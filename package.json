@@ -1,0 +1,24 @@
+{
+  "name": "controllab",
+  "version": "1.0.0",
+  "description": "Este projeto tem como objetivo o controle do fluxo de materiais no estoque do Laboratório de Física do Instituto Federal de Educação, ciência e tecnologia da Paraíba, campus de Picuí, e apontar informações importantes sobre a entrada e saída de materiais do laboratório, bem como os empréstimos e local onde o material está localizado dentro do laboratório. O sistema fornece ao administrador acesso à uma tabela contendo a descrição de cada material ( nome, loja em que foi comprado, quantidade, valor unitário, valor total e etc) e através de uma consulta terá acesso à uma outra tabela contendo todos os empréstimos em que conterá o tipo de material, a pessoa a quem o material foi emprestado, data em que foi pego e data de devolução. Desta forma, o administrador do laboratório poderá ter um maior controle dos materiais presentes em estoque e daqueles que foram emprestados.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enzodiniz/ControlLab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enzodiniz/ControlLab/issues"
+  },
+  "homepage": "https://github.com/enzodiniz/ControlLab#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "config": "^1.26.1",
+    "express": "^4.15.3"
+  }
+}
