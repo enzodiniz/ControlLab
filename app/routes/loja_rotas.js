@@ -44,7 +44,7 @@ routes.put('/lojas/:id', function (req, res) {
 });
 
 routes.delete('/lojas/:id', function (req, res) {
-  Loja.remove().then();
+  Loja.remove({_id: req.params.id}).then();
 });
 
 module.exports = routes

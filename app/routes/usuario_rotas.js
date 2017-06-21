@@ -25,7 +25,7 @@ routes.post('/users', function (req, res) {
 })
 
 routes.get('/users/:id', function (req, res) {
-  Usuario.find( {_id: req.params.id} ).then((usr) = {
+  Usuario.findOne( {_id: req.params.id} ).then((usr) => {
     res.json({
       sucess: true,
       result: usr
@@ -53,29 +53,17 @@ routes.put('/users/:id', function (req, res) {
     senha: req.body.senha,
     matricula: req.body.matricula
   }})
-  .then(..., ...);
+  .then((obj) => {
+    res.json({
+      sucess: true
+    });
+  }, ...);
 });
 
 routes.delete('/users/:id', function (req, res) {
-  Usuario.remove().then();
-});
+  Usuario.remove({_id: req.params.id}).then((obj) => {
 
-// routes.post('/users/emprestimo', function (req, res) {
-//   var emprestimo = new Emprestimo({
-//       materiais: req.body.materiais,
-//       responsavel: req.body.responsavel.id,
-//       data: req.body.data
-//   });
-//
-//   emprestimo.save().then((obj) => {
-//     res.json({
-//       sucess: true
-//     });
-//   }, (err) => {
-//     res.json({
-//       sucess: false
-//     });
-//   })
-// })
+  }, (err) => {});
+});
 
 module.exports = routes
