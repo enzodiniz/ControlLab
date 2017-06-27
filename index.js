@@ -5,7 +5,14 @@ var bodyParser = require('body-parser')
 var config = require('config')
 
 app.use(bodyParser.json())
-router.use(require('app/user_routes')) //routes
+router.use(require('app/routes/usuario_rotas')) //routes
+router.use(reuire('app/routes/material_rotas'))
+router.use(reuire('app/routes/grupo_rotas'))
+router.use(reuire('app/routes/local_rotas'))
+router.use(reuire('app/routes/loja_rotas'))
+router.use(reuire('app/routes/emprestimo_rotas'))
+router.use(reuire('app/routes/recurso_rotas'))
+
 app.use('api', router)
 
 var server = app.listen(3000, function () {

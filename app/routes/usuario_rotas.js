@@ -12,10 +12,10 @@ routes.post('/users', function (req, res) {
     matricula: req.body.matricula
   });
 
-  User.save().then((obj) => {
+  user.save().then((obj) => {
     res.json({
-      sucess: true
-
+      sucess: true,
+      result: obj
     });
   }, (err) => {
     res.json({
@@ -30,7 +30,11 @@ routes.get('/users/:id', function (req, res) {
       sucess: true,
       result: usr
     });
-  }, ...);
+  }, (err) => {
+    res.json({
+      sucess: false
+    })
+  });
 })
 
 routes.get('/users', function (req, res) {
@@ -40,7 +44,9 @@ routes.get('/users', function (req, res) {
       result: usrs
     });
   }, (err) => {
-
+    res.json({
+      sucess: false
+    })
   });
 })
 
@@ -55,15 +61,27 @@ routes.put('/users/:id', function (req, res) {
   }})
   .then((obj) => {
     res.json({
-      sucess: true
+      sucess: true,
+      result: obj
     });
-  }, ...);
+  }, (err) => {
+    res.json({
+      sucess: false
+    })
+  });
 });
 
 routes.delete('/users/:id', function (req, res) {
   Usuario.remove({_id: req.params.id}).then((obj) => {
-
-  }, (err) => {});
+    res.json({
+      sucess: true,
+      result: obj
+    })
+  }, (err) => {
+    res.json({
+      sucess: false
+    })
+  });
 });
 
 module.exports = routes
