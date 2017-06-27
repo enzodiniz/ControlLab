@@ -14,7 +14,8 @@ routes.post('/locais', function (req, res) {
     });
   }, (err) => {
     res.json({
-      sucess: false
+      sucess: false,
+      detail: err
     });
   });
 });

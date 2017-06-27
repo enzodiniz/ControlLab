@@ -2,6 +2,13 @@ var express = require('express'),
     Material = require('../model/material'),
     routes = express.Router();
 
+function retornaErro(res, err) {
+  res.json({
+    sucess: false,
+    detail: err
+  });
+}
+
 routes.post('/materiais', function (req, res) {
   var material = new Material({
     data: req.body.data,
@@ -15,23 +22,23 @@ routes.post('/materiais', function (req, res) {
 
   material.save().then((obj) => {
     res.json({
-      sucess: true
-
+      sucess: true,
+      result: obj
     });
   }, (err) => {
-    res.json({
-      sucess: false
-    });
+    retornaErro(res, err)
   });
 })
 
 routes.get('/materiais/:id', function (req, res) {
-  Material.find( {_id: req.params.id} ).then((material) = {
+  Material.find( {_id: req.params.id} ).then((material) => {
     res.json({
       sucess: true,
       result: material
     });
-  }, ...);
+  }, (err) => {
+    retornaErro(res, err)
+  });
 })
 
 routes.get('/materiais', function (req, res) {
@@ -41,7 +48,7 @@ routes.get('/materiais', function (req, res) {
       result: materiais
     });
   }, (err) => {
-
+    retornaErro(res, err)
   });
 })
 
@@ -59,13 +66,20 @@ routes.put('/materias/:id', function (req, res) {
     res.json({
       sucess: true
     });
-  }, ...);
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 routes.delete('/materiais/:id', function (req, res) {
   Material.remove({_id: req.params.id}).then((obj) => {
-
-  }, (err) => {});
+    res.json({
+      sucess: true,
+      result: obj
+    })
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 module.exports = routes

@@ -2,6 +2,13 @@ var express = require('express'),
     routes = express.Router(),
     Usuario = require('../model/usuario');
 
+function retornaErro(res, err) {
+  res.json({
+    sucess: false,
+    detail: err
+  });
+}
+
 routes.post('/users', function (req, res) {
   var user = new Usuario({
     primeiroNome: req.body.primeiroNome,
@@ -18,9 +25,7 @@ routes.post('/users', function (req, res) {
       result: obj
     });
   }, (err) => {
-    res.json({
-      sucess: false
-    });
+    retornaErro(res, err)
   });
 })
 
@@ -31,9 +36,7 @@ routes.get('/users/:id', function (req, res) {
       result: usr
     });
   }, (err) => {
-    res.json({
-      sucess: false
-    })
+    retornaErro(res, err)
   });
 })
 
@@ -44,9 +47,7 @@ routes.get('/users', function (req, res) {
       result: usrs
     });
   }, (err) => {
-    res.json({
-      sucess: false
-    })
+    retornaErro(res, err)
   });
 })
 
@@ -65,9 +66,7 @@ routes.put('/users/:id', function (req, res) {
       result: obj
     });
   }, (err) => {
-    res.json({
-      sucess: false
-    })
+    retornaErro(res, err)
   });
 });
 
@@ -78,9 +77,7 @@ routes.delete('/users/:id', function (req, res) {
       result: obj
     })
   }, (err) => {
-    res.json({
-      sucess: false
-    })
+    retornaErro(res, err)
   });
 });
 

@@ -1,7 +1,14 @@
 var express = require('express'),
-    routes = express.router();
+    routes = express.Router();
 
 var Emprestimo = require ('../model/emprestimo')
+
+function retornaErro(res, err) {
+  res.json({
+    sucess: false,
+    detail: err
+  });
+}
 
 routes.post('emprestimos', function(req, res){
   var emprestimo = new Emprestimo({
@@ -11,12 +18,11 @@ routes.post('emprestimos', function(req, res){
   });
  emprestimo.save().then((obj)=> {
    res.json({
-     sucess: true
+     sucess: true,
+     result: obj
    });
   }, (err)=> {
-    res.json({
-      sucess:false
-    });
+    retornaErro(res, err)
   });
 })
 
@@ -26,7 +32,9 @@ routes.get('/emprestimos/:id', function (req, res) {
       sucess: true,
       result: usr
     });
-  }, ...);
+  }, (err) => {
+    retornaErro(res, err)
+  });
 })
 
 routes.get('/emprestimos', function (req, res) {
@@ -36,7 +44,7 @@ routes.get('/emprestimos', function (req, res) {
       result: emprestimos
     });
   }, (err) => {
-
+    retornaErro(res, err)
   });
 })
 
@@ -50,13 +58,20 @@ routes.put('/emprestimos/:id', function (req, res) {
     res.json({
       sucess: true
     });
-  }, ...);
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 routes.delete('/users/:id', function (req, res) {
   Emprestimo.remove({_id: req.params.id}).then((obj) => {
-
-  }, (err) => {});
+    res.json({
+      sucess: true,
+      result: obj
+    })
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 module.exports = routes

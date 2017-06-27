@@ -2,6 +2,13 @@ var express = require('express'),
     Loja = require('../model/loja'),
     routes = express.Router();
 
+function retornaErro(res, err) {
+  res.json({
+    sucess: false,
+    detail: err
+  });
+}
+
 routes.post('/lojas', function (req, res) {
   var loja = new Loja({
     nome: req.body.nome
@@ -9,20 +16,23 @@ routes.post('/lojas', function (req, res) {
 
   loja.save().then((obj) => {
     res.json({
-      sucess: true
+      sucess: true,
+      result: obj
     });
   }, (err) => {
-
+    retornaErro(res, err)
   });
 })
 
 routes.get('/lojas/:id', function (req, res) {
-  Loja.findOne( {_id: req.params.id} ).exec().then((loja) = {
+  Loja.findOne( {_id: req.params.id} ).exec().then((loja) => {
     res.json({
       sucess: true,
       result: loja
     });
-  }, ...);
+  }, (err) => {
+    retornaErro(res, err)
+  });
 })
 
 routes.get('/lojas', function (req, res) {
@@ -32,7 +42,7 @@ routes.get('/lojas', function (req, res) {
       result: lojas
     });
   }, (err) => {
-
+    retornaErro(res, err)
   });
 })
 
@@ -40,11 +50,25 @@ routes.put('/lojas/:id', function (req, res) {
   Loja.update( {_id: req.params.id}, {$set: {
     nome: req.body.nome
   }})
-  .then(..., ...);
+  .then((loja) => {
+    res.json({
+      sucess: true,
+      result: loja
+    })
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 routes.delete('/lojas/:id', function (req, res) {
-  Loja.remove({_id: req.params.id}).then();
+  Loja.remove({_id: req.params.id}).then((obj) => {
+    res.json({
+      sucess: true,
+      result: obj
+    })
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 module.exports = routes

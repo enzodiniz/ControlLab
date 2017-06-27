@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
 var Material = new Schema({
   data: { type: Date },
   descricao: { type: String },
-  local: { type: ObjectId },
-  recurso: { type: ObjectId },
-  loja: { type: ObjectId },
+  local: { type: Schema.ObjectId },
+  recurso: { type: Schema.ObjectId },
+  loja: { type: Schema.ObjectId },
   quantidade: { type: Number },
   valorUnit: { type: Number }
 })
