@@ -50,18 +50,7 @@ routes.put('/lojas/:id', function (req, res) {
   Loja.update( {_id: req.params.id}, {$set: {
     nome: req.body.nome
   }})
-  .then((loja) => {
-    res.json({
-      sucess: true,
-      result: loja
-    })
-  }, (err) => {
-    retornaErro(res, err)
-  });
-});
-
-routes.delete('/lojas/:id', function (req, res) {
-  Loja.remove({_id: req.params.id}).then((obj) => {
+  .then((obj) => {
     res.json({
       sucess: true,
       result: obj
@@ -69,6 +58,17 @@ routes.delete('/lojas/:id', function (req, res) {
   }, (err) => {
     retornaErro(res, err)
   });
+});
+
+routes.delete('/lojas/:id', function (req, res) {
+  Loja.remove( {_id: req.params.id} ).then((obj) => {
+    res.json({
+      sucess: true,
+      result: obj
+    })
+  }, (err) => {
+    retornaErro(res, err)
+  })
 });
 
 module.exports = routes
