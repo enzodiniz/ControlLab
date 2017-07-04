@@ -6,7 +6,7 @@ var bodyParser = require('body-parser')
 var config = require('config')
 
 mongoose.Promisse = global.Promisse
-mongoose.connect("mongodb://control-app:ctrl20Lab@localhost/control")
+mongoose.connect(config.conexao)
 
 app.use(bodyParser.json())
 router.use(require('./app/routes/usuario_rotas')) //routes

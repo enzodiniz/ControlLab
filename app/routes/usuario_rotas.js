@@ -9,6 +9,10 @@ function retornaErro(res, err) {
   });
 }
 
+routes.post('/autenticacao', function (req, res) {
+
+})
+
 routes.post('/users', function (req, res) {
   var user = new Usuario({
     primeiroNome: req.body.primeiroNome,
@@ -16,7 +20,8 @@ routes.post('/users', function (req, res) {
     grupo: req.body.grupo,
     userName: req.body.userName,
     senha: req.body.senha,
-    matricula: req.body.matricula
+    matricula: req.body.matricula,
+    admin: req.body.admin
   });
 
   user.save().then((obj) => {
@@ -58,7 +63,8 @@ routes.put('/users/:id', function (req, res) {
     grupo: req.body.grupo,
     userName: req.body.userName,
     senha: req.body.senha,
-    matricula: req.body.matricula
+    matricula: req.body.matricula,
+    admin: req.body.admin
   }})
   .then((obj) => {
     res.json({

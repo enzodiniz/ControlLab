@@ -8,7 +8,8 @@ var Usuario = new Schema({
   grupo: { type: Schema.ObjectId },
   userName: { type: String },
   senha: { type: String }, //hash
-  matricula: { type: String, unique: true } //chave unica
+  matricula: { type: String, unique: true }, //chave unica
+  admin: { type: Boolean, default: false }
 })
 
 module.exports = mongoose.model('Usuario', Usuario);
