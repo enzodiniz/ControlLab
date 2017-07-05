@@ -7,17 +7,18 @@ box-sizing: border-box;
 }
 body {
 font-family: Arial;
+
 padding: 50px;
 background-image: url('../imagens/ferramentas-de-marketing.jpg');
 
 }
 .login {
-margin: 20px auto;
+margin: 30px auto;
 width: 300px;
 }
 .login-screen {
 background-color: #F5DEB3;
-padding: 2px;
+padding: 20px;
 border-radius: 5px
 }
 
@@ -44,7 +45,17 @@ padding: 10px 0;
 width: 250px;
 transition: border .5s;
 }
-
+#bl{
+	text-align: center;
+	background-color: #1e90ff;
+	border: 2px solid transparent;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 250px;
+	transition: border .5s;
+}
 input:focus {
 border: 2px solid #3498DB;
 box-shadow: none;

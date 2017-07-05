@@ -1,0 +1,92 @@
+body {
+background-image: url('../imagens/ferramentas-de-marketing.jpg');
+
+}
+.titulo {
+  margin-left: 13px;
+}
+
+#botao {
+  margin-top: 10px;
+  margin-right: 195px;
+  background-color:#1e90ff;
+}
+
+.botao button {
+  width: 200px;
+background-color: #ECF0F1;
+}
+
+.tela-screen {
+background-color: #Dfb887;
+padding: 400px;
+margin-left:  auto ;
+margin-top:  100px
+}
+
+.tela {
+margin: 20px auto;
+width: 600px;
+}
+
+.tela-screen {
+background-color: #F5DEB3;
+padding: 2px;
+border-radius: 5px
+}
+
+.app-title {
+text-align: center;
+color: #7888;
+}
+
+* {
+box-sizing: border-box;
+}
+
+#descricao{
+margin-right: auto;
+
+}
+
+
+input {
+text-align: center;
+background-color: #ECF0F1;
+border: 2px solid transparent;
+border-radius: 3px;
+font-size: 14px;
+font-weight: 20;
+padding: 3px ;
+width: 250px;
+transition: border .5s;
+}
+#bl{
+	text-align: center;
+	background-color: #1e90ff;
+	border: 2px solid transparent;
+	border-radius: 13px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 250px;
+	transition: border .5s;
+}
+
+
+.btn {
+  border: 2px solid transparent;
+  background: #3498DB;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
