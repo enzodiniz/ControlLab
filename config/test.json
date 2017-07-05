@@ -1,3 +1,4 @@
 {
-  "ambiente":  "executando ambiente de teste"
+  "ambiente":  "executando ambiente de teste",
+  "conexao": "mongodb://control-app:ctrl20Lab@localhost/control-teste"
 }

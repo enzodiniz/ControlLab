@@ -2,6 +2,17 @@ var express = require('express'),
     routes = express.Router(),
     Usuario = require('../model/usuario');
 
+function retornaErro(res, err) {
+  res.json({
+    sucess: false,
+    detail: err
+  });
+}
+
+routes.post('/autenticacao', function (req, res) {
+
+})
+
 routes.post('/users', function (req, res) {
   var user = new Usuario({
     primeiroNome: req.body.primeiroNome,
@@ -9,18 +20,17 @@ routes.post('/users', function (req, res) {
     grupo: req.body.grupo,
     userName: req.body.userName,
     senha: req.body.senha,
-    matricula: req.body.matricula
+    matricula: req.body.matricula,
+    admin: req.body.admin
   });
 
-  User.save().then((obj) => {
+  user.save().then((obj) => {
     res.json({
-      sucess: true
-
+      sucess: true,
+      result: obj
     });
   }, (err) => {
-    res.json({
-      sucess: false
-    });
+    retornaErro(res, err)
   });
 })
 
@@ -30,7 +40,9 @@ routes.get('/users/:id', function (req, res) {
       sucess: true,
       result: usr
     });
-  }, ...);
+  }, (err) => {
+    retornaErro(res, err)
+  });
 })
 
 routes.get('/users', function (req, res) {
@@ -40,7 +52,7 @@ routes.get('/users', function (req, res) {
       result: usrs
     });
   }, (err) => {
-
+    retornaErro(res, err)
   });
 })
 
@@ -51,19 +63,28 @@ routes.put('/users/:id', function (req, res) {
     grupo: req.body.grupo,
     userName: req.body.userName,
     senha: req.body.senha,
-    matricula: req.body.matricula
+    matricula: req.body.matricula,
+    admin: req.body.admin
   }})
   .then((obj) => {
     res.json({
-      sucess: true
+      sucess: true,
+      result: obj
     });
-  }, ...);
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 routes.delete('/users/:id', function (req, res) {
   Usuario.remove({_id: req.params.id}).then((obj) => {
-
-  }, (err) => {});
+    res.json({
+      sucess: true,
+      result: obj
+    })
+  }, (err) => {
+    retornaErro(res, err)
+  });
 });
 
 module.exports = routes
