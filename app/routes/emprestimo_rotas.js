@@ -10,7 +10,7 @@ function retornaErro(res, err) {
   });
 }
 
-routes.post('emprestimos', function(req, res){
+routes.post('/emprestimos', function(req, res){
   var emprestimo = new Emprestimo({
     materiais: req.body.materiais,
     responsavel: req.body.responsavelId, //id
@@ -56,14 +56,15 @@ routes.put('/emprestimos/:id', function (req, res) {
   }})
   .then((obj) => {
     res.json({
-      sucess: true
+      sucess: true,
+      result: obj
     });
   }, (err) => {
     retornaErro(res, err)
   });
 });
 
-routes.delete('/users/:id', function (req, res) {
+routes.delete('/emprestimos/:id', function (req, res) {
   Emprestimo.remove({_id: req.params.id}).then((obj) => {
     res.json({
       sucess: true,

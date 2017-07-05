@@ -12,8 +12,7 @@ function retornaErro(res, err) {
 routes.post('/recursos', function (req, res) {
   var recurso = new Recurso({
     nome:req.body.nome,
-    valor:req.body.valor,
-    material:req.body.materal
+    valor:req.body.valor
   });
 
   recurso.save().then((obj) => {
@@ -51,8 +50,7 @@ routes.get('/recursos', function (req, res) {
 routes.put('/recursos/:id', function (req, res) {
   Recurso.update( {_id: req.params.id}, {$set: {
   nome:req.body.nome,
-  valor:req.body.valor,
-  material:req.body.material
+  valor:req.body.valor
   }})
   .then((obj) => {
     res.json({

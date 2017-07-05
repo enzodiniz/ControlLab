@@ -3,8 +3,7 @@ var mongoose = require('mongoose'),
 
 var Recurso = new Schema({
   nome: { type: String },
-  valor: { type: Number },
-  materiais: { type: [ Schema.ObjectId ] }
+  valor: { type: Number }
 })
 
 module.exports = mongoose.model('Recurso', Recurso);
