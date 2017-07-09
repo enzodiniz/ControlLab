@@ -4,11 +4,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>CotrolLab</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="..\bootstrap\css\bootstrap.min.css">
-    <link rel="stylesheet" href="..\bootstrap\css\estilo.css">
-  <script type="text/javascript" src="..\bootstrap\js\jquery-3.2.1.min.js"></script>
- <script type="text/javascript" src="..\bootstrap\js\bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../bootstrap/css/estilo.css">
+      <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -36,57 +36,46 @@
   </div>
 </div>
 </div>
+
 <div class="col-md-offset-3 col-md-6">
-<div class="tela">
   <div class="tela-screen">
     <div class="app-title">
-      <h1>Adicionar Emprestimo</h1>
+      <h1>Material</h1>
+    </div>
+    <form class="form-group">
+      <div class="col-xs-6">
+        <label for="">Responsavel</label>
+        <input  class="form-control" type="text">
+        </div>
 
-  <div class="row">
-    <div class="col-md-6">
-        <div class="form-inline">
-      <label for="responsavel" "form control">Responsavel</label><br>
-      <input id="responsavel" class="text"  type="text">
+      <div class="col-xs-6">
+        <label  for="">Descrição</label>
+        <input class="form-control" type="text">
+      </div>
+
+      <div class="col-xs-4">
+    <label for="">Data</label>
+    <input  class="form-control"  type="Date">
+    </div>
+
+   <div class="col-xs-4">
+    <label for="">Quantidade</label>
+    <input  class="form-control"  type="number">
+    </div>
+  <div class="col-xs-4">
+    <label for="">Valor Unitário</label>
+    <input  class="form-control"  type="number" value="0.00" step="0.00">
+    </div>
+
+    <div class="botao pull-rigth">
+
+              <button class="btn btn-primary" type="submit">
+                <span>Adicionar Empréstimo</span>
+              </button>
+
       </div>
     </div>
-
-    <div class="col-md-6">
-    <div class="form-grid">
-      <label  for="descricao" class="form control">Descrição</label><br>
-      <input id="descricao" class="form"  type="text">
-    </div>
-  </div>
-
-<div class="col-md-6">
-    <div class="form-inline">
-  <label for="data" "form control">Data</label><br>
-  <input id="data" class="text"  type="date">
-  </div>
 </div>
-
-<div class="col-md-6">
-    <div class="form-inline">
-  <label for="quantidade" "form control">Quantidade</label><br>
-  <input id="number" class="text"  type="number">
-  </div>
-</div>
-
-<div class="col-xs-3">
-    <div class="form-inline">
-  <label for="valortotal" "form control">Valor Unitário</label><br>
-  <input id="number" class="text"  type="number" value="0.00">
-  </div>
-</div>
-</div>
-
-    <button id="botao" class="btn btn-primary">Adicionar Emprestimo </button>
-  </div>
-</div>
-</div>
-
-    </div>
-  </div>
- </div>
-</div>
+  </form>
 </body>
 </html>
