@@ -62,7 +62,7 @@ routes.put('/grupos/:id', function (req, res) {
   });
 });
 
-routes.delete('/lojas/:id', function (req, res) {
+routes.delete('/grupos/:id', function (req, res) {
   Grupo.remove({_id: req.params.id}).then((obj) => {
     res.json({
       sucess: true,

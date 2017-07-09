@@ -9,6 +9,7 @@ function retornaErro(res, err) {
   });
 }
 
+//Cria um local e adiciona ao BD
 routes.post('/locais', function (req, res) {
   var local = new Local({
     nome: req.body.nome
@@ -24,6 +25,7 @@ routes.post('/locais', function (req, res) {
   });
 });
 
+//recupera local de determinado ID
 routes.get('/locais/:id', function (req, res) {
   Local.findOne( {_id: req.params.id} ).exec().then((obj) => {
     res.json({
@@ -35,6 +37,7 @@ routes.get('/locais/:id', function (req, res) {
   });
 })
 
+//recupera todos os locais
 routes.get('/locais', function (req, res) {
   Local.find({}).then((obj) => {
     res.json({
@@ -46,6 +49,7 @@ routes.get('/locais', function (req, res) {
   });
 })
 
+//atualizar local
 routes.put('/locais/:id', function (req, res) {
   Local.update( {_id: req.params.id}, {$set: {
     nome: req.body.nome
@@ -60,6 +64,8 @@ routes.put('/locais/:id', function (req, res) {
   });
 });
 
+
+//Remove um local de determinado ID
 routes.delete('/locais/:id', function (req, res) {
   Local.remove( {_id: req.params.id} ).then((obj) => {
     res.json({

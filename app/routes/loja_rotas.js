@@ -9,6 +9,7 @@ function retornaErro(res, err) {
   });
 }
 
+//cria uma loja
 routes.post('/lojas', function (req, res) {
   var loja = new Loja({
     nome: req.body.nome
@@ -24,6 +25,7 @@ routes.post('/lojas', function (req, res) {
   });
 })
 
+//recupera a loja de determinado ID
 routes.get('/lojas/:id', function (req, res) {
   Loja.findOne( {_id: req.params.id} ).exec().then((loja) => {
     res.json({
@@ -35,6 +37,7 @@ routes.get('/lojas/:id', function (req, res) {
   });
 })
 
+//recupera todas as lojas
 routes.get('/lojas', function (req, res) {
   Loja.find({}).then((lojas) => {
     res.json({
@@ -46,6 +49,7 @@ routes.get('/lojas', function (req, res) {
   });
 })
 
+//atualiza uma loja
 routes.put('/lojas/:id', function (req, res) {
   Loja.update( {_id: req.params.id}, {$set: {
     nome: req.body.nome
@@ -60,6 +64,8 @@ routes.put('/lojas/:id', function (req, res) {
   });
 });
 
+//TODO: Essa rota não está funcionando
+//Remove uma loja de determinado ID
 routes.delete('/lojas/:id', function (req, res) {
   Loja.remove( {_id: req.params.id} ).then((obj) => {
     res.json({

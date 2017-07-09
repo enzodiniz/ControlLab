@@ -52,7 +52,7 @@ routes.get('/materiais', function (req, res) {
   });
 })
 
-routes.put('/materias/:id', function (req, res) {
+routes.put('/materiais/:id', function (req, res) {
   Material.update( {_id: req.params.id}, {$set: {
     data: req.body.data,
     descricao: req.body.descricao,
@@ -64,7 +64,8 @@ routes.put('/materias/:id', function (req, res) {
   }})
   .then((obj) => {
     res.json({
-      sucess: true
+      sucess: true,
+      result: obj
     });
   }, (err) => {
     retornaErro(res, err)
