@@ -10,6 +10,7 @@ function retornaErro(res, err) {
   });
 }
 
+//emprestar um material
 routes.post('/emprestimos', function(req, res){
   var emprestimo = new Emprestimo({
     materiais: req.body.materiais,
@@ -26,6 +27,7 @@ routes.post('/emprestimos', function(req, res){
   });
 })
 
+//recuperar emprestimo por id
 routes.get('/emprestimos/:id', function (req, res) {
   Emprestimo.findOne( {_id: req.params.id} ).then((usr) => {
     res.json({
@@ -37,6 +39,20 @@ routes.get('/emprestimos/:id', function (req, res) {
   });
 })
 
+//recuperar todos os emprestimos de determinada data
+routes.get('/emprestimos/datas/:dt', function (req, res) {
+  Emprestimo.find({data: req.params.dt})
+    .then((obj) => {
+      res.json({
+        sucess: true,
+        result: obj
+      })
+    }, (err) => {
+      retornaErro(res, err)
+    })
+})
+
+//recuperar todos os emprestimos
 routes.get('/emprestimos', function (req, res) {
   Emprestimo.find({}).then((emprestimos) => {
     res.json({
@@ -48,6 +64,7 @@ routes.get('/emprestimos', function (req, res) {
   });
 })
 
+//atualizar emprestimo por id
 routes.put('/emprestimos/:id', function (req, res) {
   Emprestimo.update( {_id: req.params.id}, {$set: {
     materiais: req.body.materiais,
@@ -64,6 +81,7 @@ routes.put('/emprestimos/:id', function (req, res) {
   });
 });
 
+//remover um emprestimo
 routes.delete('/emprestimos/:id', function (req, res) {
   Emprestimo.remove({_id: req.params.id}).then((obj) => {
     res.json({

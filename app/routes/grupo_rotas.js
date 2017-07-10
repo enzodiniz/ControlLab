@@ -9,6 +9,7 @@ function retornaErro(res, err) {
   });
 }
 
+//criar grupo
 routes.post('/grupos', function (req, res) {
   var grupo = new Grupo({
     nome: req.body.nome,
@@ -25,6 +26,7 @@ routes.post('/grupos', function (req, res) {
   });
 })
 
+//recuperar grupo por ID
 routes.get('/grupos/:id', function (req, res) {
   Grupo.findOne( {_id: req.params.id} ).exec().then((grp) => {
     res.json({
@@ -36,6 +38,29 @@ routes.get('/grupos/:id', function (req, res) {
   });
 })
 
+//TODO: Ajeitar isso aqui
+//recuperar todos os grupos de um usuário
+routes.get('/grupos/users/:id', function (req, res) {
+  var grupos = [], id = req.params.id
+  routes.get('/grupos', function (req, res, id) {
+    Grupo.find({})
+      .then((obj) => {
+        for (var i = 0; i < obj.length; i++) {
+          if (obj[i].integrantes.contains(id))
+          grupos[i] = obj[i]
+        }
+
+        res.json({
+          sucess: true,
+          result: grupos
+        })
+      }, (err) => {
+        retornaErro(res, err)
+      })
+  })
+})
+
+//recuperar todos os grupos
 routes.get('/grupos', function (req, res) {
   Grupo.find({}).then((grps) => {
     res.json({
@@ -47,6 +72,7 @@ routes.get('/grupos', function (req, res) {
   });
 })
 
+//atualizar grupo por ID
 routes.put('/grupos/:id', function (req, res) {
   Grupo.update( {_id: req.params.id}, {$set: {
     nome: req.body.nome,
@@ -62,6 +88,7 @@ routes.put('/grupos/:id', function (req, res) {
   });
 });
 
+//remover grupo por ID
 routes.delete('/grupos/:id', function (req, res) {
   Grupo.remove({_id: req.params.id}).then((obj) => {
     res.json({

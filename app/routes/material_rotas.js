@@ -9,6 +9,7 @@ function retornaErro(res, err) {
   });
 }
 
+//criar um material
 routes.post('/materiais', function (req, res) {
   var material = new Material({
     data: req.body.data,
@@ -30,6 +31,7 @@ routes.post('/materiais', function (req, res) {
   });
 })
 
+//recuperar material por id
 routes.get('/materiais/:id', function (req, res) {
   Material.find( {_id: req.params.id} ).then((material) => {
     res.json({
@@ -41,6 +43,7 @@ routes.get('/materiais/:id', function (req, res) {
   });
 })
 
+//recuperar todos os materiais
 routes.get('/materiais', function (req, res) {
   Material.find({}).then((materiais) => {
     res.json({
@@ -52,6 +55,32 @@ routes.get('/materiais', function (req, res) {
   });
 })
 
+//recuperar todos os materiais de determinado recurso
+routes.get('/materiais/recursos/:id', function (req, res) {
+  Material.find({recurso: req.params.id}).then((obj) => {
+    res.json({
+      sucess: true,
+      result: obj
+    })
+  }, (err) => {
+    retornaErro(res, err)
+  })
+})
+
+//recuperar todos os materiais de determinado loja
+routes.get('/materiais/lojas/:id', function (req, res) {
+  Material.find({loja: req.params.id})
+    .then((obj) => {
+      res.json({
+        sucess: true,
+        result: obj
+      })
+    }, (err) => {
+      retornaErro(res, err)
+    })
+})
+
+//atualizar um material pelo id
 routes.put('/materiais/:id', function (req, res) {
   Material.update( {_id: req.params.id}, {$set: {
     data: req.body.data,
@@ -72,6 +101,7 @@ routes.put('/materiais/:id', function (req, res) {
   });
 });
 
+//remover um material por id
 routes.delete('/materiais/:id', function (req, res) {
   Material.remove({_id: req.params.id}).then((obj) => {
     res.json({
