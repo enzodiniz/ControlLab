@@ -1,4 +1,5 @@
 {
   "ambiente":  "executando ambiente padrão",
-  "conexao": "mongodb://control-app:ctrl20Lab@localhost/control"
+  "conexao": "mongodb://control-app:ctrl20Lab@localhost/control",
+  "segredo": "teste"
 }

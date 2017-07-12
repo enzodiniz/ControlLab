@@ -42,22 +42,20 @@ routes.get('/grupos/:id', function (req, res) {
 //recuperar todos os grupos de um usuário
 routes.get('/grupos/users/:id', function (req, res) {
   var grupos = [], id = req.params.id
-  routes.get('/grupos', function (req, res, id) {
-    Grupo.find({})
-      .then((obj) => {
-        for (var i = 0; i < obj.length; i++) {
-          if (obj[i].integrantes.contains(id))
-          grupos[i] = obj[i]
-        }
+  Grupo.find({})
+    .then((obj) => {
+      for (var i = 0; i < obj.length; i++) {
+        if (obj[i].integrantes.contains(id))
+        grupos[i] = obj[i]
+      }
 
-        res.json({
-          sucess: true,
-          result: grupos
-        })
-      }, (err) => {
-        retornaErro(res, err)
+      res.json({
+        sucess: true,
+        result: grupos
       })
-  })
+    }, (err) => {
+      retornaErro(res, err)
+    })
 })
 
 //recuperar todos os grupos

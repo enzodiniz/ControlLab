@@ -9,15 +9,47 @@ function retornaErro(res, err) {
   });
 }
 
+//autenticar o usuário
 routes.post('/autenticacao', function (req, res) {
+  Usuario.findOne({userName: req.body.userName})
+    .then((user) => {
+      console.log(user);
+      if (!user) {
+        res.json({
+          sucess: false,
+          messagem: "Usuário não cadastrado!"
+        })
+      }
+      else {
+        if (user.senha != req.body.senha) {
+          res.json({
+            sucess: false,
+            messagem: "Senha ou usuário inválidos!"
+          })
+        }
+        else {
+          var token = jwt.sing(user, app.get('superSecret'), {
+            expiresInMinutes: 1440
+          })
 
+          res.json({
+            sucess: true,
+            messagem: "Logado com sucesso.",
+            token: token
+          })
+        }
+      }
+    }, (err) => {
+      retornaErro(res, err)
+    })
 })
 
+//criar um usuário
 routes.post('/users', function (req, res) {
   var user = new Usuario({
     primeiroNome: req.body.primeiroNome,
     ultimoNome: req.body.ultimoNome,
-    grupo: req.body.grupo,
+    email: req.body.email,
     userName: req.body.userName,
     senha: req.body.senha,
     matricula: req.body.matricula,
@@ -34,6 +66,7 @@ routes.post('/users', function (req, res) {
   });
 })
 
+//recuperar um usuário por ID
 routes.get('/users/:id', function (req, res) {
   Usuario.findOne( {_id: req.params.id} ).then((usr) => {
     res.json({
@@ -45,6 +78,7 @@ routes.get('/users/:id', function (req, res) {
   });
 })
 
+//recuperar todos os usuários
 routes.get('/users', function (req, res) {
   Usuario.find({}).then((usrs) => {
     res.json({
@@ -56,11 +90,12 @@ routes.get('/users', function (req, res) {
   });
 })
 
+//atualizar um usuário por ID
 routes.put('/users/:id', function (req, res) {
   Usuario.update( {_id: req.params.id}, {$set: {
     primeiroNome: req.body.primeiroNome, // || nome atual do usuário
     ultimoNome: req.body.ultimoNome,
-    grupo: req.body.grupo,
+    email: req.body.email,
     userName: req.body.userName,
     senha: req.body.senha,
     matricula: req.body.matricula,
@@ -76,6 +111,7 @@ routes.put('/users/:id', function (req, res) {
   });
 });
 
+//remove um usuário
 routes.delete('/users/:id', function (req, res) {
   Usuario.remove({_id: req.params.id}).then((obj) => {
     res.json({

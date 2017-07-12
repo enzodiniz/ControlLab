@@ -64,13 +64,12 @@ routes.put('/locais/:id', function (req, res) {
   });
 });
 
-
 //Remove um local de determinado ID
 routes.delete('/locais/:id', function (req, res) {
   Local.remove( {_id: req.params.id} ).then((obj) => {
     res.json({
       sucess: true,
-      result: obj
+      result: req.params.id
     })
   }, (err) => {
     retornaErro(res, err)

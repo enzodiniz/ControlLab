@@ -4,6 +4,7 @@ var app = express()
 var router = express.Router()
 var bodyParser = require('body-parser')
 var config = require('config')
+var jwt = require('jsonwebtoken')
 
 mongoose.Promisse = global.Promisse
 mongoose.connect(config.conexao)
@@ -11,6 +12,7 @@ mongoose.connect(config.conexao)
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
 app.use('/scripts', express.static(__dirname + '/node_modules'))
+app.set('superSecret', config.segredo)
 
 router.use(require('./app/routes/usuario_rotas')) //routes
 router.use(require('./app/routes/material_rotas'))

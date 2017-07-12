@@ -64,13 +64,12 @@ routes.put('/lojas/:id', function (req, res) {
   });
 });
 
-//TODO: Essa rota não está funcionando
 //Remove uma loja de determinado ID
 routes.delete('/lojas/:id', function (req, res) {
   Loja.remove( {_id: req.params.id} ).then((obj) => {
     res.json({
       sucess: true,
-      result: obj
+      result: req.params.id
     })
   }, (err) => {
     retornaErro(res, err)

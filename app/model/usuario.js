@@ -6,6 +6,7 @@ var Usuario = new Schema({
   primeiroNome: { type: String },
   ultimoNome: { type: String },
   grupo: { type: Schema.ObjectId },
+  email: {type: String},
   userName: { type: String, unique: true },
   senha: { type: String }, //hash
   matricula: { type: String, unique: true }, //chave unica
