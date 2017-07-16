@@ -25,13 +25,13 @@ text-align: center;
 color: #7888;
 }
 
-.botao {
+#botao {
+  margin-top: 10
+
 
 }
 
-button {
-padding-top: 100;
-}
+
 
 .abc {
   margin-top: 10px;
