@@ -1,6 +1,8 @@
 var express = require('express'),
     routes = express.Router(),
-    Usuario = require('../model/usuario');
+    Usuario = require('../model/usuario'),
+    jwt = require('jsonwebtoken');
+var config = require('config');
 
 function retornaErro(res, err) {
   res.json({
@@ -11,9 +13,41 @@ function retornaErro(res, err) {
 
 //autenticar o usuário
 routes.post('/autenticacao', function (req, res) {
+  // Usuario.findOne({
+  //   userName: req.body.userName
+  // }, function(err, user) {
+  //
+  //   if (err) throw err;
+  //
+  //   if (!user) {
+  //     res.json({ success: false, message: 'Authentication failed. User not found.' });
+  //   } else if (user) {
+  //
+  //     // check if password matches
+  //     if (user.senha != req.body.senha) {
+  //       res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+  //     } else {
+  //
+  //       // if user is found and password is right
+  //       // create a token
+  //       var token = jwt.sign(user, app.get('superSecret'), {
+  //         expiresInMinutes: 1440 // expires in 24 hours
+  //       });
+  //
+  //       // return the information including token as JSON
+  //       res.json({
+  //         success: true,
+  //         message: 'Enjoy your token!',
+  //         token: token
+  //       });
+  //     }
+  //   }
+  // });
+
+
   Usuario.findOne({userName: req.body.userName})
     .then((user) => {
-      console.log(user);
+      console.log("asdf");
       if (!user) {
         res.json({
           sucess: false,
@@ -28,8 +62,8 @@ routes.post('/autenticacao', function (req, res) {
           })
         }
         else {
-          var token = jwt.sing(user, app.get('superSecret'), {
-            expiresInMinutes: 1440
+          var token = jwt.sign(user._id, config.segredo, {
+            expiresIn: "24h"
           })
 
           res.json({
@@ -42,6 +76,31 @@ routes.post('/autenticacao', function (req, res) {
     }, (err) => {
       retornaErro(res, err)
     })
+})
+
+//midleware que verifica token
+routes.use((req, res, next) => {
+  var token = req.body.token || req.query.token || req.headers['x-access-token']
+
+  if (token) {
+    jwt.verify(token, app.get('superSecret'), (err, decoded) => {
+
+      if (err){
+        res.json({
+          sucess: false,
+          messagem: "Falha durante a autenticação!"
+        })
+      } else {
+        req.decoded = decoded
+        next()
+      }
+    })
+  } else {
+    return res.status(203).send({
+      sucess: false,
+      messagem: "Nenhum token fornecido."
+    })
+  }
 })
 
 //criar um usuário
