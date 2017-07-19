@@ -1,8 +1,9 @@
 var express = require('express'),
     routes = express.Router(),
     Usuario = require('../model/usuario'),
-    jwt = require('jsonwebtoken');
-var config = require('config');
+    jwt = require('jsonwebtoken'),
+    config = require('config'),
+    bcrypt = require('bcrypt-nodejs');
 
 function retornaErro(res, err) {
   res.json({
@@ -13,41 +14,8 @@ function retornaErro(res, err) {
 
 //autenticar o usuário
 routes.post('/autenticacao', function (req, res) {
-  // Usuario.findOne({
-  //   userName: req.body.userName
-  // }, function(err, user) {
-  //
-  //   if (err) throw err;
-  //
-  //   if (!user) {
-  //     res.json({ success: false, message: 'Authentication failed. User not found.' });
-  //   } else if (user) {
-  //
-  //     // check if password matches
-  //     if (user.senha != req.body.senha) {
-  //       res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-  //     } else {
-  //
-  //       // if user is found and password is right
-  //       // create a token
-  //       var token = jwt.sign(user, app.get('superSecret'), {
-  //         expiresInMinutes: 1440 // expires in 24 hours
-  //       });
-  //
-  //       // return the information including token as JSON
-  //       res.json({
-  //         success: true,
-  //         message: 'Enjoy your token!',
-  //         token: token
-  //       });
-  //     }
-  //   }
-  // });
-
-
   Usuario.findOne({userName: req.body.userName})
     .then((user) => {
-      console.log("asdf");
       if (!user) {
         res.json({
           sucess: false,
@@ -55,13 +23,7 @@ routes.post('/autenticacao', function (req, res) {
         })
       }
       else {
-        if (user.senha != req.body.senha) {
-          res.json({
-            sucess: false,
-            messagem: "Senha ou usuário inválidos!"
-          })
-        }
-        else {
+        if (bcrypt.compareSync(req.body.senha, user.senha)) {
           var token = jwt.sign(user._id, config.segredo, {
             expiresIn: "24h"
           })
@@ -70,6 +32,12 @@ routes.post('/autenticacao', function (req, res) {
             sucess: true,
             messagem: "Logado com sucesso.",
             token: token
+          })
+        }
+        else {
+          res.json({
+            sucess: false,
+            messagem: "Senha ou usuário inválidos!"
           })
         }
       }
@@ -110,7 +78,7 @@ routes.post('/users', function (req, res) {
     ultimoNome: req.body.ultimoNome,
     email: req.body.email,
     userName: req.body.userName,
-    senha: req.body.senha,
+    senha: bcrypt.hashSync(req.body.senha),
     matricula: req.body.matricula,
     admin: req.body.admin
   });
