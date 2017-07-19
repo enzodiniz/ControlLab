@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>CotrolLab</title>
+    <link rel="shortcut icon" href="imagens/favicon.ico"/>      
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
       <link rel="stylesheet" href="../bootstrap/css/estilo.css">
       <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
@@ -42,7 +43,7 @@
     <div class="app-title">
       <h1>Material</h1>
     </div>
-    <form class="form-group">
+    <form class="form-group" method="post">
       <div class="col-xs-6">
         <label for="">Responsavel</label>
         <input  class="form-control" type="text">
@@ -66,16 +67,16 @@
     <label for="">Valor Unitário</label>
     <input  class="form-control"  type="number" value="0.00" step="0.00">
     </div>
+    <div class="col-xs-4">
 
-    <div class="botao pull-rigth">
-
-              <button class="btn btn-primary" type="submit">
-                <span>Adicionar Empréstimo</span>
-              </button>
-
-      </div>
-    </div>
 </div>
+<button id="botao" class="btn btn-primary" type="submit">
+  <span>Adicionar Empréstimo</span>
+</button>
+    </div>
+
+</div>
+
   </form>
 </body>
 </html>
