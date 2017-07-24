@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="controlLab">
+  <head>
+    <meta charset="utf-8">
+    <title>ControlLab</title>
+    <link rel="shortcut icon" href="imagens/favicon.ico"/>
+    <script src="/scripts/angular/angular.min.js"></script>
+    <script src="/scripts/angular-route/angular-route.min.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/components/services/apiService.js"></script>
+    <script src="app/components/main/mainCtrl.js"></script>
+    <script src="app/components/clima/climaCtrl.js"></script>
+  </head>
+  <body ng-controller="MainCtrl as c">
+<div ng-view  ></div>
+
+
+  </body>
+</html>
