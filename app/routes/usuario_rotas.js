@@ -1,6 +1,9 @@
 var express = require('express'),
     routes = express.Router(),
-    Usuario = require('../model/usuario');
+    Usuario = require('../model/usuario'),
+    jwt = require('jsonwebtoken'),
+    config = require('config'),
+    bcrypt = require('bcrypt-nodejs');
 
 function retornaErro(res, err) {
   res.json({
@@ -13,7 +16,6 @@ function retornaErro(res, err) {
 routes.post('/autenticacao', function (req, res) {
   Usuario.findOne({userName: req.body.userName})
     .then((user) => {
-      console.log(user);
       if (!user) {
         res.json({
           sucess: false,
@@ -21,15 +23,9 @@ routes.post('/autenticacao', function (req, res) {
         })
       }
       else {
-        if (user.senha != req.body.senha) {
-          res.json({
-            sucess: false,
-            messagem: "Senha ou usuário inválidos!"
-          })
-        }
-        else {
-          var token = jwt.sing(user, app.get('superSecret'), {
-            expiresInMinutes: 1440
+        if (bcrypt.compareSync(req.body.senha, user.senha)) {
+          var token = jwt.sign(user._id, config.segredo, {
+            expiresIn: "24h"
           })
 
           res.json({
@@ -38,10 +34,41 @@ routes.post('/autenticacao', function (req, res) {
             token: token
           })
         }
+        else {
+          res.json({
+            sucess: false,
+            messagem: "Senha ou usuário inválidos!"
+          })
+        }
       }
     }, (err) => {
       retornaErro(res, err)
     })
+})
+
+//midleware que verifica token
+routes.use((req, res, next) => {
+  var token = req.body.token || req.query.token || req.headers['x-access-token']
+
+  if (token) {
+    jwt.verify(token, app.get('superSecret'), (err, decoded) => {
+
+      if (err){
+        res.json({
+          sucess: false,
+          messagem: "Falha durante a autenticação!"
+        })
+      } else {
+        req.decoded = decoded
+        next()
+      }
+    })
+  } else {
+    return res.status(203).send({
+      sucess: false,
+      messagem: "Nenhum token fornecido."
+    })
+  }
 })
 
 //criar um usuário
@@ -51,7 +78,7 @@ routes.post('/users', function (req, res) {
     ultimoNome: req.body.ultimoNome,
     email: req.body.email,
     userName: req.body.userName,
-    senha: req.body.senha,
+    senha: bcrypt.hashSync(req.body.senha),
     matricula: req.body.matricula,
     admin: req.body.admin
   });
