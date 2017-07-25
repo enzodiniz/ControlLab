@@ -1,8 +1,15 @@
 angular
   .module('ControlLab')
-  .service('authSvc', ($window) => {
+  .service('authSvc', function($window, $http) {
 
     var self = this;
+
+    self.login = function (userName, senha) {
+      return $http.post('http://localhost:3000/api/autenticacao', {
+        userName: userName,
+        senha: senha
+      })
+    }
 
     self.saveToken = function(token) {
   	  $window.localStorage['jwtToken'] = token;
@@ -18,7 +25,7 @@ angular
   	  return $window.localStorage['jwtToken'];
   	}
 
-    self.isAuth = function (token) {
+    self.isAuthed = function () {
       var token = self.getToken();
       if (token){
         var params = self.parseJwt(token);

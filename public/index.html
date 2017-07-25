@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html ng-app="controlLab">
+<html ng-app="ControlLab">
   <head>
     <meta charset="utf-8">
     <title>ControlLab</title>
     <link rel="shortcut icon" href="imagens/favicon.ico"/>
-    <script src="/scripts/angular/angular.min.js"></script>
+    <!-- <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="../../css/style1.css">
+    <!-- <script type="text/javascript" src="scripts//bootstrap.min.js"></script> -->
+    <!-- <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> -->
+    <script type="text/javascript" src="/scripts/angular/angular.js"></script>
     <script src="/scripts/angular-route/angular-route.min.js"></script>
     <script src="app/app.module.js"></script>
-    <script src="app/components/services/apiService.js"></script>
+    <script type="text/javascript" src="app/components/usuario/usuarioCtrl.js"></script>
+    <script type="text/javascript" src="app/components/services/authService.js"></script>
+    <script type="text/javascript" src="app/components/authentication/authCtrl.js"></script>
     <script src="app/components/main/mainCtrl.js"></script>
-    <script src="app/components/clima/climaCtrl.js"></script>
   </head>
-  <body ng-controller="MainCtrl as c">
-<div ng-view  ></div>
-
-
+  <body ng-controller="MainController as c">
+    <div ng-view></div>
   </body>
 </html>
