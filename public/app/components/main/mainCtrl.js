@@ -28,9 +28,9 @@ function MainCtrl($scope, $http, $location,  authSvc) {
   //   })
   // } //serviços
 
-  if (authSvc.isAuthed()){
-
-  } else {
-    $location.path('/login');
-  }
+  // if (authSvc.isAuthed()){ //base64Url is undefined
+  //
+  // } else {
+  //   $location.path('/login');
+  // }
 }
