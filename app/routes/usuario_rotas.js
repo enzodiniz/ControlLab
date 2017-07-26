@@ -19,7 +19,7 @@ routes.post('/autenticacao', function (req, res) {
       if (!user) {
         res.json({
           sucess: false,
-          messagem: "Usuário não cadastrado!"
+          mensagem: "Usuário não cadastrado!"
         })
       }
       else {
@@ -30,14 +30,14 @@ routes.post('/autenticacao', function (req, res) {
 
           res.json({
             sucess: true,
-            messagem: "Logado com sucesso.",
+            mensagem: "Logado com sucesso.",
             token: token
           })
         }
         else {
           res.json({
             sucess: false,
-            messagem: "Senha ou usuário inválidos!"
+            mensagem: "Senha ou usuário inválidos!"
           })
         }
       }

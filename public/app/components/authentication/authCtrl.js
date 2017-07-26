@@ -1,6 +1,6 @@
 angular
   .module("ControlLab")
-  .controller('authCtrl', function($location, authSvc) {
+  .controller('authCtrl', function($location, $rootScope, authSvc) {
     var self = this;
 
     self.userName = "";
@@ -19,25 +19,32 @@ angular
     self.autenticar = function () {
       authSvc.login(self.userName, self.senha)
         .then((res) => {
-          console.log("chegou antes do token");
           var token = res.data ? res.data.token : null;
-          console.log(token);
           if (token) {
-            authSvc.saveToken();
+            authSvc.saveToken(token);
             $location.path('/home');
           } else {
+            console.log(res.data.mensagem);
+            $rootScope.$broadcast('evento', {alerta: "erro",
+              mensagem: res.data.mensagem});
+              
             console.log("token não definido.");
           }
         }, (res) => {
           console.log("chegou antes do token");
           var token = res.data ? res.data.token : null;
-          console.log(token);
+
           if (token) {
             authSvc.saveToken();
             $location.path('/home');
           } else {
             console.log("token não definido.");
+            console.log(res);
           }
         });
+    }
+
+    self.fazerLogout = function () {
+      authSvc.loguot();
     }
   })

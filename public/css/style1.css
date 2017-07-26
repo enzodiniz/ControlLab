@@ -12,6 +12,11 @@ padding: 50px;
 background-image: url('../imagens/ferramentas-de-marketing.jpg');
 
 }
+
+.tudo-branco {
+  color: rgb(255, 255, 255);
+}
+
 .login {
 margin: 30px auto;
 width: 300px;

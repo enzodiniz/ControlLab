@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title>ControlLab</title>
     <link rel="shortcut icon" href="imagens/favicon.ico"/>
-    <!-- <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style1.css">
-    <!-- <script type="text/javascript" src="scripts//bootstrap.min.js"></script> -->
-    <!-- <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> -->
+    <script type="text/javascript" src="/scripts/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/scripts/angular/angular.min.js"></script>
     <script src="/scripts/angular-route/angular-route.min.js"></script>
     <script src="app/app.module.js"></script>
@@ -17,6 +17,19 @@
     <script src="app/components/main/mainCtrl.js"></script>
   </head>
   <body ng-controller="MainController as c">
+
+    <div class="container">
+      <div ng-cloak class="col-md-offset-3 col-md-6" role="alert"
+        ng-show="c.evento">
+          <div class="[c.eventClass]" class="alerta">
+            <button type="button" class="close" ng-click="c.fecharAlerta()" arial-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{c.eventMessage}}
+          </div>
+      </div>
+    </div>
+
     <div ng-view></div>
   </body>
 </html>

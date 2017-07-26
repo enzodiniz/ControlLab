@@ -28,9 +28,23 @@ function MainCtrl($scope, $http, $location,  authSvc) {
   //   })
   // } //serviços
 
-  // if (authSvc.isAuthed()){ //base64Url is undefined
-  //
-  // } else {
-  //   $location.path('/login');
-  // }
+  $scope.$on('evento', function (erro, args) {
+    self.evento = true;
+    if (args.alerta == "erro"){
+      self.eventClass = 'alert-danger';
+    } else {
+      self.eventClass = 'alert-info';
+    }
+    self.eventMessage = args.mensagem;
+  })
+
+  self.fecharAlerta = function () {
+    self.evento = false;
+  }
+
+  if (authSvc.isAuthed()){ //base64Url is undefined
+
+  } else {
+    $location.path('/login');
+  }
 }

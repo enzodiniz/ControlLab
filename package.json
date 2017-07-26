@@ -21,8 +21,10 @@
     "angular-route": "^1.6.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
     "config": "^1.26.1",
     "express": "^4.15.3",
+    "jquery": "^3.2.1",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.11.0"
   }
