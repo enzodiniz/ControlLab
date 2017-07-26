@@ -11,7 +11,7 @@ angular
       var token = res.data ? res.data.token : null;
       console.log(token);
       if (token) {
-        authSvc.saveToken();
+        authSvc.saveToken(token);
         $location.path('/home');
       }
     }
@@ -27,7 +27,7 @@ angular
             console.log(res.data.mensagem);
             $rootScope.$broadcast('evento', {alerta: "erro",
               mensagem: res.data.mensagem});
-              
+
             console.log("token não definido.");
           }
         }, (res) => {
@@ -35,7 +35,7 @@ angular
           var token = res.data ? res.data.token : null;
 
           if (token) {
-            authSvc.saveToken();
+            authSvc.saveToken(token);
             $location.path('/home');
           } else {
             console.log("token não definido.");
