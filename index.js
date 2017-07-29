@@ -8,6 +8,9 @@ var config = require('config')
 
 mongoose.Promisse = global.Promisse
 mongoose.connect(config.conexao)
+// , {
+// 	useMongoClient: true	
+// }
 
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
@@ -24,10 +27,8 @@ router.use(require('./app/routes/recurso_rotas'))
 app.use('/api', router)
 
 var server = app.listen(3000, function () {
-    console.log();
     console.log('Example app listen on port 3000!')
     console.log(config.ambiente);
-    console.log();
 })
 
 module.exports = server

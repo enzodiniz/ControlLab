@@ -13,4 +13,8 @@ function usuarioCtrl($scope, $http) {
 
       })
   }
+
+  if (!authSvc.isAuthed()){
+      $location.path('/login');
+  }
 }

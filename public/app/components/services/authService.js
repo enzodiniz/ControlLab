@@ -28,7 +28,6 @@ angular
     self.isAuthed = function () {
       var token = self.getToken();
       if (token){
-        console.log(typeof(token));
         var params = self.parseJwt(token);
         return Math.round(new Date().getTime() / 1000) <= params.exp;
       } else {

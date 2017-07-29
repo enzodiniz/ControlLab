@@ -13,8 +13,8 @@ background-image: url('../imagens/ferramentas-de-marketing.jpg');
 
 }
 
-.tudo-branco {
-  color: rgb(255, 255, 255);
+.fundo-branco {
+	background: rgb(255, 255, 255);
 }
 
 .login {

@@ -5,6 +5,14 @@ angular.module("ControlLab", ['ngRoute']) //ui-select
         templateUrl: 'app/routes/home.html'
       })
 
+      .when('/emprestimos', {
+        templateUrl: 'app/routes/AddEmprestimo.html'
+      })
+
+      .when('/estoques', {
+        templateUrl: 'app/routes/AddEstoque.html'
+      })
+
       .when('/login', {
         templateUrl: 'app/routes/login.html'
       })

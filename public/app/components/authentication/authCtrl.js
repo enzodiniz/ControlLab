@@ -15,10 +15,11 @@ angular
         $location.path('/home');
       }
     }
-//self.handleRequest(res);
+
     self.autenticar = function () {
       authSvc.login(self.userName, self.senha)
         .then((res) => {
+
           var token = res.data ? res.data.token : null;
           if (token) {
             authSvc.saveToken(token);
@@ -27,10 +28,10 @@ angular
             console.log(res.data.mensagem);
             $rootScope.$broadcast('evento', {alerta: "erro",
               mensagem: res.data.mensagem});
-
-            console.log("token não definido.");
           }
+
         }, (res) => {
+
           console.log("chegou antes do token");
           var token = res.data ? res.data.token : null;
 
@@ -38,9 +39,11 @@ angular
             authSvc.saveToken(token);
             $location.path('/home');
           } else {
-            console.log("token não definido.");
-            console.log(res);
+            console.log(res.data.mensagem);
+            $rootScope.$broadcast('evento', {alerta: "erro",
+              mensagem: res.data.mensagem});
           }
+          
         });
     }
 
