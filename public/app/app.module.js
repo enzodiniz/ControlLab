@@ -9,6 +9,22 @@ angular.module("ControlLab", ['ngRoute']) //ui-select
         templateUrl: 'app/routes/AddEmprestimo.html'
       })
 
+      .when('/addUsuario', {
+        templateUrl: 'app/routes/addUsuario.html'
+      })
+
+      .when('/addGrupo', {
+        templateUrl: 'app/routes/addGrupo.html'
+      })
+
+      .when('/addLoja', {
+        templateUrl: 'app/routes/addLoja.html'
+      })
+
+      .when('/addLocal', {
+        templateUrl: 'app/routes/addLocal.html'
+      })
+
       .when('/estoques', {
         templateUrl: 'app/routes/AddEstoque.html'
       })

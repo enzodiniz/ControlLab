@@ -7,10 +7,12 @@ var jwt = require('jsonwebtoken')
 var config = require('config')
 
 mongoose.Promisse = global.Promisse
-mongoose.connect(config.conexao)
-// , {
+// mongoose.connect(config.conexao, {
 // 	useMongoClient: true	
-// }
+// });
+
+mongoose.connect(config.conexao);
+
 
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))

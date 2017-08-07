@@ -2,14 +2,15 @@ angular
   .module("ControlLab")
   .controller('usuarioCtrl', usuarioCtrl)
 
-function usuarioCtrl($scope, $http) {
+function usuarioCtrl($scope, $http, userSvc, authSvc) {
   var self = this;
 
-  self.getUsuarios = function (res) {
-    $http.get('http://localhost:3000/users')
-      .then(function () {
-        self.usuarios = res.data.result
-      }, function (err) {
+  self.addUser = function () {
+    userSvc.addUser(self.pri, self.ult, self.email, self.userName, self.senha, self.mat, self.adm)
+      .then((res) => {
+        console.log(res);
+
+      }, (err) => {
 
       })
   }

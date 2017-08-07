@@ -37,7 +37,7 @@ routes.post('/autenticacao', function (req, res) {
         else {
           res.json({
             sucess: false,
-            mensagem: "Senha ou usuário inválidos!"
+            mensagem: "Senha incorreta! Esqueceu a senha?"
           })
         }
       }

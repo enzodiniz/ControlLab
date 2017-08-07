@@ -23,20 +23,23 @@ angular
           var token = res.data ? res.data.token : null;
           if (token) {
             authSvc.saveToken(token);
+            $rootScope.$broadcast('evento', { alerta: 'logado', 
+              mensagem: res.data.mensagem })
             $location.path('/home');
           } else {
             console.log(res.data.mensagem);
-            $rootScope.$broadcast('evento', {alerta: "erro",
-              mensagem: res.data.mensagem});
+            $rootScope.$broadcast('evento', { alerta: "erro",
+              mensagem: res.data.mensagem });
           }
 
         }, (res) => {
 
-          console.log("chegou antes do token");
           var token = res.data ? res.data.token : null;
 
           if (token) {
             authSvc.saveToken(token);
+            $rootScope.$broadcast('evento', { alerta: 'logado', 
+              mensagem: res.data.mensagem })
             $location.path('/home');
           } else {
             console.log(res.data.mensagem);

@@ -12,6 +12,26 @@ angular
       $location.path('/estoques');
     }
 
+    self.redirAddUser = function () {
+      $location.path('/addUsuario');
+    }
+
+    self.redirAddGrupo = function () {
+      $location.path('/addGrupo');
+    }
+
+    self.redirAddLoja = function () {
+      $location.path('/addLoja');
+    }
+
+    self.redirAddLocal = function () {
+      $location.path('/addLocal');
+    }
+
+    self.sair = function () {
+      authSvc.loguot();
+    }
+
     if (!authSvc.isAuthed()) {
       $location.path('/login');
     }
