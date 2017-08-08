@@ -28,6 +28,10 @@ angular
       $location.path('/addLocal');
     }
 
+    self.redirAddRecurso = function () {
+      $location.path('/recursos')
+    }
+
     self.sair = function () {
       authSvc.loguot();
     }

@@ -1,8 +1,13 @@
 angular
   .module("ControlLab")
-  .controller('empCtrl', function($location, authSvc, empSvc) {
+  .controller('empCtrl', function($scope, $location, authSvc, empSvc) {
 
     var self = this;
+    var adicionando;
+    var emprestimos;
+
+    self.emprestimos = [];
+    self.adicionando = false;
 
     //ação do botão 'sair' da barra de navegação.
     self.sair = function () {
@@ -13,12 +18,28 @@ angular
     self.redirHome = function () {
       $location.path('/home');
     }
+
+    self.mostrarForm = function () {
+      if (self.adicionando)
+        self.adicionando = false;
+      else
+        self.adicionando = true;
+    }
+
+    self.emprestar = function () {
+      empSvc.emprestar(self.mat, self.resp, self.dt)
+        .then((obj) => {
+
+        })
+    }
+
 // TODO: implementar função de erro.
     //recuperar todos os empréstimos.
     self.getEmprestimos = () => {
       empSvc.getEmprestimos()
         .then(function (res) {
-          self.emprestimos = res.data.emprestimos;
+          console.log(res);
+          self.emprestimos = res.data.result;
         }, function (err) {
       
         })

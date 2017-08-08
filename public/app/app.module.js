@@ -25,6 +25,10 @@ angular.module("ControlLab", ['ngRoute']) //ui-select
         templateUrl: 'app/routes/addLocal.html'
       })
 
+      .when('/recursos', {
+        templateUrl: 'app/routes/recurso.html'
+      })
+
       .when('/estoques', {
         templateUrl: 'app/routes/AddEstoque.html'
       })

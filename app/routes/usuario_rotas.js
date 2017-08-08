@@ -5,6 +5,7 @@ var express = require('express'),
     config = require('config'),
     bcrypt = require('bcrypt-nodejs');
 
+    
 function retornaErro(res, err) {
   res.json({
     sucess: false,
@@ -51,7 +52,7 @@ routes.use((req, res, next) => {
   var token = req.body.token || req.query.token || req.headers['x-access-token']
 
   if (token) {
-    jwt.verify(token, app.get('superSecret'), (err, decoded) => {
+    jwt.verify(token, config.segredo, (err, decoded) => {
 
       if (err){
         res.json({

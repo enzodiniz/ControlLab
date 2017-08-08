@@ -1,5 +1,5 @@
-
-  <div ng-controller="empCtrl as c" class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div ng-cloak ng-controller="empCtrl as c">
+  <div ng-cloak class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <!-- Botão para expandir o menu. Aparece quando a largura da tela diminui (Requer JS). -->
@@ -20,54 +20,57 @@
               <span class="glyphicon glyphicon-home"> Início</span>
             </a>
           </li>
-          <li><a href="C:\Users\jaelson\Desktop\ControlLab\ControlLab\bootstrap\ConsultarEmprestimo">
-            <span class="glyphicon glyphicon-search"> Consultar Empréstimos</span>
-          </a></li>
+          <li class="active" ng-click="c.mostrarForm()">
+            <a href=""><span class="glyphicon glyphicon-plus"> Emprestar material</span></a>
+          </li>
           <li><a href="#" ng-click="c.sair()"><span class="glyphicon glyphicon-off"> Sair</span></a></li>
         </ul>
       </div>
     </div>
   </div>
-</div>
-</div>
 
-<div class="col-md-offset-3 col-md-6">
-  <div class="tela-screen">
-    <div class="app-title fundo-branco">
-      <h1>Empréstimo</h1>
-    </div>
-    <form class="form-group fundo-branco" method="post">
-      <div class="col-xs-6">
-        <label for="">Responsavel</label>
-        <input  class="form-control" type="text">
+  <!-- Form de emprestar material -->
+  <div ng-cloak class="col-md-offset-3 col-md-6">
+    <div class="tela-screen">
+      <div class="app-title">
+        <h1 class="fundo-branco">Empréstimos</h1>
+      </div>
+      <form ng-show="c.adicionando" class=" fundo-branco" method="post">
+        <div class="form-group">
+          <h3 class="fundo-branco text-center">Emprestar material</h3>
+        </div>
+        <div class="col-xs-6 form-group grupoDeForms">
+          <label for="">Responsavel</label>
+          <input class="form-control" type="text" ng-model="c.resp">
         </div>
 
-      <div class="col-xs-6">
-        <label  for="">Descrição</label>
-        <input class="form-control" type="text">
-      </div>
+        <div class="col-xs-6 form-group grupoDeForms">
+          <label for="">Material</label>
+          <input class="form-control" type="text">
+        </div>
 
-      <div class="col-xs-4">
-    <label for="">Data</label>
-    <input  class="form-control"  type="Date">
-    </div>
+        <div class="col-xs-4 form-group grupoDeForms">
+          <label for="">Data</label>
+          <input class="form-control" type="Date" ng-model="c.dt">
+        </div>
 
-   <div class="col-xs-4">
-    <label for="">Quantidade</label>
-    <input  class="form-control"  type="number">
-    </div>
-  <div class="col-xs-4">
-    <label for="">Valor Unitário</label>
-    <input  class="form-control"  type="number" value="0.00" step="0.00">
-    </div>
-    <div class="col-xs-4">
+        <button id="botao" class="btn btn-primary col-xs-offset-8" type="submit" ng-click="c.emprestar()">
+          <span>Adicionar Empréstimo</span>
+        </button>          
+      </form>  
+    </div>  
+  </div>
 
+  <!-- Lista de empréstimos -->
+  <div class="col-md-offset-3 col-md-6" ng-init="c.getEmprestimos()">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="emp in c.emprestimos">
+        {{emp}}
+      </li>
+    </ul>
+  </div>
 </div>
-<button id="botao" class="btn btn-primary" type="submit">
-  <span>Adicionar Empréstimo</span>
-</button>
-    </div>
+  
+  
 
-</div>
 
-  </form>
