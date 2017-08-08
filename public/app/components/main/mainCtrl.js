@@ -18,7 +18,7 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
   //     self.usuarios = res.data.result;
   //   }, (err) => {
   //
-  //   })db
+  //   })
   // } //serviços
 
   $scope.$on('evento', function (erro, args) {
