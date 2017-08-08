@@ -1,0 +1,65 @@
+
+<body ng-app = "tarefas">
+<div ng-controller="HEmpCrtl.js as c">
+  <div>
+
+<div  class="container">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6">
+<div class="panel panel-sucess">
+  <div class="panel-body">
+    <form method="post">
+        <div class="col-md-9">
+              <input  ng-model = "c.texto"  type=" text" class="form-control" name="texto-post" value=""
+               placeholder=" Digite na rede social do Amor"></div>
+               <div class="col-md-3">
+                <button  ng-click = "c.adicionar()" class="btn btn-primary" >Enviar</button>
+               </div>
+          </div>
+  </div>
+  </form>
+</div>
+</div>
+</form>
+<form class="form-inline">
+    <div class="col-md-offset-3 col-md-6">
+  <div class="form-group">
+    <label >Pesquisar</label>
+    <input type="text" ng-model="Pesquisar" class="form-control" placeholder="Procurando...">
+
+<button class="btn btn-primary"   ng-click= "ordenar = true " type="button"name="button">Ordenar</button>
+    <button  ng-click="ordenar = false "  class="btn btn-primary" type="button" name="button">Desordenar</button>
+  </div>
+</div>
+</form>
+  <div class="row" ng-repeat= "n in c.numeros|orderBy:date: ordenar: 'dd/MM/yyyy HH:mm:ss'| filter:Pesquisar">
+
+  <div class=" col-md-offset-3 col-md-6 ">
+
+ <div class="panel panel-info">
+  <div class= "panel-heading">
+         Jaelson
+
+  </div>
+
+    <div class= " panel-body">
+
+          {{n.texto}}
+        </div>
+
+ <div class="panel-footer text-right">
+ <span class="pull-left">
+    <span class="glyphicon glyphicon-time"></span>{{n.timestamp | date: 'dd/MM/yyyy HH:mm:ss'}} </span>
+
+    <button class="btn btn-link btn-xs" type="button" name="button">
+          <div ng-click= "cont = cont + 1" ng-init ="cont = 0 "class="glyphicon glyphicon-thumbs-up">({{cont}})
+          <button  class="btn btn-link btn-xs" type="button" name="button">
+        <span class="glyphicon glyphicon-comment"></span>&nbspComentar</button>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+
+</html>

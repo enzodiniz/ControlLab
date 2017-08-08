@@ -12,13 +12,13 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
 
       });
   }
-  
+
   // self.getUsuarios = () => {
   //   $http.get('http://localhost:3000/usuarios').then((res) => {
   //     self.usuarios = res.data.result;
   //   }, (err) => {
   //
-  //   })
+  //   })db
   // } //serviços
 
   $scope.$on('evento', function (erro, args) {
@@ -35,7 +35,7 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
     self.evento = false;
   }
 
-  if (!authSvc.isAuthed()){ 
+  if (!authSvc.isAuthed()){
     $location.path('/login');
-  } 
+  }
 }

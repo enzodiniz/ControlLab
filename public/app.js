@@ -3,6 +3,24 @@ angular.module("controlLab", []) //ui-select
 
 function MainCtrl($scope, $http) {
   var self = this;
+  this.texto = "";
+  this.numeros = [];
+  this.adicionar = function(){
+    if(this.numeros.indexOf(this.texto)== -1){
+    this.numeros.push({
+      texto: this.texto,
+      timestamp:new Date()
+
+        });
+    this.texto =""
+}
+  }
+
+  this.remover = function(i) {
+    this.numeros.splice(i, 1);
+
+  }
+
 
   self.getMateriais() = () => {
     $http.get('http://localhost:3000/materiais').then((res) => {
