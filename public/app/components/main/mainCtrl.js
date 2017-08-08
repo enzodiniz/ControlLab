@@ -13,6 +13,10 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
       });
   }
 
+  self.isAuthed = function () {
+    return authSvc.isAuthed();
+  }
+
   $scope.$on('evento', function (erro, args) {
     self.evento = true;
     if (args.alerta == "erro"){
@@ -25,6 +29,12 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
       self.eventClass = 'alert-info';
     }
     self.eventMessage = args.mensagem;
+  })
+
+  $scope.$on('menu', function (erro, args) {
+    if (args.menu == "recurso") {
+      self.menuRec = true;
+    }
   })
 
   self.fecharAlerta = function () {

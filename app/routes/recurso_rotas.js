@@ -67,7 +67,7 @@ routes.put('/recursos/:id', function (req, res) {
 });
 
 //remover recurso por ID
-routes.delete('/recurso/:id', function (req, res) {
+routes.delete('/recursos/:id', function (req, res) {
   Recurso.remove({_id:req.params.id}).then((obj) => {
     res.json({
       sucess: true,

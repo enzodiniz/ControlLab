@@ -1,5 +1,5 @@
 angular.module('ControlLab')
-	.controller('RecursoCtrl', function (recSvc) {
+	.controller('RecursoCtrl', function (recSvc, authSvc) {
 		
 		var self = this;
 		var adicionando = false;

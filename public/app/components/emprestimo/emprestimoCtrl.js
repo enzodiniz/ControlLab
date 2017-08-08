@@ -3,21 +3,9 @@ angular
   .controller('empCtrl', function($scope, $location, authSvc, empSvc) {
 
     var self = this;
-    var adicionando;
-    var emprestimos;
 
     self.emprestimos = [];
     self.adicionando = false;
-
-    //ação do botão 'sair' da barra de navegação.
-    self.sair = function () {
-      authSvc.loguot();
-    }
-
-    //ação do botão 'início' da barra de navegação.
-    self.redirHome = function () {
-      $location.path('/home');
-    }
 
     self.mostrarForm = function () {
       if (self.adicionando)
@@ -28,14 +16,14 @@ angular
 
     self.emprestar = function () {
       empSvc.emprestar(self.mat, self.resp, self.dt)
-        .then((obj) => {
-
+        .then((res) => {
+          self.obterEmprestimos();
         })
     }
 
 // TODO: implementar função de erro.
     //recuperar todos os empréstimos.
-    self.getEmprestimos = () => {
+    self.obterEmprestimos = () => {
       empSvc.getEmprestimos()
         .then(function (res) {
           console.log(res);
@@ -43,6 +31,16 @@ angular
         }, function (err) {
       
         })
+    }
+
+    //ação do botão 'sair' da barra de navegação.
+    self.sair = function () {
+      authSvc.loguot();
+    }
+
+    //ação do botão 'início' da barra de navegação.
+    self.redirHome = function () {
+      $location.path('/home');
     }
 
     if (!authSvc.isAuthed()){

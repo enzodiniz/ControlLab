@@ -18,6 +18,6 @@ angular.module('ControlLab')
 		}
 
 		self.removerRecurso= function (id) {
-			return $http.delete(API + "/" + id + "/?token=" + token)
+			return $http.delete(API + "/" + id + "/?token=" + token);
 		}
-	})
+})
