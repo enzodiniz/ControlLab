@@ -13,19 +13,15 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
       });
   }
 
-  // self.getUsuarios = () => {
-  //   $http.get('http://localhost:3000/usuarios').then((res) => {
-  //     self.usuarios = res.data.result;
-  //   }, (err) => {
-  //
-  //   })
-  // } //serviços
-
   $scope.$on('evento', function (erro, args) {
     self.evento = true;
     if (args.alerta == "erro"){
       self.eventClass = 'alert-danger';
-    } else {
+    }
+    else if (args.alerta == "logado"){
+      self.eventClass = 'alert-success'
+    }
+    else {
       self.eventClass = 'alert-info';
     }
     self.eventMessage = args.mensagem;

@@ -1,0 +1,74 @@
+<div ng-cloak ng-controller="RecursoCtrl as c">
+
+  <!-- Barra de menu -->
+  <div ng-cloak class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- Botão para expandir o menu. Aparece quando a largura da tela diminui (Requer JS). -->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- O nome, marca, logotipo do nosso projeto -->
+        <a class="navbar-brand" href="#">ControlLab</a>
+      </div>
+      <!-- Os itens de menu -->
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active" ng-click="c.redirHome()">
+            <a href="">
+              <span class="glyphicon glyphicon-home"> Início</span>
+            </a>
+          </li>
+          <li class="active" ng-click="c.mostrarForm()">
+            <a href=""><span class="glyphicon glyphicon-plus"> Adicionar recurso</span></a>
+          </li>
+          <li><a href="#" ng-click="c.sair()"><span class="glyphicon glyphicon-off"> Sair</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form de emprestar material -->
+  <div class="row">
+	  <div ng-cloak class="col-md-offset-3 col-md-6">
+	    <div class="tela-screen">
+	      <div class="app-title">
+	        <h1 class="fundo-branco text-center">Recursos</h1>
+	      </div>
+	      <form ng-show="c.adicionando" class="form-inline fundo-branco" method="post">
+	        <div class="col-xs-5 form-group grupoDeForms">
+	          <label for="">Nome</label>
+	          <input class="form-control" type="text" ng-model="c.nome">
+	        </div>
+
+	        <div class="col-xs-5 form-group grupoDeForms">
+	          <label for="">Valor</label>
+	          <input class="form-control" type="text" ng-model="c.val">
+	        </div>
+
+	        <button id="botao" class="btn btn-primary col-xs-offset-8" type="submit" ng-click="c.addRecurso()">
+	          <span>Adicionar recurso</span>
+	        </button>          
+	      </form>  
+	    </div>  
+	  </div>  	
+  </div>
+
+  <!-- Lista de empréstimos -->
+  <div class="row" ng-init="c.obterRecurso()">
+	  <div class="col-md-offset-3 col-md-6">
+	    <ul class="list-group">
+	      <li class="list-group-item" ng-repeat="rec in c.recursos">
+	        <b>{{rec.nome}}</b>
+          <button class="pull-right" ng-click= "c.removerRecurso(rec._id)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button><br>
+          Valor: R$ {{rec.valor}}
+	      </li>
+	    </ul>
+	  </div>  	
+  </div>
+</div>
