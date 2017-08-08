@@ -21,7 +21,7 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
     self.evento = true;
     if (args.alerta == "erro"){
       self.eventClass = 'alert-danger';
-    } 
+    }
     else if (args.alerta == "logado"){
       self.eventClass = 'alert-success'
     }
@@ -41,7 +41,7 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
     self.evento = false;
   }
 
-  if (!authSvc.isAuthed()){ 
+  if (!authSvc.isAuthed()){
     $location.path('/login');
-  } 
+  }
 }
