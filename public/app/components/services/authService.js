@@ -1,6 +1,6 @@
 angular
   .module('ControlLab')
-  .service('authSvc', function($window, $http) {
+  .service('authSvc', function($window, $http, $location) {
 
     var self = this;
 
@@ -45,5 +45,6 @@ angular
 
     self.logout = function () {
       $window.localStorage.removeItem('jwtToken')
+      $location.path('/login');
     }
   })

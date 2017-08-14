@@ -13,6 +13,34 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
       });
   }
 
+  self.redirecionarEmp = function () {
+    $location.path('/emprestimos');
+  }
+
+  self.redirecionarEst = function () {
+    $location.path('/estoques');
+  }
+
+  self.redirAddUser = function () {
+    $location.path('/addUsuario');
+  }
+
+  self.redirAddGrupo = function () {
+    $location.path('/addGrupo');
+  }
+
+  self.redirAddLoja = function () {
+    $location.path('/addLoja');
+  }
+
+  self.redirAddLocal = function () {
+    $location.path('/addLocal');
+  }
+
+  self.redirAddRecurso = function () {
+    $location.path('/recursos')
+  }
+
   self.isAuthed = function () {
     return authSvc.isAuthed();
   }
@@ -22,7 +50,7 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
     if (args.alerta == "erro"){
       self.eventClass = 'alert-danger';
     }
-    else if (args.alerta == "logado"){
+    else if (args.alerta == "success"){
       self.eventClass = 'alert-success'
     }
     else {

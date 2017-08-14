@@ -8,7 +8,7 @@ var Usuario = new Schema({
   grupo: { type: Schema.ObjectId },
   email: {type: String},
   userName: { type: String, unique: true },
-  senha: { type: String }, //hash
+  senha: { type: String },
   matricula: { type: String, unique: true }, //chave unica
   admin: { type: Boolean, default: false }
 })

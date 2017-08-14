@@ -19,6 +19,7 @@
   "dependencies": {
     "angular": "^1.6.5",
     "angular-route": "^1.6.5",
+    "async": "^2.5.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
@@ -26,6 +27,9 @@
     "express": "^4.15.3",
     "jquery": "^3.2.1",
     "jsonwebtoken": "^7.4.1",
-    "mongoose": "^4.11.0"
+    "lodash": "^4.17.4",
+    "mongoose": "^4.11.0",
+    "mongoose-money": "^0.2.0",
+    "ui-select": "^0.19.8"
   }
 }

@@ -33,7 +33,7 @@ angular
     }
 
     self.sair = function () {
-      authSvc.loguot();
+      authSvc.logout();
     }
 
     if (!authSvc.isAuthed()) {

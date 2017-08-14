@@ -33,7 +33,7 @@ routes.post('/materiais', function (req, res) {
 
 //recuperar material por id
 routes.get('/materiais/:id', function (req, res) {
-  Material.find( {_id: req.params.id} ).then((material) => {
+  Material.findOne( {_id: req.params.id} ).then((material) => {
     res.json({
       sucess: true,
       result: material
@@ -78,6 +78,54 @@ routes.get('/materiais/lojas/:id', function (req, res) {
     }, (err) => {
       retornaErro(res, err)
     })
+})
+
+//recuperar um material pra ui-select
+routes.get('/materiais/busca', function (req, res) {
+  var q = req.query.query;
+
+  // Material.find({"descricao" : new RegExp(q, 'i')})
+  //   .then((materiais) => {
+  //     console.log(materiais);
+  //     res.json({
+  //       success: true,
+  //       query: q,
+  //       result: materiais
+  //     })
+  //   }, (err) => {
+  //     retornaErro(res, err);
+  //   })
+
+  Material.find({descricao: q})
+    .then((mat) => {
+      res.json({
+        success: true,
+        query: q,
+        result: mat
+      }, (err) => {
+        retornaErro(res, err);
+      })
+    })
+
+
+  // Material.find({'descricao' : new RegExp(q, 'i')},
+  //   '_id descricao quantidade local', function(err, users) {
+  //   User.findById(req.uid, function(err, user) {
+  //     if (user.type == "admin") {
+  //       res.json({
+  //         success: true,
+  //         query: q,
+  //         result: users
+  //       });
+  //     } else {
+  //       res.json({
+  //         success: false,
+  //         message: "Current user cannot perform this operation."
+  //       });
+  //     }
+  //   });
+  // });
+
 })
 
 //atualizar um material pelo id

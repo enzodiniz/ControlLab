@@ -24,7 +24,14 @@ routes.post('/autenticacao', function (req, res) {
         })
       }
       else {
-        if (bcrypt.compareSync(req.body.senha, user.senha)) {
+        if (!user.admin){
+          res.json({
+            sucess: false,
+            mensagem: "O usuário não é administrador!"
+          })
+        }
+
+        else if (bcrypt.compareSync(req.body.senha, user.senha)) {
           var token = jwt.sign(user._id, config.segredo, {
             expiresIn: "24h"
           })

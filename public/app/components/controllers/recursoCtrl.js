@@ -10,6 +10,8 @@ angular.module('ControlLab')
 					console.log(res);
 					self.adicionando = false;
 					self.obterRecurso();
+					self.nome = "";
+					self.val = undefined;
 				}, (err) => {
 					console.log(err);
 				})
