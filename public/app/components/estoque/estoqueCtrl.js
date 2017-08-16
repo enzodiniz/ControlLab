@@ -6,7 +6,7 @@ angular
 
     //ação do botão 'sair' da barra de navegação.
     self.sair = function () {
-      authSvc.loguot();
+      authSvc.logout();
     }
 
     //ação do botão 'início' da barra de navegação.

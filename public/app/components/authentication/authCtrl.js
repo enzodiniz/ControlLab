@@ -23,7 +23,7 @@ angular
           var token = res.data ? res.data.token : null;
           if (token) {
             authSvc.saveToken(token);
-            $rootScope.$broadcast('evento', { alerta: 'success', 
+            $rootScope.$broadcast('evento', { alerta: 'success',
               mensagem: res.data.mensagem })
             $location.path('/home');
           }
@@ -39,7 +39,7 @@ angular
 
           if (token) {
             authSvc.saveToken(token);
-            $rootScope.$broadcast('evento', { alerta: 'success', 
+            $rootScope.$broadcast('evento', { alerta: 'success',
               mensagem: res.data.mensagem })
             $location.path('/home');
           } else {
@@ -47,11 +47,11 @@ angular
             $rootScope.$broadcast('evento', {alerta: "erro",
               mensagem: res.data.mensagem});
           }
-          
+
         });
     }
 
     self.fazerLogout = function () {
-      authSvc.loguot();
+      authSvc.logout();
     }
   })

@@ -5,7 +5,7 @@ var express = require('express'),
     config = require('config'),
     bcrypt = require('bcrypt-nodejs');
 
-    
+
 function retornaErro(res, err) {
   res.json({
     sucess: false,
@@ -55,29 +55,29 @@ routes.post('/autenticacao', function (req, res) {
 })
 
 //midleware que verifica token
-routes.use((req, res, next) => {
-  var token = req.body.token || req.query.token || req.headers['x-access-token']
-
-  if (token) {
-    jwt.verify(token, config.segredo, (err, decoded) => {
-
-      if (err){
-        res.json({
-          sucess: false,
-          messagem: "Falha durante a autenticação!"
-        })
-      } else {
-        req.decoded = decoded
-        next()
-      }
-    })
-  } else {
-    return res.status(203).send({
-      sucess: false,
-      messagem: "Nenhum token fornecido."
-    })
-  }
-})
+// routes.use((req, res, next) => {
+//   var token = req.body.token || req.query.token || req.headers['x-access-token']
+//
+//   if (token) {
+//     jwt.verify(token, config.segredo, (err, decoded) => {
+//
+//       if (err){
+//         res.json({
+//           sucess: false,
+//           messagem: "Falha durante a autenticação!"
+//         })
+//       } else {
+//         req.decoded = decoded
+//         next()
+//       }
+//     })
+//   } else {
+//     return res.status(203).send({
+//       sucess: false,
+//       messagem: "Nenhum token fornecido."
+//     })
+//   }
+// })
 
 //criar um usuário
 routes.post('/users', function (req, res) {

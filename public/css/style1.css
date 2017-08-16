@@ -1,7 +1,11 @@
-{
+/*{
 box-sizing: border-box;
 }
-
+#ts {
+background-color: #Deb887;
+padding: 20px;
+border-radius: 5px
+}
 *:focus {
  outline: none;
 }
@@ -9,7 +13,7 @@ body {
 font-family: Arial;
 
 padding: 50px;
-background-image: url('../imagens/ferramentas-de-marketing.jpg');
+background-image: url('../imagens/logo.png');
 
 }
 
@@ -69,7 +73,15 @@ input:focus {
 border: 2px solid #3498DB;
 box-shadow: none;
 }
+#form{
+  background-color: #Deb887;
+  padding: 20px;
+  border-radius: 5px
+}
 
+#h1{
+  background-color: #3498DB
+}
 .btn {
  border: 2px solid transparent;
  background: #3498DB;

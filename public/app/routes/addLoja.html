@@ -1,35 +1,41 @@
 <div ng-controller="lojaCtrl as c">
+<div class="col-md-offset-3 col-md-6">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3" ng-init="c.obterLojas()">
-			
-
-			<h1 class="fundo-branco text-center">Lojas</h1>
+		<div  ng-init="c.obterLojas()">
+			<h1 class=" text-center">Lojas</h1>
 			<div class="row">
+
 				<button ng-click="c.mostrarForm()" class="pull-right">
-					<span class="glyphicon glyphicon-plus"></span>
-				</button>				
+					<span class=" glyphicon glyphicon-plus "></span>
+				</button>
 			</div>
-
+</div>
 			<!-- Início do form de cadastro -->
+			<div class="col-md-offset-3 col-md-6">
 			<div class="row">
-				 <form ng-show="c.adicionando" class="form-inline fundo-branco col-md-offset-1 col-md-10" method="post">
+
+				 <form class="form-horizontal"  ng-show="c.adicionando" class="form-inline  col-md-offset-3 col-md-6" method="post">
 					<h4 class="text-center">Adicionar loja</h4>
-			        <div class="col-xs-4 form-group grupoDeForms">
-			          <!-- <label for="">Nome</label> -->
+			        <div class="col-xs-6 form-group grupoDeForms">
+
+							  <!-- <label for="">Nome</label> -->
 			          <input class="form-control" placeholder="Nome" type="text" ng-model="c.nome">
 			        </div>
-
 			        <div class="form-group grupoDeForms pull-right">
-			        	<button class="btn btn-success btn-xs" type="submit" ng-click="c.addLoja()">
+								<div class="col-md-9">
+			        	<button  class="btn btn-primary " type="submit" ng-click="c.addLoja()">
 			          		<span>Adicionar loja</span>
-			        	</button>          
+			        	</button>
 			        </div>
-			    </form>  
+							 </div>
+							 </div>
+			    </form>
 			</div>
-			<!-- Fim do form de cadastro -->
+			</div>
 
+			<!-- Fim do form de cadastro -->
+<div class="col-md-6 col-md-offset-3">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
 					<form ng-show="c.excluindo">
 						<div class="form-group">
 							<label class="fundo-branco">Tem certeza que deseja excluir essa loja?</label><br>
@@ -41,8 +47,9 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
+				<div class="col-md-offset-3 col-md-6 ">
 					<ul class="list-group">
+
 						<li class="list-group-item" ng-repeat="l in c.lojas">
 							{{l.nome}}
 							<!-- <button class="btn btn-danger btn-xs" ng-click="c.removerLoja(l._id)">
@@ -52,15 +59,16 @@
 							<div class="btn-group pull-right" role="group" aria-label="Basic example">
 								<button class="t" ng-click="c.atualizarLoja(l._id)">
 									<span class="glyphicon glyphicon-pencil"></span>
-								</button>								
+								</button>
 
 								<button class="" ng-click="c.mostrarExcluir()" ng-init="c.setId(l._id)">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
+							
 							</div>
 						</li>
 					</ul>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</div>
