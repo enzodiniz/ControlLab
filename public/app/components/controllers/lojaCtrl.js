@@ -16,7 +16,8 @@ angular.module('ControlLab')
 				self.adicionando = true;
 		}
 
-		self.mostrarExcluir = function () {
+		self.mostrarExcluir = function (id) {
+			self.setId(id);
 			if (self.excluindo)
 				self.excluindo = false;
 			else

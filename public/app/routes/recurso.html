@@ -36,16 +36,17 @@
   <div class="row">
     <div class="tela-screen">
 	  <div ng-cloak class="">
-	    <div id= "ts"class="tela-screen">
+	    <div class="tela-screen">
 	      <div class="app-title">
-	        <h1 id="h1" class="fundo-branco text-center">Recursos</h1>
+
+	        <h1 class="fundo-branco text-center">Recursos</h1>
 	      </div>
         <div class="pull-right">
           <button ng-click="c.mostrarForm()">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </div>
-	      <form id="form"ng-show="c.adicionando" class="form-inline fundo-branco" method="post">
+	      <form ng-show="c.adicionando" class="form-horizontal" method="post">
 <div class="col-md-offset-2 col-md-4">
           <div class=" form-group grupoDeForms">
 	          <label for="">Nome</label>
@@ -55,13 +56,15 @@
 <div class="col-md-offset-1 col-md-2">
 	        <div class=" form-group grupoDeForms">
 	          <label for="">Valor</label>
-	          <input class="form-control" type="number step="0.00""  ng-model="c.val">
+	          <input class="form-control" type="number" step="0.20"  ng-model="c.val">
 	        </div>
           </div>
+<div class="col-md-7">
+  <button  class="btn btn-primary pull-right" type="submit" ng-click="c.addRecurso()">
+    <span >Adicionar recurso</span>
+  </button>
+</div>
 
-	        <button  class="btn btn-default" type="submit" ng-click="c.addRecurso()">
-	          <span >Adicionar recurso</span>
-	        </button>
 
 	      </form>
 	    </div>
@@ -73,15 +76,21 @@
   <!-- Lista de empréstimos -->
   <div class="row" ng-init="c.obterRecurso()">
 	  <div class="col-md-offset-3 col-md-6">
-	    <ul class="list-group">
-	      <li class="list-group-item" ng-repeat="rec in c.recursos">
-	        <b>{{rec.nome}}</b>
-          <button class="pull-right" ng-click= "c.removerRecurso(rec._id)">
-            <span class="glyphicon glyphicon-trash"></span>
-          </button><br>
-          Valor: R$ {{rec.valor}}
-	      </li>
-	    </ul>
+      <form class="form-horizontal" >
+        <ul class="list-group">
+          <div class="col-md-12">
+            <li class="list-group-item" ng-repeat="rec in c.recursos">
+    	        <b>{{rec.nome}}</b>
+              <button class="pull-right" ng-click= "c.removerRecurso(rec._id)">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button><br>
+              Valor: R$ {{rec.valor}}
+    	      </li>
+          </div>
+
+  	    </ul>
+      </form>
+
 	  </div>
   </div>
 </div>
