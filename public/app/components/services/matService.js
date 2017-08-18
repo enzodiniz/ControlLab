@@ -15,6 +15,7 @@ function matSvc($http, authSvc) {
 	}
 
 	self.getMaterials = function (query) {
-		return $http.get(API + 'busca' + "/?token=" + token + '&query=' + query);
+		return $http.get('http://localhost:3000/api/materiais_busca' + 
+			"/?token=" + token + '&query=' + query);
 	}
 }

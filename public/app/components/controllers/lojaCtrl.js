@@ -61,9 +61,8 @@ angular.module('ControlLab')
 
 		self.setId = function (id) {
 			self.id = id;
-		}
+		}	
 
-		if (!authSvc.isAuthed()) {
+		if(!authSvc.isAuthed())
 			$location.path('/login');
-		}
 	})

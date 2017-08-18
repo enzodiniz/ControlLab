@@ -10,7 +10,8 @@ angular.module("ControlLab", ['ngRoute', 'ui.select']) //ui-select
       })
 
       .when('/addUsuario', {
-        templateUrl: 'app/routes/addUsuario.html'
+        // templateUrl: 'app/routes/addUsuario.html'
+        templateUrl: 'app/routes/addUsuario (Conflitos entre maiúsculas e minúsculas).html'
       })
 
       .when('/addGrupo', {

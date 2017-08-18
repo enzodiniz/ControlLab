@@ -45,6 +45,10 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
     return authSvc.isAuthed();
   }
 
+  self.sair = function () {
+    authSvc.logout();
+  }
+
   $scope.$on('evento', function (erro, args) {
     self.evento = true;
     if (args.alerta == "erro"){
