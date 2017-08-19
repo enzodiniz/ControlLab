@@ -1,6 +1,6 @@
 angular
   .module("ControlLab")
-  .controller('empCtrl', function($scope, $location, authSvc, empSvc, matSvc) {
+  .controller('empCtrl', function($scope, $location, $rootScope, authSvc, empSvc, matSvc, userSvc) {
 
     var self = this;
 
@@ -19,6 +19,19 @@ angular
       empSvc.emprestar(self.mat, self.resp, self.dt)
         .then((res) => {
           self.obterEmprestimos();
+          $rootScope.$broadcast('evento', {
+            alerta: 'success',
+            mensagem: 'Material emprestado com sucesso.'
+          })
+          self.resp = undefined;
+          self.mat = undefined;
+          self.dt = undefined;
+          self.adicionando = false;
+        }, (err) => {
+          $rootScope.$broadcast('evento', {
+            alerta: 'erro',
+            mensagem: 'Erro ao emprestar o material.'
+          })
         })
     }
 
@@ -60,6 +73,13 @@ angular
         .then((res) => {
           console.log(res);
           self.mats = res.data.result;
+        })
+    }
+
+    self.refreshResponsible = function (query) {
+      userSvc.getUsers(query)
+        .then((res) => {
+          self.users = res.data.result;
         })
     }
 

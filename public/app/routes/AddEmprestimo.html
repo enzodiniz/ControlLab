@@ -1,91 +1,105 @@
-<div ng-cloak ng-controller="empCtrl as c">
-  <div ng-cloak class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- Botão para expandir o menu. Aparece quando a largura da tela diminui (Requer JS). -->
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <!-- O nome, marca, logotipo do nosso projeto -->
-        <a class="navbar-brand" href="#">ControlLab</a>
+
+<div class="container">
+  <div ng-cloak ng-controller="empCtrl as c">
+    <!-- Form de cadastro -->
+    <div ng-cloak class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <form ng-show="c.adicionando" class="form-horizontal">
+          <div class="panel panel-primary">
+
+            <div class="panel-heading">
+              Adicionar empréstimo
+            </div>
+
+            <div class="panel-body">
+
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label class="control-label">Responsável</label>
+
+                  <ui-select multiple ng-model="c.resp" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
+                    <ui-select-match >{{$item.primeiroNome}} {{$item.ultimoNome}}</ui-select-match>
+                      <ui-select-choices repeat="person in c.users" refresh="c.refreshResponsible($select.search)" refresh-delay="0">
+                        <div ng-bind-html="person.userName | highlight: $select.search"></div>
+                          <small>
+                            {{person.primeiroNome}} {{person.ultimoNome}}
+                            <{{person.email}}>
+                          </small>
+                      </ui-select-choices>
+                  </ui-select>                    
+                </div>
+              </div>
+              
+
+              <!-- <div class="col-md-7">
+                <div class="form-group">
+                  <label class="control-label" for="responsavel">Responsável</label>
+                  <input class="form-control" type="text" name="responsavel" ng-model="c.resp">
+                </div>
+              </div> -->
+              <div class="col-md-offset-1 col-md-4">
+                <div class="form-group">
+                  <label class="control-label" for="data">Data</label>
+                  <input class="form-control" type="Date" name="data">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Materiais</label>
+                  <ui-select multiple ng-model="c.mat" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
+                      <ui-select-match>{{$item.descricao}}
+                      </ui-select-match>
+                      <ui-select-choices repeat="mate in c.mats" refresh="c.refreshMaterials($select.search)" refresh-delay="0">
+                        <div ng-bind-html="mate.descricao | highlight: $select.search"></div>
+                        <small>
+                          {{mate.descricao}}
+                        </small>
+                      </ui-select-choices>
+                  </ui-select>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-footer">
+              <div class="col-md-offset-10">
+                <button ng-click="c.emprestar()" class="btn btn-primary">Adicionar</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-      <!-- Os itens de menu -->
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li class="active" ng-click="c.redirHome()">
-            <a href="">
-              <span class="glyphicon glyphicon-home"> Início</span>
-            </a>
-          </li>
-          <li class="active" ng-click="c.mostrarForm()">
-            <a href=""><span class="glyphicon glyphicon-plus"> Emprestar material</span></a>
-          </li>
-          <li><a href="#" ng-click="c.sair()"><span class="glyphicon glyphicon-off"> Sair</span></a></li>
-        </ul>
+    </div>
+
+    <!-- Lista de empréstimos -->
+    <div class="row" ng-init="c.obterEmprestimos()">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="panel panel-default">
+          <!-- Início do panel-heading -->
+          <div class="panel-heading">
+            <div class="col-md-6">
+              <h4>Empréstimos</h4>
+            </div>
+            <div ng-show="!c.adicionando" class="col-md-offset-9">
+              <button ng-click="c.mostrarForm()" class="btn btn-primary">Emprestar material</button>
+            </div>
+            <div ng-show="c.adicionando" class="col-md-offset-8">
+              <button ng-click="c.mostrarForm()" class="btn btn-danger">Cancelar empréstimo</button>
+            </div>
+          </div>
+          <!-- Fim do panel-heading -->
+
+          <!-- Início do corpo do painel -->
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="emp in c.emprestimos">
+                 <b>Responsável: {{emp.responsavel}}</b><br>
+                  Materiais emprestados: {{emp.materiais}}
+              </li>
+            </ul>
+          </div>
+          <!-- Fim do corpo do painel -->
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- Form de emprestar material -->
-  <div ng-cloak class="col-md-offset-3 col-md-6">
-    <div class="tela-screen">
-      <div class="app-title">
-        <h1 class="fundo-branco">Empréstimos</h1>
-      </div>
-      <form ng-show="c.adicionando" class=" fundo-branco" method="post">
-        <div class="form-group">
-          <h3 class="fundo-branco text-center">Emprestar material</h3>
-        </div>
-        <div class="col-xs-6 form-group grupoDeForms">
-          <label for="">Responsavel</label>
-          <input class="form-control" type="text" ng-model="c.resp">
-        </div>
-
-        <div class="col-xs-6 form-group grupoDeForms">
-          <label for="">Material</label>
-          <input class="form-control" type="text">
-        </div>
-
-
-        <div class="form-group"></div> 
-        <ui-select multiple ng-model="c.mats" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
-        <ui-select-match placeholder="Selecione os materiais...">{{$item.descricao}}</ui-select-match>
-            <ui-select-choices repeat="mate in c.mats" refresh="c.refreshMaterials($select.search)" refresh-delay="0">
-              <div ng-bind-html="mate.descricao | highlight: $select.search"></div>
-              <small>
-                {{mate.descricao}}
-              </small>
-            </ui-select-choices>
-        </ui-select>
-
-        
-
-        <div class="col-xs-4 form-group grupoDeForms">
-          <label for="">Data</label>
-          <input class="form-control" type="Date" ng-model="c.dt">
-        </div>
-
-        <button id="botao" class="btn btn-primary col-xs-offset-8" type="submit" ng-click="c.emprestar()">
-          <span>Adicionar Empréstimo</span>
-        </button>          
-      </form>  
-    </div>  
-  </div>
-
-  <!-- Lista de empréstimos -->
-  <div class="col-md-offset-3 col-md-6" ng-init="c.obterEmprestimos()">
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="emp in c.emprestimos">
-        <b>Responsável: {{emp.responsavel}}</b><br>
-        Materiais emprestados: {{emp.materiais}}
-      </li>
-    </ul>
-  </div>
 </div>
-  
-  
-
-

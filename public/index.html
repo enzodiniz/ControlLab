@@ -64,7 +64,7 @@
               <li>
                 <!-- Início do Dropdown -->
                 <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Cadastrar
                     <span class="caret"></span>
                   </button>
@@ -86,17 +86,18 @@
       </div>
     </div>
     <!-- Fim da barra de navegação -->
-    
+        
 
     <div class="container">
-      <div ng-cloak class="col-md-offset-3 col-md-6" role="alert"
-        ng-show="c.evento">
-          <div ng-class="[c.eventClass]" class="alerta">
-            <button type="button" class="close" ng-click="c.fecharAlerta()" arial-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+      <div class="col-md-offset-3 col-md-6">
+        <div class="bs-example" data-example-id="dismissible-alert-css"> 
+          <div ng-class="c.eventClass"  ng-show="c.evento" class="alert alert-dismissible" role="alert"> 
+            <button type="button" class="close" ng-click="c.fecharAlerta()" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button> 
             {{c.eventMessage}}
-          </div>
+          </div> 
+        </div>
       </div>
     </div>
 

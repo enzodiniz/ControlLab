@@ -13,6 +13,10 @@ background-image: url('../imagens/ferramentas-de-marketing.jpg');
 
 }
 
+. meu-espacamento {
+	margin-top: 5px;
+}
+
 /*.fundo-branco {
 	color: rgb(255, 255, 255);
 }

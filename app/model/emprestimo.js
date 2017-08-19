@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var Emprestimo = new Schema({
   materiais: { type: [ mongoose.Schema.Types.ObjectId ], ref: 'Material' },
-  responsavel: { type: Schema.ObjectId }, //usuario ou Grupo
+  responsavel: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' }, //usuario ou Grupo
   data: { type: Date }
 })
 

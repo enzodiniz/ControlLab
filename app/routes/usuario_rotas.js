@@ -125,6 +125,21 @@ routes.get('/users', function (req, res) {
   });
 })
 
+//recuperar todos os usuário ui-select
+routes.get('/users_busca', function (req, res) {
+  Usuario.find({'userName' : new RegExp(req.query.query, 'i')},  
+    '_id userName primeiroNome ultimoNome email')
+    .then((users) => {
+      res.json({
+        success: true,
+        query: req.query.query,
+        result: users
+      })
+    }, (err) => {
+      retornaErro(res, err);
+    })
+})
+
 //atualizar um usuário por ID
 routes.put('/users/:id', function (req, res) {
   Usuario.update( {_id: req.params.id}, {$set: {
