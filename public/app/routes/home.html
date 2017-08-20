@@ -1,5 +1,39 @@
-<div ng-controller="homeCtrl as c">
-		
+<div class="container" ng-controller="homeCtrl as c">
+	<div class="row">
+		<div class="col-md-6" ng-init="c.getEmprestimos()">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Empréstimos</h4>
+				</div>
+				<div class="panel-body">
+					<ul class="list-group">
+						<a class="list-group-item" ng-repeat="e in c.emprestimos">
+							{{e.responsavel}}
+							{{e.materiais}}
+						</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" ng-init="c.getMateriais()">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Materiais</h4>
+				</div>
+				<div class="panel-body">
+					<ul class="list-group">
+						<a class="list-group-item" ng-repeat="m in c.materiais">
+							{{m.quantidade}}
+							{{m.descricao}}
+						</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-controller="homeCtrl as c">		
 	<div ng-cloak class="col-md-offset-3 col-md-6">
 		<div class="login">
 			<div class="login-screen">

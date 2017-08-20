@@ -47,11 +47,11 @@
                 <div class="form-group">
                   <label class="control-label">Materiais</label>
                   <ui-select multiple ng-model="c.mat" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
-                      <ui-select-match>{{$item.descricao}}
-                      </ui-select-match>
+                      <ui-select-match>{{$item.quantidade}} {{$item.descricao}}</ui-select-match>
                       <ui-select-choices repeat="mate in c.mats" refresh="c.refreshMaterials($select.search)" refresh-delay="0">
                         <div ng-bind-html="mate.descricao | highlight: $select.search"></div>
                         <small>
+                          {{mate.quantidade}}
                           {{mate.descricao}}
                         </small>
                       </ui-select-choices>

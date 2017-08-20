@@ -70,6 +70,20 @@ routes.get('/grupos', function (req, res) {
   });
 })
 
+//recuperar todos os grupos ui-select
+routes.get('/grupos_busca', function (req, res) {
+  Grupo.find({'nome' : new RegExp(req.query.query, 'i')})
+    .then((grupos) => {
+      res.json({
+        success: true,
+        query: req.query.query,
+        result: grupos
+      })
+    }, (err) => {
+      retornaErro(res, err);
+    })
+})
+
 //atualizar grupo por ID
 routes.put('/grupos/:id', function (req, res) {
   Grupo.update( {_id: req.params.id}, {$set: {

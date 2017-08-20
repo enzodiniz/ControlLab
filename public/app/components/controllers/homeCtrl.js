@@ -1,8 +1,22 @@
 angular
   .module("ControlLab")
-  .controller("homeCtrl", function($location, authSvc) {
+  .controller("homeCtrl", function($location, authSvc, matSvc, empSvc) {
 
     var self = this;
+
+    self.getMateriais = function () {
+      matSvc.obterMateriais()
+        .then((res) => {
+          self.materiais = res.data.result;
+        })
+    }
+
+    self.getEmprestimos = function () {
+      empSvc.getEmprestimos()
+        .then((res) => {
+          self.emprestimos = res.data.result;
+        })
+    }
 
     self.redirecionarEmp = function () {
       $location.path('/emprestimos');

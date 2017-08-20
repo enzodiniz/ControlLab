@@ -1,6 +1,6 @@
 angular
   .module("ControlLab")
-  .controller('empCtrl', function($scope, $location, $rootScope, authSvc, empSvc, matSvc, userSvc) {
+  .controller('empCtrl', function($scope, $location, $rootScope, authSvc, empSvc, matSvc, userSvc, gpSvc) {
 
     var self = this;
 
@@ -81,6 +81,11 @@ angular
         .then((res) => {
           self.users = res.data.result;
         })
+
+      // gpSvc.getGroups(query)
+      //   .then((res) => {
+      //     self.users += res.data.result;
+      //   })  
     }
 
     //ação do botão 'sair' da barra de navegação.

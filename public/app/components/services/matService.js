@@ -4,18 +4,18 @@ angular.module("ControlLab")
 function matSvc($http, authSvc) {
 	var self = this,
 		token = authSvc.getToken();
-	const API = "http://localhost:3000/api/materiais/";
+	const API = "http://localhost:3000/api/materiais";
 
 	self.obterMateriais = function () {
 		return $http.get(API + "/?token=" + token);
 	}
 
 	self.obterMaterial = function (id) {
-		return $http.get(API + id + "/?token=" + token);
+		return $http.get(API + '/' + id + "/?token=" + token);
 	}
 
 	self.getMaterials = function (query) {
-		return $http.get('http://localhost:3000/api/materiais_busca' + 
+		return $http.get(API + '_busca' + 
 			"/?token=" + token + '&query=' + query);
 	}
 }
