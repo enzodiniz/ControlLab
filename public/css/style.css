@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /** {
+=======
+/* {
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
 box-sizing: border-box;
 }
 
@@ -9,13 +13,22 @@ body {
 font-family: Arial;
 
 padding: 50px;
-background-image: url('../imagens/ferramentas-de-marketing.jpg');
+background-image: url('../imagens/logo.png');
 
+}
+#h1{
+  background-color: #Deb887;
 }
 
 .login {
 margin: 20px auto;
 width: 300px;
+}
+
+#ts {
+background-color: #Deb887;
+padding: 20px;
+border-radius: 5px
 }
 .login-screen {
 background-color: #Deb887;
@@ -52,22 +65,7 @@ border: 2px solid #3498DB;
 box-shadow: none;
 }
 
-.btn {
-  border: 2px solid transparent;
-  background: #3498DB;
-  color: #ffffff;
-  font-size: 16px;
-  line-height: 25px;
-  padding: 10px 0;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: block;
-  width: 250px;
-  margin: 0 auto;
-}
+
 
 .btn:hover {
   background-color: #2980B9;

@@ -5,7 +5,7 @@ var express = require('express'),
     config = require('config'),
     bcrypt = require('bcrypt-nodejs');
 
-    
+
 function retornaErro(res, err) {
   res.json({
     sucess: false,

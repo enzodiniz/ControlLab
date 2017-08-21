@@ -7,6 +7,7 @@
         <form ng-show="c.adicionando" class="form-horizontal">
           <div class="panel panel-primary">
 
+
             <div class="panel-heading">
               Adicionar empréstimo
             </div>
@@ -16,7 +17,6 @@
               <div class="col-md-7">
                 <div class="form-group">
                   <label class="control-label">Responsável</label>
-
                   <ui-select multiple ng-model="c.resp" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
                     <ui-select-match >{{$item.primeiroNome}} {{$item.ultimoNome}}</ui-select-match>
                       <ui-select-choices repeat="person in c.users" refresh="c.refreshResponsible($select.search)" refresh-delay="0">
@@ -30,7 +30,6 @@
                 </div>
               </div>
               
-
               <!-- <div class="col-md-7">
                 <div class="form-group">
                   <label class="control-label" for="responsavel">Responsável</label>
@@ -91,6 +90,16 @@
           <!-- Início do corpo do painel -->
           <div class="panel-body">
             <ul class="list-group">
+              <li class="list-group-item">
+                <div class="col-md-offset-8">
+                  <button ng-show="!c.adicionando" ng-click="c.mostrarForm()" class="btn btn-primary">
+                    Emprestar material
+                  </button>
+                  <button ng-show="c.adicionando" ng-click="c.mostrarForm()" class="btn btn-danger">
+                    Cancelar empréstimo
+                  </button>
+                </div>
+              </li>
               <li class="list-group-item" ng-repeat="emp in c.emprestimos">
                  <b>Responsável: {{emp.responsavel}}</b><br>
                   Materiais emprestados: {{emp.materiais}}

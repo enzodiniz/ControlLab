@@ -21,7 +21,7 @@
             <a href="">
               <span class="glyphicon glyphicon-home"> Início</span>
             </a>
-          </li>          
+          </li>
           <li class="active" ng-click="c.mostrarForm()">
             <a href=""><span class="glyphicon glyphicon-plus"> Adicionar recurso</span></a>
           </li>
@@ -32,10 +32,13 @@
   </div>   -->
 
   <!-- Form de emprestar material -->
+  <div class="col-md-offset-3 col-md-6">
   <div class="row">
-	  <div ng-cloak class="col-md-offset-3 col-md-6">
+    <div class="tela-screen">
+	  <div ng-cloak class="">
 	    <div class="tela-screen">
 	      <div class="app-title">
+
 	        <h1 class="fundo-branco text-center">Recursos</h1>
 	      </div>
         <div class="pull-right">
@@ -43,37 +46,51 @@
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </div>
-	      <form ng-show="c.adicionando" class="form-inline fundo-branco" method="post">
-	        <div class="col-xs-4 form-group grupoDeForms">
+	      <form ng-show="c.adicionando" class="form-horizontal" method="post">
+<div class="col-md-offset-2 col-md-4">
+          <div class=" form-group grupoDeForms">
 	          <label for="">Nome</label>
 	          <input class="form-control" type="text" ng-model="c.nome">
 	        </div>
-
-	        <div class="col-xs-4 form-group grupoDeForms">
+</div>
+<div class="col-md-offset-1 col-md-2">
+	        <div class=" form-group grupoDeForms">
 	          <label for="">Valor</label>
-	          <input class="form-control" type="text" ng-model="c.val">
+	          <input class="form-control" type="number" step="0.20"  ng-model="c.val">
 	        </div>
+          </div>
+<div class="col-md-7">
+  <button  class="btn btn-primary pull-right" type="submit" ng-click="c.addRecurso()">
+    <span >Adicionar recurso</span>
+  </button>
+</div>
 
-	        <button id="botao" class="" type="submit" ng-click="c.addRecurso()">
-	          <span>Adicionar recurso</span>
-	        </button>          
-	      </form>  
-	    </div>  
-	  </div>  	
+
+	      </form>
+	    </div>
+    </div>
+	  </div>
+    </div>
   </div>
 
   <!-- Lista de empréstimos -->
   <div class="row" ng-init="c.obterRecurso()">
 	  <div class="col-md-offset-3 col-md-6">
-	    <ul class="list-group">
-	      <li class="list-group-item" ng-repeat="rec in c.recursos">
-	        <b>{{rec.nome}}</b>
-          <button class="pull-right" ng-click= "c.removerRecurso(rec._id)">
-            <span class="glyphicon glyphicon-trash"></span>
-          </button><br>
-          Valor: R$ {{rec.valor}}
-	      </li>
-	    </ul>
-	  </div>  	
+      <form class="form-horizontal" >
+        <ul class="list-group">
+          <div class="col-md-12">
+            <li class="list-group-item" ng-repeat="rec in c.recursos">
+    	        <b>{{rec.nome}}</b>
+              <button class="pull-right" ng-click= "c.removerRecurso(rec._id)">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button><br>
+              Valor: R$ {{rec.valor}}
+    	      </li>
+          </div>
+
+  	    </ul>
+      </form>
+
+	  </div>
   </div>
 </div>

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
 <div ng-controller="usuarioCtrl as c" class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -14,12 +18,20 @@
     <!-- Os itens de menu -->
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<<<<<<< HEAD
         <li class="active" ng-click="c.redirHome()">
+=======
+				<li class="active" ng-click="c.redirHome()">
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
           <a href="">
             <span class="glyphicon glyphicon-home"> Início</span>
           </a>
         </li>
+<<<<<<< HEAD
         <li><a href="C:\Users\jaelson\Desktop\ControlLab\ControlLab\bootstrap\ConsultarEmprestimo">
+=======
+        <li><a href="">
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
           <span class="glyphicon glyphicon-search"> Consultar Empréstimos</span>
         </a></li>
         <li><a href="#" ng-click="c.sair()"><span class="glyphicon glyphicon-off"> Sair</span></a></li>
@@ -30,12 +42,23 @@
 </div>
 </div>
 
+<<<<<<< HEAD
 <div class="col-md-offset-3 col-md-6">
 <div class="tela-screen">
   <div class="app-title ">
     <h1>Adicionar Usuário</h1>
   </div>
   <form class="form-group " method="post">
+=======
+<div class="row">
+<div class="container">
+<div class="col-md-offset-3 col-md-6">
+  <div class="app-title ">
+    <h1>Adicionar Usuário</h1>
+  </div>
+  <form class="form-horizontal" action="index.html" method="post">
+  <div class="form-group " method="post">
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
     <div class="col-xs-6">
       <label for="">Primeiro Nome</label>
       <input  class="form-control" type="text">
@@ -45,6 +68,11 @@
       <label  for="">Ultimo Nome  </label>
       <input class="form-control" type="text">
     </div>
+<<<<<<< HEAD
+=======
+	</div>
+	<div class="form-group">
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
     <div class="col-xs-6">
       <label  for="">Email  </label>
       <input class="form-control" type="email">
@@ -54,14 +82,22 @@
   <label for="">Data</label>
   <input  class="form-control"  type="Date">
   </div>
+<<<<<<< HEAD
   <div class="col-xs-4">
    <label for="">Nomde do Usuario</label>
+=======
+</div>
+<div class="form-group">
+  <div class="col-xs-4">
+   <label for="">Nome do Usuario</label>
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
    <input  class="form-control"  type="text">
    </div>
  <div class="col-xs-4">
   <label for="">Senha</label>
   <input  class="form-control"  type="password">
   </div>
+<<<<<<< HEAD
 <div class="col-xs-4">
   <label for="">Valor Unitário</label>
   <input  class="form-control"  type="number" value="0.00" step="0.00">
@@ -74,6 +110,40 @@
 </button>
   </div>
 
+=======
+
+<div class="col-xs-4">
+  <label for="">Valor Unitário</label>
+  <input  class="form-control"  type="number" value="0.00" step="0.20">
+  </div>
+	</div>
+<div class="form-group">
+  <div class="col-xs-12">
+    <button  class="btn btn-primary pull-right" type="submit">
+    <span>Adicionar </span>
+    </button>
+</div>
+</div>
+</form>
+  </div>
+</div>
+</div>
+</div>
+
+
+<div class="row" ng-init="c.obterUsuario">
+  <div class="col-md-offset-3 col-md-6">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="rec in c.Usuario">
+        <b>{{rec.nome}}</b>
+        <button class="pull-right" ng-click= "c.removerUsuario(rec._id)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button><br>
+        Valor: R$ {{rec.valor}}
+      </li>
+    </ul>
+  </div>
+>>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
 </div>
 
 </form>

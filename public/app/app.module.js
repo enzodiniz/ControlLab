@@ -1,4 +1,4 @@
-angular.module("ControlLab", ['ngRoute', 'ui.select']) //ui-select
+angular.module("ControlLab", ['ngRoute', 'ui.select', 'ngSanitize']) //ui-select
   .config(function ($routeProvider) {
     $routeProvider
       .when('/home', {

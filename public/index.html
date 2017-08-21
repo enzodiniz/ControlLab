@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <title>ControlLab</title>
     <link rel="shortcut icon" href="imagens/favicon.ico"/>
+
     <link rel="stylesheet" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" type="text/css" href="/scripts/angular/angular-csp.css">
@@ -14,6 +15,7 @@
     <script type="text/javascript" src="/scripts/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/scripts/angular/angular.min.js"></script>
     <script src="/scripts/angular-route/angular-route.min.js"></script>
+    <script src="/scripts/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="/scripts/ui-select/dist/select.min.js"></script>
     <script src="app/app.module.js"></script>
     <script type="text/javascript" src="app/components/services/authService.js"></script>
@@ -37,6 +39,12 @@
     <script src="app/components/controllers/lojaCtrl.js"></script>
     <script src="app/components/controllers/localCtrl.js"></script>
     <script src="app/components/main/mainCtrl.js"></script>
+    <style media="screen">
+      body{
+        margin-bottom: auto;
+        margin-top: 80px
+      }
+    </style>
   </head>
   <body ng-controller="MainController as c">
 
@@ -55,7 +63,7 @@
             <a class="navbar-brand" href="#">
               <span>
                 <img src="/imagens/logo.png" height="30px" width="50px"> ControlLab
-              </span>              
+              </span>
             </a>
           </div>
           <!-- Os itens de menu -->
@@ -86,7 +94,6 @@
       </div>
     </div>
     <!-- Fim da barra de navegação -->
-        
 
     <div class="container">
       <div class="col-md-offset-3 col-md-6">

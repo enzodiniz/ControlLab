@@ -43,7 +43,7 @@ angular
   	  }
 	  }
 
-    self.logout = function () {
+     self.logout = function () {
       $window.localStorage.removeItem('jwtToken')
       $location.path('/login');
     }
