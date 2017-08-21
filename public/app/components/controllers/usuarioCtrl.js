@@ -5,7 +5,6 @@ angular
 function usuarioCtrl($scope, $http, userSvc, authSvc) {
   var self = this;
 
-<<<<<<< HEAD
   self.addUser = function () {
     userSvc.addUser(self.pri, self.ult, self.email, self.userName, self.senha, self.mat, self.adm)
       .then((res) => {
@@ -13,24 +12,6 @@ function usuarioCtrl($scope, $http, userSvc, authSvc) {
 
       }, (err) => {
 
-      })
-  }
-
-  if (!authSvc.isAuthed()){
-      $location.path('/login');
-  }
-}
-=======
-  self.addUsuario = function () {
-    recSvc.addUsuario(self.nome, self.val)
-      .then((res) => {
-        console.log(res);
-        self.adicionando = false;
-        self.obterUsuario();
-        self.nome = "";
-        self.val = undefined;
-      }, (err) => {
-        console.log(err);
       })
   }
 
@@ -58,5 +39,8 @@ function usuarioCtrl($scope, $http, userSvc, authSvc) {
     else
       self.adicionando = true;
   }
-  })
->>>>>>> 3dcb88843759fd490fe10deab6d3273523a3530c
+
+  if (!authSvc.isAuthed()){
+      $location.path('/login');
+  } 
+}

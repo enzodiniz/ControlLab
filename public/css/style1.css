@@ -1,3 +1,8 @@
+body {
+
+background-image: url('../imagens/logo.png');
+
+}
 /*{
 box-sizing: border-box;
 }
@@ -8,8 +13,13 @@ border-radius: 5px
 }
 *:focus {
  outline: none;
+<<<<<<< HEAD
 }*/
 body {
+=======
+}
+ body {
+>>>>>>> 993c23b2551d376c2d111698b9aec8c4d2fa4906
 font-family: Arial;
 
 padding: 50px;
