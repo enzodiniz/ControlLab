@@ -1,27 +1,33 @@
 <div ng-controller="homeCtrl as c">
-		
-	<div class="col-md-offset-3 col-md-6">
-		<div class="login">
-			<div class="login-screen">
-				<div class="app-title">
-					<h1>Bem-vindo(a)!</h1>
-				</div>
-				<form name=login>
-					<div class="telainicial">
-						<div class="control-group">
-        					<button class="btn btn-primary" type="submit" ng-click="c.redirecionarEmp()">
-                				<span>Empréstimos</span>
-        					</button>
-						</div>
-          	<div class="control-group">
-          		<button class="btn btn-primary" type="submit" ng-click="c.redirecionarEst()">
-            		<span>Estoque</span>
-            			</button>
-          	</div>
+	<div class="col-md-offset-4 col-md-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading text-center">
+						Bem-vindo(a)!
 					</div>
-				</form>
+					<div class="panel-body">
+					<form class="form-horizontal">
+							<div class="col-md-6 ">
+								<div class="control-group">
+		        					<button class="btn btn-primary" type="submit" ng-click="c.redirecionarEmp()">
+		                				<span>Empréstimos</span>
+		        					</button>
+								</div>
+	            </div>
+							<div class="col-md-6">
+								<div class="control-group">
+		          		<button class="btn btn-primary" type="submit" ng-click="c.redirecionarEst()">
+		            		<span>Estoque</span>
+		            			</button>
+		          	</div>
+							</div>
+
+						</div>
+	</form>
+				</div>
 			</div>
-		</div>	
+		</div>
+
 	</div>
-  
-</div>
+
+					</div>
+				</div>

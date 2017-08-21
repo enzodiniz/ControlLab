@@ -33,62 +33,52 @@
   <div class="row">
     <form class="form-horizontal">
       <div ng-cloak class="col-md-offset-3 col-md-6">
-        <div class="tela-screen">
-          <div class="app-title">
-            <h1 class="fundo-branco">Empréstimos</h1>
-          </div>
+
           <form ng-show="c.adicionando" class="" method="post">
-            <div class="form-group">
-              <h3 class=" text-center">Emprestar material</h3>
-            </div>
-            <div class="col-xs-6 form-group ">
-              <label for="">Responsavel</label>
-              <input class="form-control" type="text" ng-model="c.resp">
-            </div>
-
-            <div class="col-md-6 form-group">
-              <label for="">Material</label>
-              <input class="form-control" type="text" ng-model="c.mat">
-            </div>
-
-    </div>
-
-
-
-<!--
-        <div class="form-group"></div>
-        <ui-select multiple ng-model="c.mats" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
-        <ui-select-match placeholder="Selecione os materiais...">{{$item.descricao}}</ui-select-match>
-            <ui-select-choices repeat="mate in c.mats" refresh="c.refreshMaterials($select.search)" refresh-delay="0">
-              <div ng-bind-html="mate.descricao | highlight: $select.search"></div>
-              <small>
-                {{mate.descricao}}
-              </small>
-            </ui-select-choices>
-        </ui-select>
--->
-
-
-        <div class="col-xs-4 form-group grupoDeForms">
-          <label for="">Data</label>
-          <input class="form-control" type="Date" ng-model="c.dt">
-        </div>
-    <div class="form-group">
-        <button  class="btn btn-primary col-xs-offset-8" type="submit" ng-click="c.emprestar()">
-          <span>Adicionar Empréstimo</span>
-        </button>
-      </form>
-    </div>
-    </div>
+<div class="panel panel-primary">
+  <div class="panel-heading text-center">
+    Emprestar material
   </div>
+<div class="panel-body">
+  <div class="col-xs-6 form-group ">
+    <label for="">Responsavel</label>
+    <input class="form-control" type="text" ng-model="c.resp">
+  </div>
+
+  <div class="col-md-6 form-group">
+    <label for="">Material</label>
+    <input class="form-control" type="text" ng-model="c.mat">
+  </div>
+
+<div class="col-xs-4 form-group">
+    <label for="">Data</label>
+   <input class="form-control" type="Date" ng-model="c.dt">
+</div>
+
+<div class="form-group">
+   <button  class="btn btn-primary col-xs-offset-8" type="submit" ng-click="c.emprestar()">
+   <span>Adicionar Empréstimo</span>
+   </button>
+
+</form>
+</div>
+</div>
+</div>
+
+</div>
+</div>
 
   <!-- Lista de empréstimos -->
+
   <div class="col-md-offset-3 col-md-6" ng-init="c.obterEmprestimos()">
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="emp in c.emprestimos">
-        <b>Responsável: {{emp.responsavel}}</b><br>
-        Materiais emprestados: {{emp.materiais}}
-      </li>
-    </ul>
-  </div>
+    <div class="panel panel-primary">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="emp in c.emprestimos">
+          <b>Responsável: {{emp.responsavel}}</b><br>
+          Materiais emprestados: {{emp.materiais}}
+        </li>
+      </ul>
+    </div>
+    </div>
+
 </div>
