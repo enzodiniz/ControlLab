@@ -1,64 +1,74 @@
 <div ng-cloak ng-controller="RecursoCtrl as c">
   <!-- Form de emprestar material -->
+
   <div class="col-md-offset-3 col-md-6">
-  <div class="row">
-    <div class="tela-screen">
-	  <div ng-cloak class="">
-	    <div class="tela-screen">
-	      <div class="app-title">
-
-	        <h1 class="fundo-branco text-center">Recursos</h1>
-	      </div>
-        <div class="pull-right">
-          <button ng-click="c.mostrarForm()">
-            <span class="glyphicon glyphicon-plus"></span>
-          </button>
+     <div ng-cloak class="">
+    <div class="panel panel-default">
+      <!-- Início do panel-heading -->
+      <div class="panel-heading">
+        <div class="col-md-6">
+          <h4>Recursos</h4>
         </div>
-	      <form ng-show="c.adicionando" class="form-horizontal" method="post">
-<div class="col-md-offset-2 col-md-4">
-          <div class=" form-group grupoDeForms">
-	          <label for="">Nome</label>
-	          <input class="form-control" type="text" ng-model="c.nome">
-	        </div>
-</div>
-<div class="col-md-offset-1 col-md-2">
-	        <div class=" form-group grupoDeForms">
-	          <label for="">Valor</label>
-	          <input class="form-control" type="number" step="0.20"  ng-model="c.val">
-	        </div>
-          </div>
-<div class="col-md-7">
-  <button  class="btn btn-primary pull-right" type="submit" ng-click="c.addRecurso()">
-    <span >Adicionar recurso</span>
-  </button>
-</div>
+        <div class="text-right" ng-show="c.adicionando">
+          <button ng-click="c.mostrarForm()" class="btn btn-default">Cancelar recurso</button>
+        </div>
+        <div class="text-right" ng-show="!c.adicionando">
+          <button ng-click="c.mostrarForm()" class="btn btn-primary">Emprestar recurso</button>
+        </div>
+      </div>
+<!-- fim do panel-heading-->
 
 
-	      </form>
-	    </div>
-    </div>
-	  </div>
-    </div>
-  </div>
+
+
+<!-- Início do corpo do painel -->
+<div class="panel-body">
+  <ul class="list-group">
+    <a class="list-group-item desaparece" ng-repeat="rec in c.recursos">
+      <b> Responsável: {{rec.nome}}</b>
+      <button ng-click="c.removerRecurso(rec._id)" class="btn btn-danger pull-right">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button><br>
+        Valor: R$ {{rec.valor}}
+    </a>
+  </ul>
+</div>
+</div>
+
+<!-- Fim do corpo do painel -->
+
 
   <!-- Lista de empréstimos -->
   <div class="row" ng-init="c.obterRecurso()">
-	  <div class="col-md-offset-3 col-md-6">
-      <form class="form-horizontal" >
-        <ul class="list-group">
-          <div class="col-md-12">
-            <li class="list-group-item" ng-repeat="rec in c.recursos">
-    	        <b>{{rec.nome}}</b>
-              <button class="pull-right" ng-click= "c.removerRecurso(rec._id)">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button><br>
-              Valor: R$ {{rec.valor}}
-    	      </li>
-          </div>
 
-  	    </ul>
-      </form>
-
-	  </div>
   </div>
+
+
+  	      <form ng-show="c.adicionando" class="form-horizontal" method="post">
+            <div class="panel panel-primary">
+              <div class="panel panel-heading text-center">
+                  Adicionar Recurso
+              </div>
+<div class="panel-body">
+  <div class="col-md-6">
+    <div class=" form-group ">
+        <label for="">Nome</label>
+       <input class="form-control" type="text" ng-model="c.nome">
+     </div>
+  </div>
+ <div class="col-md-6">
+   <div class=" form-group">
+     <label for="">Valor</label>
+     <input class="form-control" type="number" step="0.20"  ng-model="c.val">
+   </div>
+ </div>
+
+<button  class="btn btn-primary pull-right" type="submit" ng-click="c.addRecurso()">
+<span >OK</span>
+</button>
+</form>
+
 </div>
+</div>
+</div>
+            </div>

@@ -1,23 +1,46 @@
 <div ng-controller="lojaCtrl as c">
-<div class="col-md-offset-3 col-md-6">
-	<div class="row">
-		<div  ng-init="c.obterLojas()">
-			<div class="row">
-				<div class="panel panel-primary">
-					<div class="panel-heading text-center">Lojas</div>
 
-	<button ng-click="c.mostrarForm()" class="pull-right">
-		<span class=" glyphicon glyphicon-plus "></span>
-	</button>
-</div>
-</div>
-				</div>
+	  <div class="col-md-offset-3 col-md-6">
+	     <div ng-cloak class="">
+	    <div class="panel panel-default">
+	      <!-- Início do panel-heading -->
+	      <div class="panel-heading">
+	        <div class="col-md-6">
+	          <h4>Loja</h4>
+	        </div>
+	        <div class="text-right" ng-show="c.adicionando">
+	          <button ng-click="c.mostrarForm()" class="btn btn-default">Cancelar </button>
+	        </div>
+	        <div class="text-right" ng-show="!c.adicionando">
+	          <button ng-click="c.mostrarForm()" class="btn btn-primary">Adicionar Loja</button>
+	        </div>
+	      </div>
+	<!-- fim do panel-heading-->
 
+
+	<!-- Início do corpo do painel -->
+	<div class="panel-body">
+	  <ul class="list-group">
+	    <a class="list-group-item desaparece" ng-repeat="l in c.lojas">
+	      <b> Loja: {{l.nome}}</b>
+	      <button ng-click="c.mostrarExcluir(l._id)" class="btn btn-danger pull-right">
+	        <span class="glyphicon glyphicon-trash"></span>
+	      </button>
+				<button class="btn btn-danger pull-right" ng-click="c.atualizarLoja(l._id)">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button><br>
+	        Valor: R$ {{rec.valor}}
+	    </a>
+	  </ul>
+	</div>
+	</div>
+
+	<!-- Fim do corpo do painel -->
 
 <!-- Início do form de cadastro -->
-<div class="col-md-offset-3 col-md-6">
-	<div class="row">
-	 	<form class="form-horizontal"  ng-show="c.adicionando" class="form-inline  col-md-offset-3 col-md-6" method="post">
+
+
+	 	<form class="form-horizontal"  ng-show="c.adicionando" class=" " method="post">
 			<div class="panel panel-primary">
 				<div class="panel-heading text-center">Lojas</div>
 				<div class="panel-body">
@@ -35,15 +58,15 @@
 				</div>
 			</div>
 	    </form>
-	</div>
+
 </div>
 
 			<!-- Fim do form de cadastro -->
-<div class="col-md-6 col-md-offset-3">
-			<div class="row">
+
+			
 					<form ng-show="c.excluindo">
 						<div class="form-group">
-							<div class="panel panel-primary">
+							<div class="panel panel-default">
 								<div class="panel-heading text center">
 									Tem certeza que deseja excluir essa loja?
 								</div>
@@ -54,37 +77,10 @@
 
 						</div>
 					</form>
-				</div>
+				
 			</div>
 
-			<!-- Lista de lojas -->
-			<div class="row">
-				<div class="col-md-offset-3 col-md-6 ">
-					<div class="panel panel-primary">
-						<ul class="list-group">
 
-							<li class="list-group-item desaparece" ng-repeat="l in c.lojas">
-								{{l.nome}}
-								<!-- <button class="btn btn-danger btn-xs" ng-click="c.removerLoja(l._id)">
-									<span class="glyphicon glyphicon-trash"></span>
-								</button> -->
-
-								<div class="btn-group pull-right" role="group" aria-label="Basic example">
-									<button class="t" ng-click="c.atualizarLoja(l._id)">
-										<span class="glyphicon glyphicon-pencil"></span>
-									</button>
-
-									<button class="" ng-click="c.mostrarExcluir(l._id)">
-										<span class="glyphicon glyphicon-trash"></span>
-									</button>
-
-								</div>
-							</li>
-						</ul>
-					</div>
-
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
