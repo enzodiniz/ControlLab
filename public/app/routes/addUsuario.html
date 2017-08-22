@@ -1,3 +1,4 @@
+
 <div ng-controller="usuarioCtrl as c" class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -14,7 +15,7 @@
     <!-- Os itens de menu -->
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active" ng-click="c.redirHome()">
+				<li class="active" ng-click="c.redirHome()">
           <a href="">
             <span class="glyphicon glyphicon-home"> Início</span>
           </a>
@@ -30,15 +31,9 @@
 </div>
 </div>
 
-
-  <div class="app-title ">
-    <h1>Adicionar Usuário</h1>
-  </div>
-  <form class="form-horizontal" action="index.html" method="post">
-  <div class="form-group " method="post">
-
-    
-
+<div class="row">
+<div class="container">
+<div class="col-md-offset-3 col-md-6">
   <div class="panel panel-primary">
     <div class="panel-heading">Adicionar Usuário</div>
     <div class="panel-body">
@@ -65,7 +60,6 @@
         <label for="">Data</label>
         <input  class="form-control"  type="Date">
         </div>
-
       </div>
       <div class="form-group">
         <div class="col-xs-4">
@@ -76,37 +70,6 @@
         <label for="">Senha</label>
         <input  class="form-control"  type="password">
         </div>
-
-
-    <div class="col-xs-6">
-      <label  for="">Ultimo Nome  </label>
-      <input class="form-control" type="text">
-    </div>
-
-	</div>
-	<div class="form-group">
-
-    <div class="col-xs-6">
-      <label  for="">Email  </label>
-      <input class="form-control" type="email">
-    </div>
-
-    <div class="col-xs-4">
-  <label for="">Data</label>
-  <input  class="form-control"  type="Date">
-  </div>
-
-  
-<div class="form-group">
-  <div class="col-xs-4">
-   <label for="">Nome do Usuario</label>
-
-   <input  class="form-control"  type="text">
-   </div>
- <div class="col-xs-4">
-  <label for="">Senha</label>
-  <input  class="form-control"  type="password">
-
       <div class="col-xs-4">
         <label for="">Valor Unitário</label>
         <input  class="form-control"  type="number" value="0.00" step="0.20">
@@ -120,27 +83,12 @@
       </div>
       </div>
       </form>
-
     </div>
   </div>
-
-<div class="col-xs-4">
-  <label for="">Valor Unitário</label>
-  <input  class="form-control"  type="number" value="0.00" step="0.00">
-  </div>
-  <div class="col-xs-4">
-
-</div>
-<button id="botao" class="btn btn-primary" type="submit">
-<span>Adicionar </span>
-</button>
-  </div>
   </div>
 </div>
 </div>
 </div>
-
-
 <div class="row" ng-init="c.obterUsuario">
   <div class="col-md-offset-3 col-md-6">
     <ul class="list-group">
@@ -154,5 +102,4 @@
     </ul>
   </div>
 </div>
-
 </form>

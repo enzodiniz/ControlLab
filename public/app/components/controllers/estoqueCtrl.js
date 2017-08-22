@@ -4,6 +4,10 @@ angular
 
     var self = this;
 
+
+
+
+
     //ação do botão 'sair' da barra de navegação.
     self.sair = function () {
       authSvc.loguot();
