@@ -1,4 +1,67 @@
 <div ng-controller="lojaCtrl as c">
+	<div class="container">
+		 <!-- Form de cadastrar loja -->
+	    <div class="row">
+	        <div class="col-md-offset-4 col-md-4">
+	          <form ng-show="c.adicionando" class="form-inline">
+	            <div class="panel panel-default">
+	              <!-- Panel-heading -->
+	              <div class="panel-heading">
+	                Adicionar loja
+	              </div>
+	              <!-- Início do corpo do painel -->
+	              <div class="panel-body">
+	                <div class="form-group">
+	                  <label for="nome" class="control-label">Nome</label>
+	                  <input class="form-control" ng-model="c.nome" type="" name="nome">
+	                </div>
+	              </div>
+	              <!-- Fim do corpo do painel -->
+	              <!-- panel-footer -->
+	              <div class="panel-footer">
+	                <div class="text-right">
+	                  <button class="btn btn-primary" ng-click="c.addLoja()">Cadastrar loja</button>
+	                </div>
+	              </div>
+	            </div>
+	          </form>
+	        </div>
+	    </div>
+	    <!-- Lista de lojas -->
+	    <div class="row" ng-init="c.obterLojas()">
+	      <div class="col-md-6 col-md-offset-3">
+	        <div class="panel panel-default">
+	          <div class="panel-heading">
+	            <div class="col-md-4">
+	              <h4>Lojas</h4>
+	            </div>
+	            <div class="text-right">
+	              <button ng-show="!c.adicionando" class="btn btn-primary" ng-click="c.mostrarForm()">
+	                Adicionar loja
+	              </button>
+	            </div>
+	            <div class="text-right">
+	              <button ng-show="c.adicionando" class="btn btn-default" ng-click="c.mostrarForm()">
+	                Cancelar cadastro
+	              </button>
+	            </div>
+	          </div>
+	          <div class="panel-body">
+	            <ul class="list-group">
+	              <li class="list-group-item desaparece" ng-repeat="l in c.lojas">
+	                  {{l.nome}}
+	              </li>
+	            </ul>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</div>
+
+--------------------------------------
+
+<div ng-controller="lojaCtrl as c">
 <div class="col-md-offset-3 col-md-6">
 	<div class="row">
 		<div  ng-init="c.obterLojas()">

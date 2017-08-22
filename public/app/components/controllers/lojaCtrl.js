@@ -6,6 +6,11 @@ angular.module('ControlLab')
 			lojaSvc.obterLojas()
 				.then((res) => {
 					self.lojas = res.data.result;
+				}, (err) => {
+					$rootScope.$broadcast('evento', {
+						alerta: 'erro',
+						mensagem: 'Falha ao obter as lojas.'
+					})
 				})
 		}
 

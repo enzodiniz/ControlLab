@@ -1,5 +1,5 @@
 angular.module('ControlLab')
-	.controller('RecursoCtrl', function (recSvc, authSvc) {
+	.controller('RecursoCtrl', function (recSvc, authSvc, $rootScope, $location) {
 		
 		var self = this;
 		var adicionando = false;
@@ -12,8 +12,15 @@ angular.module('ControlLab')
 					self.obterRecurso();
 					self.nome = "";
 					self.val = undefined;
+					$rootScope.$broadcast('evento', {
+						alerta: 'success',
+						mensagem: 'Recurso adicionado com sucesso.'
+					})
 				}, (err) => {
-					console.log(err);
+					$rootScope.$broadcast('evento', {
+						alerta: 'erro',
+						mensagem: 'Falha ao adicionar o recurso.'
+					})
 				})
 		}
 
@@ -22,7 +29,10 @@ angular.module('ControlLab')
 				.then((res) => {
 					self.recursos = res.data.result;
 				}, (err) => {
-					console.log(err);
+					$rootScope.$broadcast('evento', {
+						alerta: 'erro',
+						mensagem: 'Falha ao obter os recursos.'
+					})
 				})
 		}
 
@@ -30,8 +40,15 @@ angular.module('ControlLab')
 			recSvc.removerRecurso(id)
 				.then((res) => {
 					self.obterRecurso();
+					$rootScope.$broadcast('evento', {
+						alerta: 'success',
+						mensagem: 'Recurso removido com sucesso.'
+					})
 				}, (err) => {
-					console.log(err);
+					$rootScope.$broadcast('evento', {
+						alerta: 'erro',
+						mensagem: 'Falha ao remover o recurso.'
+					})
 				})
 		}
 
@@ -41,4 +58,7 @@ angular.module('ControlLab')
 			else 
 				self.adicionando = true;
 		}
+
+		if (!authSvc.isAuthed())
+			$location.path('/login');
 	})

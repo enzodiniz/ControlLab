@@ -51,6 +51,19 @@ angular
         })
     }
 
+    self.getEmprestimos = function () {
+      empSvc.getEmprestimos()
+        .then((res) => {
+          self.emprestimos = res.data.result;
+          console.log(self.emprestimos);
+        }, (err) => {
+          $rootScope.$broadcast('evento', {
+            alerta: 'erro',
+            mensagem: 'Falha ao obter os empréstimos.'
+          })
+        })
+    }
+
     //recuperar todos os empréstimos.
     self.obterEmprestimos = () => {
       empSvc.getEmprestimos()
@@ -61,22 +74,28 @@ angular
           //varrer os empréstimos
           for (var e = 0; e < self.emprestimos.length; e++) {
             self.materiais = self.emprestimos[e].materiais;
+
+            var mats = [];
             //iterar sobre os materiais de cada empréstimo
             for (var m = 0; m < self.materiais.length; m++) {
               let i = m;
-              matSvc.obterMaterial(self.materiais[i])
+              mats.push(new Promise(function (resolve, rej) {
+                matSvc.obterMaterial(self.materiais[i])
                 .then((res) => {
-                  console.log("m: "+ i);
-                  self.materiais[i] = res.data.result.descricao;
-                  console.log("descricao: " + res.data.result.descricao);
-                  console.log("materiais: " + self.materiais);
+                  resolve(res.data.result);
                 }, (err) => {
                   
-                })
+                })  
+              }))
+              
 
             }
-            console.log("materiais: " + self.materiais);
-            self.emprestimos[e].materiais = self.materiais; 
+            Promise.all(mats)
+              .then(function (resultado) {
+                self.emprestimos[e].desc_materiais = resultado;
+              })
+            // console.log(self.materiais);
+            // self.emprestimos[e].desc_materiais = self.materiais; //**
           }
         }, function (err) {
       

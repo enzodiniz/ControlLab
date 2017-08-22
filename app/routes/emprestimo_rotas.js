@@ -1,7 +1,9 @@
 var express = require('express'),
     routes = express.Router();
 
-var Emprestimo = require ('../model/emprestimo')
+var Emprestimo = require ('../model/emprestimo'),
+    Material   = require ('../model/material'),
+    Usuario    = require ('../model/usuario')
 
 function retornaErro(res, err) {
   res.json({
@@ -54,11 +56,45 @@ routes.get('/emprestimos/datas/:dt', function (req, res) {
 
 //recuperar todos os emprestimos
 routes.get('/emprestimos', function (req, res) {
-  Emprestimo.find({}).then((emprestimos) => {
-    res.json({
-      sucess: true,
-      result: emprestimos
-    });
+  Emprestimo.find({}).then((emprestimos) => {    
+    
+    var es = [];
+    for (e of emprestimos) {
+      es.push(new Promise(function (resolve2, reject2) {
+        var mats = [];
+        for (m of e.materiais) {
+          mats.push(new Promise(function (resolve, reject) {
+            Material.findOne({_id: m})
+              .then((material) => {
+                resolve(material);
+              })
+          }))  
+        }
+        Promise.all(mats)
+          .then(function (resultado) {
+            User.findById(e.responsavel)
+              .then((u) => {
+                var e2 = {
+                  emprestimo: e,
+                  usuario: u,
+                  materiais: resultado
+                }
+                resolve2(e2);
+              })
+          })  
+      }))
+      
+    }
+
+    Promise.all(es)
+      .then(function (resultado) {
+        res.json({
+          sucess: true,
+          result: resultado,
+        });
+      })
+
+    
   }, (err) => {
     retornaErro(res, err)
   });
