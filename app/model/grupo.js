@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var Grupo = new Schema({
   integrantes: { type: [ Schema.ObjectId ] },
-  nome: { type: String }
+  nome: { type: String, unique: true }
 })
 
 module.exports = mongoose.model('Grupo', Grupo);

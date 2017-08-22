@@ -16,8 +16,9 @@ angular
     }
 
     self.emprestar = function () {
-      empSvc.emprestar(self.mat, self.resp, self.dt)
+      empSvc.emprestar(self.mat, self.resp[0]._id, self.dt)
         .then((res) => {
+          console.log(self.resp[0]._id);
           self.obterEmprestimos();
           $rootScope.$broadcast('evento', {
             alerta: 'success',
@@ -25,7 +26,6 @@ angular
           })
           self.resp = undefined;
           self.mat = undefined;
-          self.dt = undefined;
           self.adicionando = false;
         }, (err) => {
           $rootScope.$broadcast('evento', {
@@ -35,13 +35,28 @@ angular
         })
     }
 
-    // TODO: implementar função de erro.
+    self.removerEmp = function (id) {
+      empSvc.removerEmp(id)
+        .then((res) => {
+          $rootScope.$broadcast('evento', {
+            alerta: 'success',
+            mensagem: 'Emprestimo removido com sucesso.'
+          })
+          self.obterEmprestimos();
+        }, (err) => {
+          $rootScope.$broadcast('evento', {
+            alerta: 'erro',
+            mensagem: 'Falha ao remover empréstimo.'
+          })
+        })
+    }
+
     //recuperar todos os empréstimos.
     self.obterEmprestimos = () => {
       empSvc.getEmprestimos()
         .then(function (res) {
-          //recuperar pelo matCtrl o nome dos materiais
           self.emprestimos = res.data.result;
+          console.log(self.emprestimos);
 
           //varrer os empréstimos
           for (var e = 0; e < self.emprestimos.length; e++) {
@@ -49,18 +64,18 @@ angular
             //iterar sobre os materiais de cada empréstimo
             for (var m = 0; m < self.materiais.length; m++) {
               let i = m;
-              matSvc.obterMaterial(self.materiais[m])
+              matSvc.obterMaterial(self.materiais[i])
                 .then((res) => {
                   console.log("m: "+ i);
                   self.materiais[i] = res.data.result.descricao;
+                  console.log("descricao: " + res.data.result.descricao);
                   console.log("materiais: " + self.materiais);
                 }, (err) => {
                   
                 })
 
             }
-            //console.log("materiais: " + self.materiais);
-            console.log("e: " + e);
+            console.log("materiais: " + self.materiais);
             self.emprestimos[e].materiais = self.materiais; 
           }
         }, function (err) {
@@ -71,7 +86,6 @@ angular
     self.refreshMaterials = function (query) {
       matSvc.getMaterials(query)
         .then((res) => {
-          console.log(res);
           self.mats = res.data.result;
         })
     }

@@ -83,10 +83,13 @@
           <!-- Início do corpo do painel -->
           <div class="panel-body">
             <ul class="list-group">
-              <li class="list-group-item" ng-repeat="emp in c.emprestimos">
-                 <b>Responsável: {{emp.responsavel}}</b><br>
-                  Materiais emprestados: {{emp.materiais}}
-              </li>
+              <a class="list-group-item desaparece" ng-repeat="emp in c.emprestimos">
+                <b>Responsável: {{emp.responsavel}}</b>
+                <button ng-click="c.removerEmp(emp._id)" class="btn btn-danger pull-right">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button><br>
+                Materiais emprestados: {{emp.materiais}}
+              </a>
             </ul>
           </div>
           <!-- Fim do corpo do painel -->

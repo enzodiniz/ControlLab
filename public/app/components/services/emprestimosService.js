@@ -15,7 +15,11 @@ angular
   		})
   	}
 
+    self.removerEmp = function (id) {
+      return $http.delete(API + '/' + id + '/?token=' + token);
+    }
+
   	self.getEmprestimos = function () {
-  		return $http.get(API + '/?token=' + token)
+  		return $http.get(API + '/?token=' + token);
   	}
   })

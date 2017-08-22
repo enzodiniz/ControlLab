@@ -44,6 +44,12 @@
         margin-bottom: auto;
         margin-top: 80px
       }
+      .desaparece button{
+        opacity: 0;
+      }
+      .desaparece:hover button{
+        opacity: 1;
+      }
     </style>
   </head>
   <body ng-controller="MainController as c">
@@ -72,7 +78,7 @@
               <li>
                 <!-- Início do Dropdown -->
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <button class="text-center btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Cadastrar
                     <span class="caret"></span>
                   </button>

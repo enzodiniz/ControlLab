@@ -14,7 +14,7 @@ function retornaErro(res, err) {
 routes.post('/emprestimos', function(req, res){
   var emprestimo = new Emprestimo({
     materiais: req.body.materiais,
-    responsavel: req.body.responsavelId, //id
+    responsavel: req.body.responsavel, //id
     data: req.body.data
   });
  emprestimo.save().then((obj)=> {

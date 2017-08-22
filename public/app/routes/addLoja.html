@@ -14,34 +14,29 @@
 				</div>
 
 
-			<!-- Início do form de cadastro -->
-			<div class="col-md-offset-3 col-md-6">
-			<div class="row">
-
-				 <form class="form-horizontal"  ng-show="c.adicionando" class="form-inline  col-md-offset-3 col-md-6" method="post">
-
-					 <div class="panel panel-primary">
-	 					<div class="panel-heading text-center">Lojas</div>
-						<div class="panel-body">
-
-										        <div class="col-xs-6 form-group grupoDeForms">
-														  <!-- <label for="">Nome</label> -->
-										          <input class="form-control" placeholder="Nome" type="text" ng-model="c.nome">
-										        </div>
-										        <div class="form-group grupoDeForms pull-right">
-															<div class="col-md-9">
-										        	<button  class="btn btn-primary " type="submit" ng-click="c.addLoja()">
-										          		<span>Adicionar loja</span>
-										        	</button>
-										        </div>
-														 </div>
-														 </div>
-										    </form>
-										</div>
-										</div>
-
-						</div>
-
+<!-- Início do form de cadastro -->
+<div class="col-md-offset-3 col-md-6">
+	<div class="row">
+	 	<form class="form-horizontal"  ng-show="c.adicionando" class="form-inline  col-md-offset-3 col-md-6" method="post">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Lojas</div>
+				<div class="panel-body">
+				    <div class="col-xs-6 form-group grupoDeForms">
+					  <!-- <label for="">Nome</label> -->
+				        <input class="form-control" placeholder="Nome" type="text" ng-model="c.nome">
+				    </div>
+				    <div class="form-group grupoDeForms pull-right">
+						<div class="col-md-9">
+					      	<button  class="btn btn-primary " type="submit" ng-click="c.addLoja()">
+					       		<span>Adicionar loja</span>
+					      	</button>
+					    </div>
+					</div>
+				</div>
+			</div>
+	    </form>
+	</div>
+</div>
 
 			<!-- Fim do form de cadastro -->
 <div class="col-md-6 col-md-offset-3">
@@ -62,12 +57,13 @@
 				</div>
 			</div>
 
+			<!-- Lista de lojas -->
 			<div class="row">
 				<div class="col-md-offset-3 col-md-6 ">
 					<div class="panel panel-primary">
 						<ul class="list-group">
 
-							<li class="list-group-item" ng-repeat="l in c.lojas">
+							<li class="list-group-item desaparece" ng-repeat="l in c.lojas">
 								{{l.nome}}
 								<!-- <button class="btn btn-danger btn-xs" ng-click="c.removerLoja(l._id)">
 									<span class="glyphicon glyphicon-trash"></span>

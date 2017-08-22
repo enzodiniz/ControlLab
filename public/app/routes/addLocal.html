@@ -21,16 +21,15 @@
             <div class="panel panel-primary">
               <div class="panel-heading text-center">Adicionar Local </div>
               <div class="panel-body">
-
-            <div class="form-group">
-              <label class="">Nome do local</label>
-              <input ng-model="c.nome" class="form-control" type="text" name="">
+                <div class="form-group">
+                  <label class="">Nome do local</label>
+                  <input ng-model="c.nome" class="form-control" type="text" name="">
+                </div>
+                <div class="form-group">
+                <button ng-click="c.addLocal()" type="submit btn btn-default">
+                  <span class="glyphicon glyphicon-ok"></span>
+                </button>
             </div>
-            <div class="form-group">
-            <button ng-click="c.addLocal()" type="submit btn btn-default">
-              <span class="glyphicon glyphicon-ok"></span>
-            </button>
-          </div>
           </form>
         </div>
       </div>
@@ -61,7 +60,7 @@
       <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-primary">
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="l in c.locais">
+          <li class="list-group-item desaparece" ng-repeat="l in c.locais">
             <b>{{l.nome}}</b>
             <div class="btn-group pull-right" role="group" aria-label="Basic example">
               <button class="" ng-click="c.atualizarLocal(l._id)">
