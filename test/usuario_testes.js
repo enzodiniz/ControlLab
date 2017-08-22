@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 let mongoose = require("mongoose");
-let User = require('../../app/model/usuario');
+let User = require('../app/model/usuario');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -10,7 +10,7 @@ let should = chai.should();
 
 chai.use(chaiHttp)
 
-// teste cadastrar usuario
+
 describe('Usuários', () => {
     beforeEach((done) => { //Before each test we empty the database
         User.remove({}, (err) => {
@@ -18,12 +18,13 @@ describe('Usuários', () => {
         });
     });
 
+// teste cadastrar usuario
     describe('/POST user', () => {
      it('deveria fazer um POST de usuário sem erros', (done) => {
        let usuario = {
          primeiroNome: "usuario",
          ultimoNome: "um",
-         email: "user_um@email.com"
+         email: "user_um@email.com",
          userName: "usuarioUm",
          senha: "usuario1",
          matricula: "2014135123"
@@ -31,7 +32,7 @@ describe('Usuários', () => {
        let sucessoS = {
          primeiroNome: "usuario",
          ultimoNome: "um",
-         email: "user_um@email.com"
+         email: "user_um@email.com",
          userName: "usuarioUm",
          senha: "usuario1",
          matricula: "2014135123"
@@ -124,7 +125,7 @@ describe('Usuários', () => {
                  res.should.have.property('usuario')
                  done();
      })
-
+   
 // teste deletar usuario
      describe('/DEL user/',() =>{
        hai.request(server)
@@ -142,3 +143,4 @@ describe('Usuários', () => {
 describe('/PUT user/',() =>{
 })
 })
+});

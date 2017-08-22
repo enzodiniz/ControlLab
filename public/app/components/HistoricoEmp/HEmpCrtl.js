@@ -13,4 +13,6 @@ angular
     self.redirHome = function () {
       $location.path('/home');
     }
+
+
   })
