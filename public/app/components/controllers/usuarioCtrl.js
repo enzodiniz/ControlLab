@@ -8,7 +8,7 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
   self.addUser = function () {
     userSvc.addUser(self.pri, self.ult, self.email, self.userName, self.senha, self.mat, self.adm)
       .then((res) => {
-        console.log(res);
+    
         self.obterUsuario();
         self.adicionado = false;
         self.pri= "";
@@ -17,7 +17,7 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
         self.userName= "";
         self.senha= "";
         self.mat= "";
-        self.adm= "false"
+        self.adm= false
          $rootScope.$broadcast('evento',{
            alerta:'success',
            mensagm: 'Usuario adicionado com sucesso.'
@@ -31,12 +31,13 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
       })
   }
 
+
   self.obterUsuario = function () {
-    recSvc.obterUsuario()
+    userSvc.obterUsuario()
       .then((res) => {
         self.users = res.data.result;
       }, (err) => {
-        console.log(err);
+
         $rootScope.$broadcast('evento',{
           alerta:'erro',
           mensagm: 'Falha ao obter o usuario.'
@@ -46,7 +47,7 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
 
 
   self.removerUsuario = function (id) {
-    recSvc.removerUsuario(id)
+    userSvc.removerUsuario(id)
       .then((res) => {
         self.obterUsuario();
         $rootScope.$broadcast('evento',{
@@ -56,7 +57,7 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
 
       }, (err) => {
         self.obterUsuario();
-        console.log(err);
+
         $rootScope.$broadcast('evento',{
           alerta:'erro',
           mensagm: 'Falha ao remover usuario.'
