@@ -1,17 +1,17 @@
 <div ng-controller="authCtrl as a">
   <div class="container">
     <div class="row">
-      <div class="col-md-offset-3 col-md-6">  
+      <div class="col-md-offset-3 col-md-6">
         <form class="form-horizontal" ng-submit="a.autenticar()">
           <div class="panel panel-default">
             <div class="panel-heading">
               Login
             </div>
-            
+
             <div class="panel-body">
               <div class="form-group">
                 <div class="col-md-12 ">
-                  <label for="nick" class="control-label">Nick</label>
+                  <label for="nick" class="control-label">Apelido</label>
                   <input ng-model="a.userName" class="form-control" type="" name="nick">
                 </div>
               </div>
@@ -21,7 +21,7 @@
                   <input ng-model="a.senha" class="form-control" type="password" name="senha">
                 </div>
               </div>
-            </div>  
+            </div>
 
             <div class="panel-footer">
               <div class="text-right">

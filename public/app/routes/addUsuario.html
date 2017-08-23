@@ -1,9 +1,7 @@
-
-<div ng-controller="usuarioCtrl as c"  role="navigation">
+<div ng-controller="usuarioCtrl as c">
 <div class="col-md-offset-3 col-md-6">
   <form class="form-horizontal" action="index.html" method="post">
   <div class="form-group " method="post">
-
   <div class="panel panel-primary">
     <div class="panel-heading text-center">Adicionar Usuário</div>
     <div class="panel-body">
@@ -33,15 +31,13 @@
       </div>
       <div class="form-group">
         <div class="col-xs-4">
-         <label for="">Nome do Usuario</label>
+         <label for="">Apelido</label>
          <input  class="form-control"  type="text">
          </div>
        <div class="col-xs-4">
         <label for="">Senha</label>
         <input  class="form-control"  type="password">
         </div>
-
-
 
       <div class="col-xs-4">
         <label for="">Valor Unitário</label>
@@ -72,17 +68,12 @@
 </div>
 <!-- lista de ususarios -->
 
-<div class="row" ng-init="c.obterUsuario">
+<div class="row" ng-init="c.obterUsuario()">
   <div class="col-md-offset-3 col-md-6">
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="rec in c.Usuario">
-        <b>{{rec.nome}}</b>
-        <button class="pull-right" ng-click= "c.removerUsuario(rec._id)">
-          <span class="glyphicon glyphicon-trash"></span>
-        </button><br>
-        Valor: R$ {{rec.valor}}
-      </li>
-    </ul>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Usuários
+      </div>
+    </div>
   </div>
 </div>
-</form>

@@ -1,78 +1,82 @@
 <div ng-controller="localCtrl as c">
-  <div class="col-md-offset-3 col-md-6">
-     <div ng-cloak class="">
-    <div class="panel panel-default">
-      <!-- Início do panel-heading -->
-      <div class="panel-heading">
-        <div class="col-md-6">
-          <h4>Locais</h4>
-        </div>
-        <div class="text-right" ng-show="c.adicionando">
-          <button ng-click="c.mostrarAdicionar()" class="btn btn-default">Cancelar </button>
-        </div>
-        <div class="text-right" ng-show="!c.adicionando">
-          <button ng-click="c.mostrarAdicionar()" class="btn btn-primary">Adicionar Local</button>
-        </div>
-      </div>
-<!-- fim do panel-heading-->
-<div class="panel-body">
-  <ul class="list-group">
-    <a class="list-group-item desaparece" ng-repeat="l in c.locais">
-       Local: {{l.nome}}
-      <button ng-click="c.mostrarExcluir(l._id)" class="btn btn-danger pull-right">
-        <span class="glyphicon glyphicon-trash"></span>
-      </button><br>
-        Valor: R$ {{rec.valor}}
-    </a>
-  </ul>
-</div>
-</div>
-
-<!-- Fim do corpo do painel -->
 
   <!-- Form  -->
-  
-
-      <div ng-show="c.adicionando" >
-          <form class="horizontal">
-            <div class="panel panel-primary">
-              <div class="panel-heading text-center">Adicionar Local </div>
-              <div class="panel-body">
-                <div class="form-group">
-                  <label class="">Nome do local</label>
-                  <input ng-model="c.nome" class="form-control" type="text" name="">
-                </div>
-                <div class="form-group">
-                <button ng-click="c.addLocal()" type="submit btn btn-default">
-                  <span class="glyphicon glyphicon-ok"></span>
-                </button>
+  <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <form ng-show="c.adicionando" class="form-inline">
+          <div class="panel panel-default">
+            <!-- Panel-heading -->
+            <div class="panel-heading">
+              Adicionar local
             </div>
-          </form>
-        </div>
+            <!-- Início do corpo do painel -->
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="nome" class="control-label">Nome</label>
+                <input class="form-control" ng-model="c.nome" type="" name="nome">
+              </div>
+            </div>
+            <!-- Fim do corpo do painel -->
+            <!-- panel-footer -->
+            <div class="panel-footer">
+              <div class="text-right">
+                <button class="btn btn-primary" ng-click="c.addLocal()">Cadastrar local</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-</div>
-
   </div>
 
   <!-- Form de remover local -->
-
-
-      <form ng-show="c.excluindo">
-        <div class="form-group">
-          <div class="panel panel-default">
-            <div class="panel panel-heading text-center"> <label class=" text-center">Tem certeza que deseja excluir esse local?</label><br> </div>
-
-          <button class="btn-default" ng-click="c.mostrarExcluir()">Cancelar</button>
-          <button class="btn-danger" ng-click="c.removerLocal()">Excluir</button>
+ <div class="row">
+  <div class="col-md-4 col-md-offset-4" ng-show="c.excluindo">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        Tem certeza que deseja excluir esse local?
+      </div>
+      <div class="panel-footer">
+        <div class="text-right">
+          <button class="btn btn-default" ng-click="c.mostrarExcluir()">Cancelar</button>
+          <button class="btn btn-danger" ng-click="c.removerLocal()">Excluir</button>
         </div>
-      </form>
-
+      </div>
+    </div>
   </div>
-
-
+</div>
 
   <!-- Lista dos locais -->
 
   <div class="row" ng-init="c.getLocais()">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="col-md-4">
+              <h4>Locais</h4>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-primary" ng-click="c.mostrarAdicionar()" ng-show="!c.adicionando">
+                Adicionar local
+              </button>
+              <button class="btn btn-default" ng-click="c.mostrarAdicionar()" ng-show="c.adicionando">
+                Cancelar cadastro
+              </button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item desaparece" ng-repeat="l in c.locais">
+                <b>{{l.nome}}</b>
+                <div class="btn-group pull-right" role="group" aria-label="Basic example">
+                  <button class="btn btn-primary btn-xs" ng-click="c.atualizarLocal(l._id)">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                  </button>
 
+                  <button class="btn btn-danger btn-xs" ng-click="c.mostrarExcluir(l._id)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
     </div>
