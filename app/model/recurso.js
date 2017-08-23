@@ -6,7 +6,7 @@ require('mongoose-money')
 
 var Recurso = new Schema({
   nome: { type: String },
-  valor: { type: Number }
+  valor: { type: Number, min: 0}
   // type: Schema.Types.Money
 })
 

@@ -63,7 +63,7 @@
     </div>
 
     <!-- Lista de empréstimos -->
-    <div class="row" ng-init="c.obterEmprestimos()">
+    <div class="row" ng-init="c.getEmprestimos()">
       <div class="col-md-offset-3 col-md-6">
         <div class="panel panel-default">
           <!-- Início do panel-heading -->
@@ -84,11 +84,14 @@
           <div class="panel-body">
             <ul class="list-group">
               <a class="list-group-item desaparece" ng-repeat="emp in c.emprestimos">
-                <b>Responsável: {{emp.responsavel}}</b>
+                <b>Responsável: {{emp.emprestimo.responsavel}}</b>
                 <button ng-click="c.removerEmp(emp._id)" class="btn btn-danger pull-right">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button><br>
-                Materiais emprestados: {{emp.materiais}}
+                Materiais emprestados: 
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="m in emp.materiais">{{m.descricao}}</li>
+                </ul>
               </a>
             </ul>
           </div>

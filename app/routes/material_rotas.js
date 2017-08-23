@@ -87,7 +87,6 @@ routes.get('/materiais_busca', function (req, res) {
   Material.find({"descricao" : new RegExp(q, 'i')},
     'descricao quantidade')
     .then((materiais) => {
-      console.log(materiais);
       res.json({
         success: true,
         query: q,
