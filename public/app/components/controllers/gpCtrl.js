@@ -9,7 +9,6 @@ function gpCtrl(authSvc, $location,  $rootScope) {
 .then((res) => {
 
 self.obterGp();
-self.adicionado = false;
 self.integrantes = "";
 self.nome = "";
 

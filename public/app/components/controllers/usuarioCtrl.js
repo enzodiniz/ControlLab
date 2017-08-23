@@ -9,15 +9,15 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
     userSvc.addUser(self.pri, self.ult, self.email, self.userName, self.senha, self.mat, self.adm)
       .then((res) => {
     
-        self.obterUsuario();
-        self.adicionado = false;
-        self.pri= "";
-        self.ult= "";
-        self.email= "";
-        self.userName= "";
-        self.senha= "";
-        self.mat= "";
-        self.adm= false
+          self.obterUsuario();
+          self.adicionando = false;
+          self.pri= "";
+          self.ult= "";
+          self.email= "";
+          self.userName= "";
+          self.senha= "";
+          self.mat= "";
+          self.adm= false
          $rootScope.$broadcast('evento',{
            alerta:'success',
            mensagm: 'Usuario adicionado com sucesso.'
