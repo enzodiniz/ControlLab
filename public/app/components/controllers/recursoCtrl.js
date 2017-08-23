@@ -36,14 +36,15 @@ angular.module('ControlLab')
 				})
 		}
 
-		self.removerRecurso = function (id) {
-			recSvc.removerRecurso(id)
+		self.removerRecurso = function () {
+			recSvc.removerRecurso(self.id)
 				.then((res) => {
 					self.obterRecurso();
 					$rootScope.$broadcast('evento', {
 						alerta: 'success',
 						mensagem: 'Recurso removido com sucesso.'
 					})
+					self.excluindo = false;
 				}, (err) => {
 					$rootScope.$broadcast('evento', {
 						alerta: 'erro',
@@ -58,6 +59,18 @@ angular.module('ControlLab')
 			else 
 				self.adicionando = true;
 		}
+
+		self.mostrarExcluir = function (id) {
+			self.setId(id);
+			if (self.excluindo)
+				self.excluindo = false;
+			else
+				self.excluindo = true;
+		}
+
+		self.setId = function (id) {
+			self.id = id;
+		}	
 
 		if (!authSvc.isAuthed())
 			$location.path('/login');

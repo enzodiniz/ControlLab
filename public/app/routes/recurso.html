@@ -31,6 +31,22 @@
           </form>
         </div>
     </div>
+    <!-- Form de excluir recurso -->
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3" ng-show="c.excluindo">
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              Tem certeza que deseja excluir esse recurso?
+            </div>
+            <div class="panel-footer">
+              <div class="text-right">
+                <button class="btn btn-default" ng-click="c.mostrarExcluir()">Cancelar</button>
+                <button class="btn btn-danger" ng-click="c.removerRecurso()">Excluir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Lista de recursos -->
     <div class="row" ng-init="c.obterRecurso()">
       <div class="col-md-6 col-md-offset-3">
@@ -54,7 +70,7 @@
             <ul class="list-group">
               <li class="list-group-item desaparece" ng-repeat="rec in c.recursos">
                   <b>{{rec.nome}}</b>
-                  <button class="pull-right btn btn-danger" ng-click= "c.removerRecurso(rec._id)">
+                  <button class="pull-right btn btn-danger" ng-click= "c.mostrarExcluir(rec._id)">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button><br>
                   Valor: R$ {{rec.valor}}

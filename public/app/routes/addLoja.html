@@ -27,6 +27,24 @@
 	          </form>
 	        </div>
 	    </div>
+
+	    <!-- Form de excluir loja -->
+	    <div class="row">
+	    	<div class="col-md-6 col-md-offset-3" ng-show="c.excluindo">
+	    		<div class="panel panel-danger">
+	    			<div class="panel-heading">
+	    				Tem certeza que deseja excluir essa loja?
+	    			</div>
+	    			<div class="panel-footer">
+	    				<div class="text-right">
+	    					<button class="btn btn-default" ng-click="c.mostrarExcluir()">Cancelar</button>
+	    					<button class="btn btn-danger" ng-click="c.removerLoja()">Excluir</button>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+
 	    <!-- Lista de lojas -->
 	    <div class="row" ng-init="c.obterLojas()">
 	      <div class="col-md-6 col-md-offset-3">
@@ -50,104 +68,14 @@
 	            <ul class="list-group">
 	              <li class="list-group-item desaparece" ng-repeat="l in c.lojas">
 	                  {{l.nome}}
+	                  <button ng-click="c.mostrarExcluir(l._id)" class="btn btn-danger btn-xs pull-right">
+	                  	<span class="glyphicon glyphicon-trash"></span>
+	                  </button>
 	              </li>
 	            </ul>
 	          </div>
 	        </div>
 	      </div>
 	    </div>
-	</div>
-</div>
-
---------------------------------------
-
-<div ng-controller="lojaCtrl as c">
-<div class="col-md-offset-3 col-md-6">
-	<div class="row">
-		<div  ng-init="c.obterLojas()">
-			<div class="row">
-				<div class="panel panel-primary">
-					<div class="panel-heading text-center">Lojas</div>
-
-	<button ng-click="c.mostrarForm()" class="pull-right">
-		<span class=" glyphicon glyphicon-plus "></span>
-	</button>
-</div>
-</div>
-				</div>
-
-
-<!-- Início do form de cadastro -->
-<div class="col-md-offset-3 col-md-6">
-	<div class="row">
-	 	<form class="form-horizontal"  ng-show="c.adicionando" class="form-inline  col-md-offset-3 col-md-6" method="post">
-			<div class="panel panel-primary">
-				<div class="panel-heading text-center">Lojas</div>
-				<div class="panel-body">
-				    <div class="col-xs-6 form-group grupoDeForms">
-					  <!-- <label for="">Nome</label> -->
-				        <input class="form-control" placeholder="Nome" type="text" ng-model="c.nome">
-				    </div>
-				    <div class="form-group grupoDeForms pull-right">
-						<div class="col-md-9">
-					      	<button  class="btn btn-primary " type="submit" ng-click="c.addLoja()">
-					       		<span>Adicionar loja</span>
-					      	</button>
-					    </div>
-					</div>
-				</div>
-			</div>
-	    </form>
-	</div>
-</div>
-
-			<!-- Fim do form de cadastro -->
-<div class="col-md-6 col-md-offset-3">
-			<div class="row">
-					<form ng-show="c.excluindo">
-						<div class="form-group">
-							<div class="panel panel-primary">
-								<div class="panel-heading text center">
-									Tem certeza que deseja excluir essa loja?
-								</div>
-
-								<button class="btn-default" ng-click="c.mostrarExcluir()">Cancelar</button>
-								<button class="btn-danger" ng-click="c.removerLoja()">Excluir</button>
-							</div>
-
-						</div>
-					</form>
-				</div>
-			</div>
-
-			<!-- Lista de lojas -->
-			<div class="row">
-				<div class="col-md-offset-3 col-md-6 ">
-					<div class="panel panel-primary">
-						<ul class="list-group">
-
-							<li class="list-group-item desaparece" ng-repeat="l in c.lojas">
-								{{l.nome}}
-								<!-- <button class="btn btn-danger btn-xs" ng-click="c.removerLoja(l._id)">
-									<span class="glyphicon glyphicon-trash"></span>
-								</button> -->
-
-								<div class="btn-group pull-right" role="group" aria-label="Basic example">
-									<button class="t" ng-click="c.atualizarLoja(l._id)">
-										<span class="glyphicon glyphicon-pencil"></span>
-									</button>
-
-									<button class="" ng-click="c.mostrarExcluir(l._id)">
-										<span class="glyphicon glyphicon-trash"></span>
-									</button>
-
-								</div>
-							</li>
-						</ul>
-					</div>
-
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
