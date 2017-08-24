@@ -17,6 +17,13 @@ function lojaSvc($http, authSvc) {
 				})
 	}
 
+	self.atualizarLoja = function (id, nome) {
+		return $http.put(API + '/' + id, {
+			nome: nome, 
+			token: token
+		});
+	}
+
 	self.removerLoja = function (id) {
 		return $http.delete(API + '/' + id + '/?token=' + token);
 	}

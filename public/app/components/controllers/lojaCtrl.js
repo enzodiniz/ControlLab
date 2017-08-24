@@ -64,6 +64,31 @@ angular.module('ControlLab')
 				})
 		}
 
+		self.atualizarLoja = function (id) {
+			lojaSvc.atualizarLoja(id, self.nome)
+				.then((res) => {
+					self.obterLojas();
+					$rootScope.$broadcast('evento', {
+						alerta: 'success',
+						mensagem: 'Loja alterada com sucesso.'
+					})
+					self.editando = false;
+					self.nome = "";
+				}, (err) => {
+					$rootScope.$broadcast('evento', {
+						alerta: 'erro',
+						mensagem: 'Falha ao alterar essa loja.'
+					})
+				})
+		}
+
+		self.mostrarEditar = function () {
+			if(self.editando)
+				self.editando = false;
+			else
+				self.editando = true;
+		}
+
 		self.setId = function (id) {
 			self.id = id;
 		}	
