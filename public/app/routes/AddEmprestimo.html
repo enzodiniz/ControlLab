@@ -62,6 +62,23 @@
       </div>
     </div>
 
+    <!-- Form de excluir empréstimo -->
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3" ng-show="c.excluindo">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            Tem certeza que deseja excluir esse empréstimo?
+          </div>
+          <div class="panel-footer">
+            <div class="text-right">
+              <button class="btn btn-default" ng-click="c.mostrarExcluir()">Cancelar</button>
+              <button class="btn btn-danger" ng-click="c.removerEmp()">Excluir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Lista de empréstimos -->
     <div class="row" ng-init="c.getEmprestimos()">
       <div class="col-md-offset-3 col-md-6">
@@ -84,8 +101,8 @@
           <div class="panel-body">
             <ul class="list-group">
               <a class="list-group-item desaparece" ng-repeat="emp in c.emprestimos">
-                <b>Responsável: {{emp.emprestimo.responsavel}}</b>
-                <button ng-click="c.removerEmp(emp._id)" class="btn btn-danger pull-right">
+                <b>Responsável: {{emp.usuario.primeiroNome}} {{emp.usuario.ultimoNome}}</b>
+                <button ng-click="c.mostrarExcluir(emp.emprestimo._id)" class="btn btn-danger pull-right">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button><br>
                 Materiais emprestados: 

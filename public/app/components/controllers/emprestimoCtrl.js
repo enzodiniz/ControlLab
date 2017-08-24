@@ -19,12 +19,12 @@ angular
       empSvc.emprestar(self.mat, self.resp[0]._id, self.dt)
         .then((res) => {
           console.log(self.resp[0]._id);
-          self.obterEmprestimos();
+          self.getEmprestimos();
           $rootScope.$broadcast('evento', {
             alerta: 'success',
             mensagem: 'Material emprestado com sucesso.'
           })
-          self.resp = undefined;
+          self.resp = []; 
           self.mat = undefined;
           self.adicionando = false;
         }, (err) => {
@@ -35,9 +35,11 @@ angular
         })
     }
 
-    self.removerEmp = function (id) {
-      empSvc.removerEmp(id)
+    self.removerEmp = function () {
+      empSvc.removerEmp(self.id)
         .then((res) => {
+          self.getEmprestimos();
+          self.excluindo = false;
           $rootScope.$broadcast('evento', {
             alerta: 'success',
             mensagem: 'Emprestimo removido com sucesso.'
@@ -51,6 +53,16 @@ angular
         })
     }
 
+    self.mostrarExcluir = function (id) {
+      self.setId(id);
+      if (self.excluindo) {
+        self.excluindo = false;
+      } else {
+        self.excluindo = true;
+      }
+    }
+
+    //recuperar todos os empréstimos
     self.getEmprestimos = function () {
       empSvc.getEmprestimos()
         .then((res) => {
@@ -61,44 +73,6 @@ angular
             alerta: 'erro',
             mensagem: 'Falha ao obter os empréstimos.'
           })
-        })
-    }
-
-    //recuperar todos os empréstimos.
-    self.obterEmprestimos = () => {
-      empSvc.getEmprestimos()
-        .then(function (res) {
-          self.emprestimos = res.data.result;
-          console.log(self.emprestimos);
-
-          //varrer os empréstimos
-          for (var e = 0; e < self.emprestimos.length; e++) {
-            self.materiais = self.emprestimos[e].materiais;
-
-            var mats = [];
-            //iterar sobre os materiais de cada empréstimo
-            for (var m = 0; m < self.materiais.length; m++) {
-              let i = m;
-              mats.push(new Promise(function (resolve, rej) {
-                matSvc.obterMaterial(self.materiais[i])
-                .then((res) => {
-                  resolve(res.data.result);
-                }, (err) => {
-                  
-                })  
-              }))
-              
-
-            }
-            Promise.all(mats)
-              .then(function (resultado) {
-                self.emprestimos[e].desc_materiais = resultado;
-              })
-            // console.log(self.materiais);
-            // self.emprestimos[e].desc_materiais = self.materiais; //**
-          }
-        }, function (err) {
-      
         })
     }
 
@@ -119,6 +93,10 @@ angular
       //   .then((res) => {
       //     self.users += res.data.result;
       //   })  
+    }
+
+    self.setId = function (id) {
+      self.id = id;
     }
 
     //ação do botão 'sair' da barra de navegação.

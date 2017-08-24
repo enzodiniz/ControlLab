@@ -1,4 +1,85 @@
-<div ng-controller="empCtrl as c"  role="navigation">
+<div class="container" ng-controller="gpCtrl as c">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form class="form-horizontal" ng-submit="c.addGrupo()" ng-show="c.adicionando">
+        <!-- Início do painel -->
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Adicionar grupo
+          </div>
+          <!-- Início do corpo do painel -->
+          <div class="panel-body">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="nome" class="control-label">Nome</label>
+                <input ng-model="c.nome" class="form-control" type="" name="nome">
+              </div>
+            </div>
+            <div class="col-md-6 col-md-offset-1">
+              <div class="form-group">
+              <label class="control-label">Integrantes</label>
+
+                <ui-select multiple ng-model="c.integrantes" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
+                  <ui-select-match >{{$item.primeiroNome}} {{$item.ultimoNome}}</ui-select-match>
+                    <ui-select-choices repeat="person in c.users" refresh="c.refreshMembers($select.search)" refresh-delay="0">
+                      <div ng-bind-html="person.userName | highlight: $select.search"></div>
+                        <small>
+                          {{person.primeiroNome}} {{person.ultimoNome}}
+                          <{{person.email}}>
+                        </small>
+                    </ui-select-choices>
+                </ui-select>      
+              </div>
+            </div>
+          </div>
+          <!-- Fim do corpo do painel -->
+          <div class="panel-footer">
+            <div class="text-right">
+              <button class="btn btn-primary" type="submit">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <!-- Fim do painel -->
+      </form>
+    </div>
+  </div>
+
+  <!-- lista de grupos -->
+  <div class="row" ng-init="c.obterGrupos()">
+    <div class="col-md-offset-3 col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="col-md-4">
+            <h4>Grupos</h4>
+          </div>
+          <div class="text-right">
+            <button ng-show="c.adicionando" class="btn btn-default" ng-click="c.mostrarForm()">
+              Cancelar cadastro
+            </button>
+            <button ng-show="!c.adicionando" class="btn btn-primary" ng-click="c.mostrarForm()">
+              Cadastrar grupo
+            </button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="g in c.grupos">
+              <b>{{g.nome}}</b>
+              <button class="pull-right btn btn-danger" ng-click="c.removerGp(g._id)">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button> <br>
+              {{g.integrantes}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div ng-controller="empCtrl as c"  role="navigation">
   <div class="container">
 
   </div>
@@ -58,3 +139,4 @@
 
     </div>
   </div>
+ -->

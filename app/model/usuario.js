@@ -3,13 +3,13 @@ var mongoose = require('mongoose'),
 
 
 var Usuario = new Schema({
-  primeiroNome: { type: String },
-  ultimoNome: { type: String },
-  grupo: { type: Schema.ObjectId },
+  primeiroNome: { type: String, required: true },
+  ultimoNome: { type: String, required: true },
+  //grupo: { type: Schema.ObjectId },
   email: { type: String },
   userName: { type: String, unique: true },
   senha: { type: String },
-  matricula: { type: String, unique: true }, //chave unica
+  matricula: { type: String, unique: true, required: true }, //chave unica
   admin: { type: Boolean, default: false }
 })
 

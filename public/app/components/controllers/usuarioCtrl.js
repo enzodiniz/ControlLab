@@ -1,46 +1,57 @@
-angular
+  angular
   .module("ControlLab")
   .controller('usuarioCtrl', usuarioCtrl)
 
 function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
   var self = this;
 
+  self.admin = false;
+  self.opcao = "false";
+
   self.addUser = function () {
+    if (self.opcao == "true")
+      self.admin = true;
+    else if (self.opcao == "false")
+      self.admin = false;
+
     userSvc.addUser(self.pri, self.ult, self.email, self.userName, self.senha, self.mat, self.adm)
       .then((res) => {
-    
-          self.obterUsuario();
+
+          self.obterUsuarios();
           self.adicionando = false;
-          self.pri= "";
-          self.ult= "";
-          self.email= "";
-          self.userName= "";
-          self.senha= "";
-          self.mat= "";
-          self.adm= false
+          self.pri = "";
+          self.ult = "";
+          self.email = "";
+          self.userName = "";
+          self.senha = "";
+          self.mat = "";
+          self.adm = false
+          self.opcao = "false";
+
          $rootScope.$broadcast('evento',{
            alerta:'success',
-           mensagm: 'Usuario adicionado com sucesso.'
+           mensagem: 'Usuario adicionado com sucesso.'
          })
 
       }, (err) => {
         $rootScope.$broadcast('evento',{
           alerta:'erro',
-          mensagm: 'Falha ao adicionar o usuario.'
+          mensagem: 'Falha ao adicionar o usuario.'
         })
       })
   }
 
 
-  self.obterUsuario = function () {
-    userSvc.obterUsuario()
+  self.obterUsuarios = function () {
+    userSvc.getUsers()
       .then((res) => {
         self.users = res.data.result;
+        console.log(self.users);
       }, (err) => {
 
         $rootScope.$broadcast('evento',{
           alerta:'erro',
-          mensagm: 'Falha ao obter o usuario.'
+          mensagem: 'Falha ao obter o usuario.'
         })
       })
   }
@@ -49,10 +60,10 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
   self.removerUsuario = function (id) {
     userSvc.removerUsuario(id)
       .then((res) => {
-        self.obterUsuario();
+        self.obterUsuarios();
         $rootScope.$broadcast('evento',{
           alerta:'success',
-          mensagm: 'Usuario removido com sucesso.'
+          mensagem: 'Usuario removido com sucesso.'
         })
 
       }, (err) => {
@@ -60,11 +71,18 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
 
         $rootScope.$broadcast('evento',{
           alerta:'erro',
-          mensagm: 'Falha ao remover usuario.'
+          mensagem: 'Falha ao remover usuario.'
         })
       })
   }
 
+  self.isAdmin = function () {
+    if (self.opcao == "true") {
+      return true;
+    } else if (self.opcao == "false") {
+      return false;
+    }
+  }
 
   self.mostrarForm = function () {
     if (self.adicionando)

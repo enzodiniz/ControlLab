@@ -1,7 +1,7 @@
 angular
 	.module('ControlLab')
 	.service('userSvc', function ($http, authSvc) {
-		
+
 		var self = this;
 		const API = 'http://localhost:3000/api/users';
 		self.token = authSvc.getToken();
@@ -19,7 +19,15 @@ angular
 			})
 		}
 
-		self.getUsers = function (query) {
-			return $http.get(API + '_busca' + '/?token=' + self.token + '&query=' + query)
+		self.getUsers = function () {
+			return $http.get(API + '/?token=' + self.token);
+		}
+
+		self.getUsersQuery = function (query) {
+			return $http.get(API + '_busca' + '/?token=' + self.token + '&query=' + query);
+		}
+
+		self.removerUsuario = function (id) {
+			return $http.delete(API + '/' + id + '/?token=' + self.token);
 		}
 	})

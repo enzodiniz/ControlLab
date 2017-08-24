@@ -54,10 +54,35 @@ routes.get('/emprestimos/datas/:dt', function (req, res) {
     })
 })
 
+function getEmprestimos(emprestimos, callback) {
+  for (e of emprestimos) {
+      var mats = [];
+      for (m of e.materiais) {
+        mats.push(new Promise(function (resolve, reject) {
+          Material.findOne({_id: m})
+            .then((material) => {
+              resolve(material);
+            })
+        }))  
+      }
+      Promise.all(mats)
+        .then(function (resultado) {
+          User.findById(e.responsavel)
+            .then((u) => {
+              var e2 = {
+                emprestimo: e,
+                usuario: u,
+                materiais: resultado
+              }
+              console.log("usuario", e2);
+            })
+        })
+    }
+}
+
 //recuperar todos os emprestimos
 routes.get('/emprestimos', function (req, res) {
   Emprestimo.find({}).then((emprestimos) => {    
-    
     var es = [];
     for (e of emprestimos) {
       es.push(new Promise(function (resolve2, reject2) {
@@ -72,7 +97,7 @@ routes.get('/emprestimos', function (req, res) {
         }
         Promise.all(mats)
           .then(function (resultado) {
-            User.findById(e.responsavel)
+            Usuario.findById(e.responsavel)
               .then((u) => {
                 var e2 = {
                   emprestimo: e,
@@ -88,10 +113,13 @@ routes.get('/emprestimos', function (req, res) {
 
     Promise.all(es)
       .then(function (resultado) {
+        console.log(" resultado", resultado);
         res.json({
           sucess: true,
           result: resultado,
         });
+      }, function (erro) {
+        console.log(erro)
       })
 
     
