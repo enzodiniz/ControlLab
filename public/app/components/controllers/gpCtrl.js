@@ -50,6 +50,7 @@ function gpCtrl(authSvc, $location,  $rootScope, gpSvc, userSvc) {
 		gpSvc.obterGrupos()
 			.then((res) => {
 				self.grupos = res.data.result;
+				console.log("grupos: ", self.grupos);
 			}, (err) => {
 				$rootScope.$broadcast('evento',{
 					alerta:'erro',

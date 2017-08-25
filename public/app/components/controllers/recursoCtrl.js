@@ -53,6 +53,24 @@ angular.module('ControlLab')
 				})
 		}
 
+		self.atualizarRec = function (id) {
+			recSvc.atualizarRec(id)
+				.then((res) => {
+					if (res.data.success) {
+						self.obterRecurso();
+						$rootScope.$broadcast('evento', {
+							alerta: 'success',
+							mensagem: 'Recurso atualizado com sucesso.'
+						})
+					}
+				}, (err) => {
+					$rootScope.$broadcast('evento', {
+						alerta: 'erro',
+						mensagem: 'Falha ao atualizar esse recurso.'
+					})
+				})
+		}
+
 		self.mostrarForm = function () {
 			if (self.adicionando)
 				self.adicionando = false;
@@ -66,6 +84,13 @@ angular.module('ControlLab')
 				self.excluindo = false;
 			else
 				self.excluindo = true;
+		}
+
+		self.mostrarEditar = function () {
+			if (self.editando)
+				self.editando = false;
+			else
+				self.editando = true;
 		}
 
 		self.setId = function (id) {

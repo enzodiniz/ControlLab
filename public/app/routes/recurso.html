@@ -70,11 +70,36 @@
           </div>
           <div class="panel-body">
             <ul class="list-group">
-              <li class="list-group-item desaparece" ng-repeat="rec in c.recursos">
+              <li class="list-group-item desaparece desaparece-input" ng-repeat="rec in c.recursos">
                   <b>{{rec.nome}}</b>
-                  <button class="pull-right btn btn-danger" ng-click= "c.mostrarExcluir(rec._id)">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </button><br>
+                  <!-- Início do editar -->
+                  <div class="input-group" ng-show="c.editando">
+                    <div class="col-md-6">
+                      <div class="input-group">
+                        <input ng-model="c.nome" type="text" class="form-control" placeholder="Nome...">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="input-group">
+                        <input ng-model="c.val" type="number" class="form-control" placeholder="Valor...">
+                      </div>
+                    </div>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button" ng-click="c.atualizarRec(rec._id)">
+                        <span class="glyphicon glyphicon-ok"></span>
+                      </button>
+                    </span>
+                  </div>
+                  <!-- Fim do editar -->
+                  <div class="btn-group pull-right" role="group" aria-label="Basic example">
+                    <button class="btn btn-primary" ng-click= "c.mostrarEditar()">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-danger" ng-click= "c.mostrarExcluir(rec._id)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </button>                  
+                  </div>
+                  <br>
                   Valor: R$ {{rec.valor}}
               </li>
             </ul>

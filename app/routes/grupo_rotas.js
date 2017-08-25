@@ -63,10 +63,46 @@ routes.get('/grupos/users/:id', function (req, res) {
 //recuperar todos os grupos
 routes.get('/grupos', function (req, res) {
   Grupo.find({}).then((grps) => {
-    res.json({
-      success: true,
-      result: grps
-    });
+    var es = [];
+    for (e of grps) {
+      es.push(new Promise(function (resolve2, reject2) {
+        var mats = [];
+        for (m of e.integrantes) {
+          mats.push(new Promise(function (resolve, reject) {
+            Usuario.findOne({_id: m})
+              .then((material) => {
+                resolve(material);
+              })
+          }))  
+        }
+        Promise.all(mats)
+          .then(function (resultado) {
+            console.log("e:", e);
+            var e2 = {
+              grupo: e,
+              integrantes: resultado
+            }
+            resolve2(e2);
+          })  
+      }))
+      
+    }
+
+    Promise.all(es)
+      .then(function (resultado) {
+        console.log(" resultado", resultado);
+        res.json({
+          sucess: true,
+          result: resultado,
+        });
+      }, function (erro) {
+        console.log(erro)
+      })
+
+    // res.json({
+    //   success: true,
+    //   result: grps
+    // });
 
   }, (err) => {
     retornaErro(res, err)

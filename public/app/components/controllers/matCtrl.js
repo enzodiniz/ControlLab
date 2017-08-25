@@ -54,6 +54,7 @@ function matCtrl(matSvc, authSvc, $location, $rootScope, localSvc, lojaSvc, recS
 						alerta: 'success',
 						mensagem: 'Material removido com sucesso.'
 					})
+					self.obterMateriais();
 				}
 			}, (err) => {
 				$rootScope.$broadcast('evento', {
@@ -64,7 +65,6 @@ function matCtrl(matSvc, authSvc, $location, $rootScope, localSvc, lojaSvc, recS
 	}
 
 	self.refreshPlaces = function (query) {
-		console.log("chegou na função do ctrl");
 		localSvc.getPlaces(query)
 			.then((res) => {
 				self.locais = res.data.result;

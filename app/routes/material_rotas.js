@@ -110,7 +110,7 @@ routes.put('/materiais/:id', function (req, res) {
   }})
   .then((obj) => {
     res.json({
-      sucess: true,
+      success: true,
       result: obj
     });
   }, (err) => {
@@ -122,7 +122,7 @@ routes.put('/materiais/:id', function (req, res) {
 routes.delete('/materiais/:id', function (req, res) {
   Material.remove({_id: req.params.id}).then((obj) => {
     res.json({
-      sucess: true,
+      success: true,
       result: obj
     })
   }, (err) => {

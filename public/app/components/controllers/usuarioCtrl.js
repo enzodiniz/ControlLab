@@ -8,11 +8,16 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
   self.admin = false;
   self.opcao = "false";
 
+  self.addUsuario = function () {
+    
+    self.addUser();
+  }
+
   self.addUser = function () {
     if (self.opcao == "true")
-      self.admin = true;
+      self.adm = true;
     else if (self.opcao == "false")
-      self.admin = false;
+      self.adm = false;
 
     userSvc.addUser(self.pri, self.ult, self.email, self.userName, self.senha, self.mat, self.adm)
       .then((res) => {

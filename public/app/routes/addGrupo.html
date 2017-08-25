@@ -63,12 +63,18 @@
         </div>
         <div class="panel-body">
           <ul class="list-group">
-            <li class="list-group-item" ng-repeat="g in c.grupos">
-              <b>{{g.nome}}</b>
-              <button class="pull-right btn btn-danger" ng-click="c.removerGp(g._id)">
+            <li class="list-group-item desaparece" ng-repeat="g in c.grupos">
+              <b>{{g.grupo.nome}}</b>
+              <button class="pull-right btn btn-danger" ng-click="c.removerGp(g.grupo._id)">
                 <span class="glyphicon glyphicon-trash"></span>
               </button> <br>
-              {{g.integrantes}}
+              <h6>Integrantes:</h6>
+              <ul class="list-group">
+                <a class="list-group-item" ng-repeat="i in g.integrantes">
+                  <b>{{i.userName}}</b><br>
+                  {{i.primeiroNome}} {{i.ultimoNome}}
+                </a>
+              </ul>
             </li>
           </ul>
         </div>
