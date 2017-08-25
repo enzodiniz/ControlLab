@@ -23,7 +23,7 @@ routes.post('/materiais', function (req, res) {
 
   material.save().then((obj) => {
     res.json({
-      sucess: true,
+      success: true,
       result: obj
     });
   }, (err) => {

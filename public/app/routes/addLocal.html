@@ -65,10 +65,20 @@
           </div>
           <div class="panel-body">
             <ul class="list-group">
-              <li class="list-group-item desaparece" ng-repeat="l in c.locais">
+              <li class="list-group-item desaparece desaparece-input" ng-repeat="l in c.locais">
                 <b>{{l.nome}}</b>
+                <!-- Início do editar -->
+                <div class="input-group" ng-show="c.editando">
+                  <input ng-model="c.nome" type="text" class="form-control" placeholder="Nome...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" ng-click="c.atualizarLocal(l._id)">
+                      <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                  </span>
+                </div>
+                <!-- Fim do editar -->
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">
-                  <button class="btn btn-primary btn-xs" ng-click="c.atualizarLocal(l._id)">
+                  <button class="btn btn-primary btn-xs" ng-click="c.mostrarEditar()">
                     <span class="glyphicon glyphicon-pencil"></span>
                   </button>
 

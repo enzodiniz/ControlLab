@@ -52,6 +52,31 @@ angular.module('ControlLab')
 				})
 		}
 
+		self.atualizarLocal = function (id) {
+			localSvc.atualizarLocal(id, self.nome)
+				.then((res) => {
+					self.getLocais();
+					$rootScope.$broadcast('evento', {
+						alerta: 'success',
+						mensagem: 'Local alterado com sucesso.'
+					})
+					self.editando = false;
+					self.nome = "";
+				}, (err) => {
+					$rootScope.$broadcast('evento', {
+						alerta: 'erro',
+						mensagem: 'Falha ao alterar esse local.'
+					})
+				})
+		}
+
+		self.mostrarEditar = function () {
+			if(self.editando)
+				self.editando = false;
+			else
+				self.editando = true;
+		}
+
 		self.mostrarAdicionar = function () {
 			if (self.adicionando) 
 				self.adicionando = false;

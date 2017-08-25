@@ -20,4 +20,9 @@ angular.module('ControlLab')
 		self.removerRecurso= function (id) {
 			return $http.delete(API + "/" + id + "/?token=" + token);
 		}
+
+		//ui-select de material
+		self.getResources = function (query) {
+			return $http.get(API + '_busca' + '/?query=' + query + '&token=' + token);
+		}
 })

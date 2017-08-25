@@ -49,6 +49,21 @@ routes.get('/locais', function (req, res) {
   });
 })
 
+//recuperar locais a partir da query (ui-select)
+routes.get('/locais_busca', function (req, res) {
+  Local.find({'nome' : new RegExp(req.query.query, 'i')},  
+    '_id nome')
+    .then((locais) => {
+      res.json({
+        success: true,
+        query: req.query.query,
+        result: locais
+      })
+    }, (err) => {
+      retornaErro(res, err);
+    })
+})
+
 //atualizar local
 routes.put('/locais/:id', function (req, res) {
   Local.update( {_id: req.params.id}, {$set: {

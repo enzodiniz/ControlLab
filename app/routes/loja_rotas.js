@@ -49,6 +49,20 @@ routes.get('/lojas', function (req, res) {
   });
 })
 
+//recuperar locais a partir da query (ui-select)
+routes.get('/lojas_busca', function (req, res) {
+  Loja.find({'nome' : new RegExp(req.query.query, 'i')}, '_id nome')
+    .then((lojas) => {
+      res.json({
+        success: true,
+        query: req.query.query,
+        result: lojas
+      })
+    }, (err) => {
+      retornaErro(res, err);
+    })
+})
+
 //atualiza uma loja
 routes.put('/lojas/:id', function (req, res) {
   Loja.update( {_id: req.params.id}, {$set: {

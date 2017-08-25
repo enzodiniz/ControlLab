@@ -15,6 +15,7 @@ angular
       empSvc.getEmprestimos()
         .then((res) => {
           self.emprestimos = res.data.result;
+          console.log("emprestimos", self.emprestimos);
         })
     }
 

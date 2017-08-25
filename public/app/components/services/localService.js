@@ -24,4 +24,16 @@ function localSvc ($http, authSvc) {
 	self.getLocais = function () {
 		return $http.get(API + '/?token=' + self.token);
 	}
+
+	//ui-select de material
+	self.getPlaces = function (query) {
+		return $http.get(API + '_busca' + '/?query=' + query + '&token=' + self.token);
+	}
+
+	self.atualizarLocal = function (id, nome) {
+		return $http.put(API + '/' + id, {
+			nome: nome, 
+			token: self.token
+		});
+	}
 }

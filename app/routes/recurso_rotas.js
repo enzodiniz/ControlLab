@@ -50,6 +50,20 @@ routes.get('/recursos', function (req, res) {
   });
 })
 
+//recuperar locais a partir da query (ui-select)
+routes.get('/recursos_busca', function (req, res) {
+  Recurso.find({'nome' : new RegExp(req.query.query, 'i')}, '_id nome valor')
+    .then((recursos) => {
+      res.json({
+        success: true,
+        query: req.query.query,
+        result: recursos
+      })
+    }, (err) => {
+      retornaErro(res, err);
+    })
+})
+
 //atualizar recurso por ID
 routes.put('/recursos/:id', function (req, res) {
   Recurso.update( {_id: req.params.id}, {$set: {

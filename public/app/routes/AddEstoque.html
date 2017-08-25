@@ -1,60 +1,126 @@
-<div ng-controller="estCtrl as c" role="navigation">
-    
-  </div>
-</div>
-</div>
-<div class="col-md-offset-3 col-md-6">
-<div class="panel panel-primary">
-  <div class="panel panel-heading text-center">
-    Adicionar Material
-  </div>
-  <div class="panel-body">
-    <form class="form-horizontal">
-      <div class="form-group">
-        <div class="col-xs-6">
-          <label for="">Responsavel</label>
-          <input class="form-control"  type="text">
+<div class="container" ng-controller="matCtrl as c">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form class="form-horizontal" ng-submit="c.addMaterial()" ng-show="c.adicionando">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Materiais
+          </div>
+          <div class="panel-body">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="desc" class="control-label">Descrição</label>
+                <input ng-model="c.desc" class="form-control" name="desc">
+              </div>  
+            </div>
+            <div class="col-md-2 col-md-offset-1">
+              <div class="form-group">
+                <label for="quant" class="control-label">Quantidade</label>
+                <input min="0" ng-model="c.quant" class="form-control" type="number" name="quant">
+              </div>  
+            </div>   
+            <div class="col-md-3 col-md-offset-1">
+              <div class="form-group">
+                <label for="val" class="control-label">Valor</label>
+                <input min="0" ng-model="c.val" class="form-control" name="val" type="number" value="0.00" 
+                step="0.01">
+              </div>  
+            </div> 
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="local" class="control-label">Local</label>
+                <ui-select multiple ng-model="c.local" theme="bootstrap" sortable="true" close-on-select="true" style="padding-left: 12px">
+                  <ui-select-match >{{$item.nome}}</ui-select-match>
+                    <ui-select-choices repeat="lc in c.locais" refresh="c.refreshPlaces($select.search)" refresh-delay="0">
+                      <div ng-bind-html="lc.nome | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>    
+              </div>  
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+              <div class="form-group">
+                <label for="loja" class="control-label">Loja</label>
+                <ui-select multiple ng-model="c.loja" theme="bootstrap" sortable="true" close-on-select="true" style="padding-left: 12px">
+                  <ui-select-match >{{$item.nome}}</ui-select-match>
+                    <ui-select-choices repeat="lj in c.lojas" refresh="c.refreshStores($select.search)" refresh-delay="0">
+                      <div ng-bind-html="lj.nome | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>    
+              </div>  
+            </div> 
+            <div class="col-md-7">
+              <div class="form-group">
+                <label class="control-label">Recurso</label>
+                <ui-select multiple ng-model="c.rec" theme="bootstrap" sortable="true" close-on-select="true" style="padding-left: 12px">
+                  <ui-select-match >{{$item.nome}} {{$item.valor}}</ui-select-match>
+                    <ui-select-choices repeat="r in c.recursos" refresh="c.refreshResources($select.search)" refresh-delay="0">
+                      <div ng-bind-html="r.nome | highlight: $select.search"></div>
+                          <small>
+                            Valor: {{r.valor}}
+                          </small>
+                    </ui-select-choices>
+                </ui-select>    
+              </div>  
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+              <div class="form-group">
+                <label for="dt" class="control-label">Data</label>
+                <input ng-model="c.dt" class="form-control" name="dt" type="date">
+              </div>  
+            </div>   
+          </div>
+          <div class="panel-footer">
+            <div class="text-right">
+              <button class="btn btn-primary" type="submit">Adicionar</button>
+            </div>
+          </div>
         </div>
-
-        <div class="col-xs-6">
-          <label  for="">Descrição</label>
-          <input  class="form-control"  type="text">
-      </div>
-
-    <div class="col-xs-6">
-      <label for="">Recurso</label>
-      <input  class="form-control"  type="text">
-    </div>
-
-    <div class="col-xs-6">
-      <label for="">Loja</label>
-      <input class="form-control"  type="text">
-    </div>
-
-    <div class="col-xs-4">
-      <label for="">Data</label>
-      <input class="form-control"  type="date">
-    </div>
-
-    <div class="col-xs-4">
-      <label for="">Quantidade</label>
-      <input class="form-control"  type="number">
-     </div>
-
-    <div class="col-xs-4">
-      <label for="">Valor Unitário</label>
-      <input class="form-control"  type="number" value="0.00" step="0.20">
-    </div>
-
-    </div>
-    <div class="col-xs-13">
-      <button  class="btn btn-primary pull-right" type="submit">
-              <span>Adicionar </span>
-            </button>
-    </div>
-    </div>
-    </div>
-    </form>
-
+      </form>
+    </div>  
   </div>
-</div>
+
+  <!-- Lista de materiais -->
+
+  <div class="row" ng-init="c.obterMateriais()">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="col-md-4">
+            <h4>Materiais</h4>
+          </div>
+          <div class="text-right">
+            <button ng-show="!c.adicionando" class="btn btn-primary" ng-click="c.mostrarForm()">
+              Adicionar material
+            </button>
+            <button ng-show="c.adicionando" class="btn btn-default" ng-click="c.mostrarForm()">
+              Cancelar
+            </button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <div class="col-md-6" ng-repeat="m in c.materiais">
+              <div class="panel panel-default desaparece">
+                <div class="panel-heading">
+                  <div class="col-md-10">
+                    <b>{{m.quantidade}} {{m.descricao}}</b>
+                  </div>
+                  <div class="text-right">
+                    <button class="btn btn-danger" ng-click="c.removerMaterial(m._id)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  Local: {{m.local}}<br>
+                  Loja: {{m.loja}}
+                </div>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>    

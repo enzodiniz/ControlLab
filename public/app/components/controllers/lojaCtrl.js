@@ -56,6 +56,7 @@ angular.module('ControlLab')
 						mensagem: 'Loja removida com sucesso.'
 					})
 					self.excluindo = false;
+					self.editando = false;
 				}, (err) => {
 					$rootScope.$broadcast('evento', {
 						alerta: 'erro',

@@ -24,6 +24,11 @@ function lojaSvc($http, authSvc) {
 		});
 	}
 
+	//ui-select de material
+	self.getStores = function (query) {
+		return $http.get(API + '_busca' + '/?query=' + query + '&token=' + token);
+	}
+
 	self.removerLoja = function (id) {
 		return $http.delete(API + '/' + id + '/?token=' + token);
 	}
