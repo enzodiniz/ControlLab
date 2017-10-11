@@ -49,13 +49,17 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
     authSvc.logout();
   }
 
+  self.fecharAlerta = function () {
+    self.evento = false;
+  }
+
   $scope.$on('evento', function (erro, args) {
     self.evento = true;
     if (args.alerta == "erro"){
       self.eventClass = 'alert-danger';
     }
     else if (args.alerta == "success"){
-      self.eventClass = 'alert-success'
+      self.eventClass = 'alert-success';
     }
     else {
       self.eventClass = 'alert-info';
@@ -69,11 +73,7 @@ function MainCtrl($scope, $http, $location,  authSvc, matSvc) {
     }
   })
 
-  self.fecharAlerta = function () {
-    self.evento = false;
-  }
-
   if (!authSvc.isAuthed()){
     $location.path('/login');
-  }
+  } 
 }

@@ -14,11 +14,13 @@ function retornaErro(res, err) {
 
 //emprestar um material
 routes.post('/emprestimos', function(req, res){
+  
   var emprestimo = new Emprestimo({
     materiais: req.body.materiais,
     responsavel: req.body.responsavel, //id
     data: req.body.data
   });
+
  emprestimo.save().then((obj)=> {
    res.json({
      sucess: true,

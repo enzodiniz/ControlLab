@@ -6,48 +6,27 @@ angular
     self.userName = "";
     self.senha = "";
 
-    self.handleRequest = (res) => {
-      console.log("chegou no handleRequest");
+    self.handleRequest = function (res) {
       var token = res.data ? res.data.token : null;
-      console.log(token);
       if (token) {
         authSvc.saveToken(token);
+        $rootScope.$broadcast('evento', { alerta: 'success', 
+          mensagem: res.data.mensagem })
         $location.path('/home');
+      }
+      else {
+        console.log(res.data.mensagem);
+        $rootScope.$broadcast('evento', { alerta: "erro",
+          mensagem: res.data.mensagem });
       }
     }
 
     self.autenticar = function () {
       authSvc.login(self.userName, self.senha)
         .then((res) => {
-          console.log("res data: " + res.data.admin);
-          var token = res.data ? res.data.token : null;
-          if (token) {
-            authSvc.saveToken(token);
-            $rootScope.$broadcast('evento', { alerta: 'success', 
-              mensagem: res.data.mensagem })
-            $location.path('/home');
-          }
-          else {
-            console.log(res.data.mensagem);
-            $rootScope.$broadcast('evento', { alerta: "erro",
-              mensagem: res.data.mensagem });
-          }
-
+          self.handleRequest(res);
         }, (res) => {
-
-          var token = res.data ? res.data.token : null;
-
-          if (token) {
-            authSvc.saveToken(token);
-            $rootScope.$broadcast('evento', { alerta: 'success', 
-              mensagem: res.data.mensagem })
-            $location.path('/home');
-          } else {
-            console.log(res.data.mensagem);
-            $rootScope.$broadcast('evento', {alerta: "erro",
-              mensagem: res.data.mensagem});
-          }
-          
+          self.handleRequest(res);          
         });
     }
 

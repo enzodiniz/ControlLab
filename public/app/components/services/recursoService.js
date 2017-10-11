@@ -25,4 +25,12 @@ angular.module('ControlLab')
 		self.getResources = function (query) {
 			return $http.get(API + '_busca' + '/?query=' + query + '&token=' + token);
 		}
-})
+
+		self.atualizarRec = function (id, nome, val) {
+			return $http.put(API + '/' + id, {
+				token: token,
+				nome: nome,
+				valor: val
+			})
+		}
+})	

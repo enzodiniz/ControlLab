@@ -26,7 +26,7 @@ angular
           })
           self.resp = []; 
           self.mat = undefined;
-          self.adicionando = false;
+          self.mostrarForm();
         }, (err) => {
           $rootScope.$broadcast('evento', {
             alerta: 'erro',

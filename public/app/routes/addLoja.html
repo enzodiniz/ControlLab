@@ -65,27 +65,31 @@
           </div>
           <div class="panel-body">
             <ul class="list-group">
-              <li class="list-group-item desaparece desaparece-input" ng-repeat="l in c.lojas">
+              <li id="{{l._id}}" class="list-group-item desaparece item-de-lista" 
+              ng-repeat="l in c.lojas">
                 <b>{{l.nome}}</b>
                 <!-- Início do editar -->
-                <div class="input-group" ng-show="c.editando">
-			      <input ng-model="c.nome" type="text" class="form-control" placeholder="Nome...">
-			      <span class="input-group-btn">
-			        <button class="btn btn-primary" type="button" ng-click="c.atualizarLoja(l._id)">
-			        	<span class="glyphicon glyphicon-ok"></span>
-			        </button>
-			      </span>
-			    </div>
-			    <!-- Fim do editar -->
+                <div class="input-group nao-desaparece" ng-show="i == l._id" ng-repeat="i in c.editados">
+      			      <input ng-model="c.nome" type="text" class="form-control" placeholder="Nome...">
+      			      <span class="input-group-btn">
+      			        <button class="btn btn-primary" type="button" ng-click="c.atualizarLoja(l._id)">
+      			        	<span class="glyphicon glyphicon-ok"></span>
+      			        </button>
+      			      </span>
+      			    </div>
+      			    <!-- Fim do editar -->
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">
-                  <button class="btn btn-primary btn-xs" ng-click="c.mostrarEditar()">
+                  <button class="btn btn-primary btn-xs" ng-click="c.mostrarEditar(l._id)" 
+                  id="btEd{{l._id}}">
                     <span class="glyphicon glyphicon-pencil"></span>
                   </button>
 
-                  <button class="btn btn-danger btn-xs" ng-click="c.mostrarExcluir(l._id)">
+                  <button class="btn btn-danger btn-xs" ng-click="c.mostrarExcluir(l._id)"
+                  id="btEx{{l._id}}">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
                 </div>
+                <div class="espaco" ng-show="i == l._id" ng-repeat="i in c.editados"></div>
               </li>
             </ul>
           </div>

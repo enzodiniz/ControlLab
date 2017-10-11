@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                   <label for="valor" class="control-label">Valor</label>
-                  <input class="form-control" ng-model="c.val" type="number" value="0.00" step="0.2" name="valor">
+                  <input class="form-control" ng-model="c.val" type="number" value="0.00" step="0.01" name="valor">
                 </div>
               </div>
               <!-- Fim do corpo do painel -->
@@ -70,18 +70,30 @@
           </div>
           <div class="panel-body">
             <ul class="list-group">
-              <li class="list-group-item desaparece desaparece-input" ng-repeat="rec in c.recursos">
+              <a class="list-group-item desaparece" ng-repeat="rec in c.recursos">
                   <b>{{rec.nome}}</b>
+                  <div class="btn-group pull-right" role="group" aria-label="Basic example">
+                    <button class="btn btn-primary" ng-click= "c.mostrarEditar(rec._id)">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-danger" ng-click= "c.mostrarExcluir(rec._id)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </button>                  
+                  </div>
+                  <br>
+                  Valor: R$ {{rec.valor}}
                   <!-- Início do editar -->
-                  <div class="input-group" ng-show="c.editando">
+                  <div class="input-group nao-desaparece" ng-show="e.id == rec._id && e.editado" 
+                  ng-repeat="e in c.editados">
                     <div class="col-md-6">
                       <div class="input-group">
-                        <input ng-model="c.nome" type="text" class="form-control" placeholder="Nome...">
+                        <input ng-model="c.nome" type="text" class="form-control" placeholder="Novo nome...">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="input-group">
-                        <input ng-model="c.val" type="number" class="form-control" placeholder="Valor...">
+                        <input ng-model="c.val" type="number" class="form-control" 
+                        placeholder="Novo valor...">
                       </div>
                     </div>
                     <span class="input-group-btn">
@@ -91,17 +103,7 @@
                     </span>
                   </div>
                   <!-- Fim do editar -->
-                  <div class="btn-group pull-right" role="group" aria-label="Basic example">
-                    <button class="btn btn-primary" ng-click= "c.mostrarEditar()">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger" ng-click= "c.mostrarExcluir(rec._id)">
-                      <span class="glyphicon glyphicon-trash"></span>
-                    </button>                  
-                  </div>
-                  <br>
-                  Valor: R$ {{rec.valor}}
-              </li>
+              </a>
             </ul>
         </div>
       </div>

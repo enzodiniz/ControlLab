@@ -3,12 +3,13 @@ angular.module('ControlLab')
 		
 		var self = this;
 		var adicionando = false;
+		self.editados = [];
 
 		self.addRecurso = function () {
 			recSvc.addRecurso(self.nome, self.val)
 				.then((res) => {
 					console.log(res);
-					self.adicionando = false;
+					self.mostrarForm();
 					self.obterRecurso();
 					self.nome = "";
 					self.val = undefined;
@@ -28,6 +29,13 @@ angular.module('ControlLab')
 			recSvc.obterRecurso()
 				.then((res) => {
 					self.recursos = res.data.result;
+					self.editados = [];
+					for (r of self.recursos) {
+					  self.editados.push({
+					  	id: r._id,
+					  	editado: false
+					  })
+					}
 				}, (err) => {
 					$rootScope.$broadcast('evento', {
 						alerta: 'erro',
@@ -54,15 +62,17 @@ angular.module('ControlLab')
 		}
 
 		self.atualizarRec = function (id) {
-			recSvc.atualizarRec(id)
+			recSvc.atualizarRec(id, self.nome, self.val)
 				.then((res) => {
 					if (res.data.success) {
-						self.obterRecurso();
 						$rootScope.$broadcast('evento', {
 							alerta: 'success',
 							mensagem: 'Recurso atualizado com sucesso.'
 						})
+						self.mostrarEditar();
+						self.obterRecurso();
 					}
+					console.log(res);
 				}, (err) => {
 					$rootScope.$broadcast('evento', {
 						alerta: 'erro',
@@ -86,11 +96,21 @@ angular.module('ControlLab')
 				self.excluindo = true;
 		}
 
-		self.mostrarEditar = function () {
-			if (self.editando)
+		self.mostrarEditar = function (id) {
+			if (self.editando) {
+				for (e of self.editados) {
+				  if (e.id == id)
+				  	e.editado = false;
+				}
 				self.editando = false;
-			else
+			}
+			else {
+				for (e of self.editados) {
+				  if (e.id == id)
+				  	e.editado = true;
+				}
 				self.editando = true;
+			}
 		}
 
 		self.setId = function (id) {

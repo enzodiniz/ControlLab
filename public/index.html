@@ -50,11 +50,24 @@
       .desaparece:hover button {
         opacity: 1;
       }
-      .desaparece-input input {
-        opacity: 0;
-      }
-      .desaparece-input:hover input {
+      .nao-desaparece button {
         opacity: 1;
+      }
+      .espaco {
+        margin-bottom: 3px;
+        padding-bottom: 10px;
+      }
+      .item-estoque:hover {
+        border-color: rgb(127, 127, 127);
+      }
+      .item-de-lista {
+        font-size: 15px;
+      }
+      .item-de-lista:hover {
+        font-size: 16px;
+        column-fill: rgba(127, 127, 127, 0.5);
+        border-color: rgba(127, 127, 127, 0.5); 
+        background-color: rgba(225, 229, 234, 0.5);
       }
     </style>
   </head>
@@ -94,7 +107,9 @@
                 </ul>
               </li>
                 <li>
-                  <a href="#" ng-click="c.sair()"><span class="glyphicon glyphicon-off"> Sair</span></a>
+                  <a href="#" ng-click="c.sair()">
+                    <span id="loggedUser" class="glyphicon glyphicon-off"> Sair</span>
+                  </a>
                 </li>
             </ul>
           </div>

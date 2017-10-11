@@ -72,7 +72,7 @@ routes.put('/recursos/:id', function (req, res) {
   }})
   .then((obj) => {
     res.json({
-      sucess: true,
+      success: true,
       result: obj
     })
   }, (err) => {

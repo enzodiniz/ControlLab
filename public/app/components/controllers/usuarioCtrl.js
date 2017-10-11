@@ -7,11 +7,7 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
 
   self.admin = false;
   self.opcao = "false";
-
-  self.addUsuario = function () {
-    
-    self.addUser();
-  }
+  self.editados = [];
 
   self.addUser = function () {
     if (self.opcao == "true")
@@ -51,7 +47,14 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
     userSvc.getUsers()
       .then((res) => {
         self.users = res.data.result;
-        console.log(self.users);
+        self.editados = [];
+        for (u of self.users) {
+          self.editados.push({
+            editado: false,
+            id: u._id
+          })
+        }
+        console.log(self.editados);
       }, (err) => {
 
         $rootScope.$broadcast('evento',{
@@ -79,6 +82,45 @@ function usuarioCtrl($scope, $http, userSvc, authSvc, $rootScope) {
           mensagem: 'Falha ao remover usuario.'
         })
       })
+  }
+
+  self.mostrarEditar = function (id) {
+    self.setId(id);
+    console.log(self.editados);
+
+    if (self.editando) {
+      for (e of self.editados) {
+        if (e.id == self.id)
+          e.editado = false;
+      }
+      self.editando = false;
+    } 
+    else {
+      for (e of self.editados) {
+        if (e.id == self.id)
+          e.editado = true;
+      }
+      self.editando = true;
+    }
+  }
+
+  self.editUser = function () {
+    userSvc.editUser(self.id, self.pri, self.ult, self.email, self.userName, 
+      self.senha, self.mat, self.adm)
+      .then((res) => {
+        if (res.data.success) {
+          self.obterUsuarios();
+          $rootScope.$broadcast('evento',{
+            alerta:'success',
+            mensagem: 'Usuário alterado com sucesso.'
+          })
+        }
+        console.log("res: ", res);
+      })
+  }
+
+  self.setId = function (id) {
+    self.id = id;
   }
 
   self.isAdmin = function () {

@@ -34,7 +34,7 @@
                   <input class="form-control" type="Date" name="data">
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-9">
                 <div class="form-group">
                   <label class="control-label">Materiais</label>
                   <ui-select multiple ng-model="c.mat" theme="bootstrap" sortable="true" close-on-select="false" style="padding-left: 12px">
@@ -50,7 +50,8 @@
                 </div>
               </div>
             </div>
-            <!-- Fim do corpo do painel -->
+          </div>
+          <!-- Fim do corpo do painel -->
             <div class="panel-footer">
               <div class="text-right">
                 <!-- <button ng-click="c.mostrarForm()" class="btn btn-default">Cancelar empréstimo</button> -->
@@ -107,7 +108,9 @@
                 </button><br>
                 Materiais emprestados: 
                 <ul class="list-group">
-                  <li class="list-group-item" ng-repeat="m in emp.materiais">{{m.descricao}}</li>
+                  <li class="list-group-item" ng-repeat="m in emp.materiais">
+                    {{m.quantidade}} {{m.descricao}}
+                  </li>
                 </ul>
               </a>
             </ul>

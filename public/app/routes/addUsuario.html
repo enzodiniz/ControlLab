@@ -69,10 +69,10 @@
       </form>
     </div>
   </div>
-  
+
   <!-- lista de usuários -->
   <div class="row" ng-init="c.obterUsuarios()">
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="col-md-4">
@@ -89,69 +89,95 @@
         </div>
         <div class="panel-body">
           <ul class="list-group">
-            <li class="list-group-item" ng-repeat="u in c.users">
+            <a class="list-group-item desaparece" ng-repeat="u in c.users">
               <b>{{u.userName}}</b>
-              <button class="pull-right btn btn-danger" ng-click="c.removerUsuario(u._id)">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button> <br>
+              <span ng-show="u.admin" class="glyphicon glyphicon-star"></span>
+              <!-- Botões -->
+              <div class="btn-group pull-right  " role="group" aria-label="...">
+                <button class="btn btn-primary" ng-click="c.mostrarEditar(u._id)">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-danger" ng-click="c.removerUsuario(u._id)">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </div>
+              <br>
               {{u.primeiroNome}} {{u.ultimoNome}}
-            </li>
+              <!-- Início do editar -->
+              <form class="form-horizontal nao-desaparece" ng-submit="c.editUser()"
+              ng-show="e.id == u._id && e.editado" ng-repeat="e in c.editados">
+                <!-- Início do painel -->
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    Editar usuário
+                  </div>
+                  <!-- Início do corpo do painel -->
+                  <div class="panel-body">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="pri" class="control-label">Primeiro nome</label>
+                        <input ng-model="c.pri" class="form-control" type="" name="pri">
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-md-offset-1">
+                      <div class="form-group">
+                        <label for="ult" class="control-label">Último nome</label>
+                        <input ng-model="c.ult" class="form-control" type="" name="ult">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <!-- Início do radio -->
+                      <label class="radio-inline">
+                        <input ng-model="c.opcao" type="radio" name="optionsRadios" id="optionsRadios1" value="true" checked>
+                        Usuário administrador
+                      </label>
+                      <label class="radio-inline">
+                        <input ng-model="c.opcao" type="radio" name="optionsRadios" id="optionsRadios2" value="false" checked>
+                        Usuário Comum
+                      </label>
+                      <!-- Fim do radio -->
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group" ng-show="c.isAdmin()">
+                        <label for="email" class="control-label">Email</label>
+                        <input ng-model="c.email" class="form-control" type="email" name="email">
+                      </div>
+                    </div>
+                    <div class="col-md-5 col-md-offset-1">
+                      <div class="form-group" ng-show="c.isAdmin()">
+                        <label for="senha" class="control-label">Senha</label>
+                        <input ng-model="c.senha" class="form-control" type="password" name="senha">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nick" class="control-label">Apelido</label>
+                        <input ng-model="c.userName" class="form-control" type="text" name="nick">
+                      </div>
+                    </div>
+                    <div class="col-md-5 col-md-offset-1">
+                      <div class="form-group">
+                        <label for="mat" class="control-label">Matrícula</label>
+                        <input ng-model="c.mat" class="form-control" type="text" name="mat">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Fim do corpo do painel -->
+                  <div class="panel-footer">
+                    <div class="text-right">
+                      <button class="btn btn-primary" type="submit">
+                        <span class="glyphicon glyphicon-ok"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Fim do painel -->
+              </form>
+              <!-- Fim do editar -->
+            </a>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div ng-controller="usuarioCtrl as c">
-<div class="col-md-offset-3 col-md-6">
-  <form class="form-horizontal" method="post" ng-submit="c.addUser()">
-  <div class="form-group " method="post">
-  <div class="panel panel-primary">
-    <div class="panel-heading text-center">Adicionar Usuário</div>
-    <div class="panel-body">
-
-        <form ng-show="c.adicionando" class="form-horizontal" >
-        <div class="form-group " method="post">
-          <div class="col-xs-6">
-            <label for="">Primeiro Nome</label>
-            <input ng-model="c.pri" class="form-control" type="text">
-          </div>
-
-          <div class="col-xs-6">
-            <label  for="">Ultimo Nome  </label>
-            <input ng-model="c.ult" class="form-control" type="text">
-          </div>
-      	</div>
-      	<div class="form-group">
-          <div class="col-xs-6">
-            <label  for="">Email  </label>
-            <input ng-model="c.email" class="form-control" type="email">
-          </div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-4">
-         <label for="">Apelido</label>
-         <input ng-model="c.userName" class="form-control"  type="text">
-         </div>
-       <div class="col-xs-4">
-        <label for="">Senha</label>
-        <input ng-model="c.senha" class="form-control"  type="password">
-        </div>
-      	</div>
-      <div class="form-group">
-        <div class="col-xs-12">
-          <button  class="btn btn-primary pull-right" type="submit">
-          <span>Adicionar </span>
-          </button>
-      </div>
-      </div>
-      </form>
-    </div>
-  </div>
-
-
-</div>
-
-  </div> -->
-  <!-- </div> -->

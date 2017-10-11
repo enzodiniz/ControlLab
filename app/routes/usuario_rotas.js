@@ -35,7 +35,7 @@ routes.post('/autenticacao', function (req, res) {
           var token = jwt.sign(user._id, config.segredo, {
             expiresIn: "24h"
           })
-
+          //delete user.senha;
           res.json({
             sucess: true,
             mensagem: "Logado com sucesso.",
@@ -140,26 +140,57 @@ routes.get('/users_busca', function (req, res) {
     })
 })
 
-//atualizar um usuário por ID
 routes.put('/users/:id', function (req, res) {
-  Usuario.update( {_id: req.params.id}, {$set: {
-    primeiroNome: req.body.primeiroNome, // || nome atual do usuário
-    ultimoNome: req.body.ultimoNome,
-    email: req.body.email,
-    userName: req.body.userName,
-    senha: req.body.senha,
-    matricula: req.body.matricula,
-    admin: req.body.admin
-  }})
-  .then((obj) => {
-    res.json({
-      sucess: true,
-      result: obj
-    });
-  }, (err) => {
-    retornaErro(res, err)
-  });
+  Usuario.findOne({_id: req.params.id})
+    .then((user) => {
+      Usuario.update({_id: user._id}, { $set: { 
+        primeiroNome: req.body.primeiroNome            || user.primeiroNome,
+        ultimoNome:   req.body.ultimoNome              || user.ultimoNome,
+        email:        req.body.email                   || user.email,
+        userName:     req.body.userName                || user.userName,
+        senha:        bcripty.hashSync(req.body.senha) || user.senha,
+        matricula:    req.body.matricula               || user.matricula,
+        admin:        req.body.admin                   || user.admin
+      }})
+        .then((obj) => {
+          console.log("obj: ", obj);
+          res.json({
+            success: true
+          })
+        }, (err2) => {
+          retornaErro(res, err2);
+        })
+    }, (err) => {
+      retornaErro(res, err);
+    })
 });
+
+//atualizar um usuário por ID
+// routes.put('/users/:id', function (req, res) {
+//   Usuario.findOne ({_id: req.params.id})
+//     .then((user) => {
+//       console.log("chegou no de editar");
+//       Usuario.update( {_id: req.params.id}, {$set: {
+//         primeiroNome: req.body.primeiroNome || user.primeiroNome,
+//         ultimoNome: req.body.ultimoNome || user.ultimoNome,
+//         email: req.body.email || user.email,
+//         userName: req.body.userName || user.userName,
+//         senha: bcripty.hashSync(req.body.senha) || user.senha,
+//         matricula: req.body.matricula || user.matricula,
+//         admin: req.body.admin || user.admin
+//       }})
+//       .then((obj) => {
+//         console.log("editado: ", obj);
+//         res.json({
+//           success: true,
+//           result: obj
+//         });
+//       });   
+
+//     }, (err) => {
+//       retornaErro(res, err)
+//     })
+// });
 
 //remove um usuário
 routes.delete('/users/:id', function (req, res) {

@@ -4,6 +4,7 @@ angular.module('ControlLab')
 		var self = this;
 		self.adicionando = false;
 		self.locais = [];
+		self.editados = [];
 
 		self.addLocal = function () {
 			localSvc.addLocal(self.nome)
@@ -44,6 +45,7 @@ angular.module('ControlLab')
 						mensagem: 'Local removido com sucesso.'
 					})
 					self.excluindo = false;
+					self.editando = false;
 				}, (err) => {
 					$rootScope.$broadcast('evento', {
 						alerta: 'erro',
@@ -55,13 +57,13 @@ angular.module('ControlLab')
 		self.atualizarLocal = function (id) {
 			localSvc.atualizarLocal(id, self.nome)
 				.then((res) => {
-					self.getLocais();
 					$rootScope.$broadcast('evento', {
 						alerta: 'success',
 						mensagem: 'Local alterado com sucesso.'
 					})
-					self.editando = false;
 					self.nome = "";
+					self.mostrarEditar(id);
+					self.getLocais();
 				}, (err) => {
 					$rootScope.$broadcast('evento', {
 						alerta: 'erro',
@@ -70,11 +72,16 @@ angular.module('ControlLab')
 				})
 		}
 
-		self.mostrarEditar = function () {
-			if(self.editando)
+		self.mostrarEditar = function (id) {
+			if(self.editando) {
+				self.editados.splice(0, 1);
 				self.editando = false;
-			else
+			}
+			else {
 				self.editando = true;
+				self.editados.push(id);
+			}
+			console.log("locais editados: ", self.editados);
 		}
 
 		self.mostrarAdicionar = function () {

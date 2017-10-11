@@ -19,6 +19,19 @@ angular
 			})
 		}
 
+		self.editUser = function (id, pri, ult, email, userName, senha, mat, adm) {
+			return $http.put(API + '/' + id, {
+				token: self.token,
+				primeiroNome: pri,
+			    ultimoNome: ult,
+			    email: email,
+			    userName: userName,
+			    senha: senha,
+			    matricula: mat,
+			    admin: adm
+			})
+		}
+
 		self.getUsers = function () {
 			return $http.get(API + '/?token=' + self.token);
 		}

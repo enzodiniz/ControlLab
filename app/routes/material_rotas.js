@@ -1,5 +1,7 @@
 var express = require('express'),
     Material = require('../model/material'),
+    Loja     = require ('../model/loja'),
+    Local    = require ('../model/local'),
     routes = express.Router();
 
 function retornaErro(res, err) {
@@ -46,6 +48,28 @@ routes.get('/materiais/:id', function (req, res) {
 //recuperar todos os materiais
 routes.get('/materiais', function (req, res) {
   Material.find({}).then((materiais) => {
+    // var mats = [];
+    // for (m of materiais) {
+    //   mats.push(new Promise(function (resolve, reject) {
+    //     Loja.findOne({_id: m.loja})
+    //       .then((loja) => {
+    //         var m2 = {
+    //           material: m,
+    //           loja: loja
+    //         }
+    //         resolve(m2);
+    //       })
+    //   }))
+    // }
+
+    // Promise.all(mats)
+    //   .then(function (resultado) {
+    //     console.log("resultado:", resultado);
+    //     res.json({
+    //       success: true,
+    //       result: resultado
+    //     })
+    //   })
     res.json({
       sucess: true,
       result: materiais
